@@ -1,86 +1,159 @@
-/* =====================================================
-   ESTADO GLOBAL DO SISTEMA
-===================================================== */
+
+/* =========================================================
+   ESTADO GLOBAL DO SITE
+   Aqui guardamos idioma, likes e tamanho da fonte
+========================================================= */
 
 let idiomaAtual = "pt";
 let likes = 0;
 let fonteBase = 16;
 
-/* =====================================================
-   TRADUÇÕES (SEM ALTERAR SEUS TEXTOS ORIGINAIS)
-===================================================== */
+/* =========================================================
+   TRADUÇÕES HUMANIZADAS (ESTILO ALUNO, NATURAL)
+========================================================= */
 
 const textos = {
     pt: {
         titulo: "Projeto Agrinho 2026",
         menu: ["Início", "O Equilíbrio", "Tecnologia no Campo", "Participe"],
+
         bannerH2: "Agro Forte, Futuro Sustentável",
-        bannerP: "Descubra como a produção de alimentos e a preservação do meio ambiente andam juntas para garantir o amanhã.",
-        botao: "Entender o Projeto",
+        bannerP: "O campo é muito mais do que plantar e colher. Ele mostra como a gente pode produzir alimentos com responsabilidade, cuidando da natureza ao mesmo tempo e pensando nas próximas gerações.",
+        bannerBtn: "Entender o Projeto",
+
         equilibrioH3: "O Equilíbrio Necessário",
-        equilibrioP: "Para o nosso futuro ser seguro, o campo precisa produzir alimentos de forma eficiente sem esgotar os recursos naturais da nossa terra.",
-        card1: "Produção Forte",
-        card2: "Preservação Ativa",
-        tecH3: "Inovação e Tecnologia Sustentável",
-        tecP: "Hoje, o produtor rural usa ferramentas modernas para evitar desperdícios. Veja alguns exemplos de práticas reais:",
-        drone: "Drones agrícolas: Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.",
-        irrigacao: "Irrigação gota a gota: Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.",
-        solar: "Energia Solar: Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.",
-        interacaoH3: "Participe da Nossa Ideia",
-        interacaoP: "Apoie o nosso projeto escolar ou envie uma sugestão de prática sustentável para o campo!",
+        equilibrioP: "Para o futuro dar certo, é preciso equilibrar produção de alimentos com cuidado da natureza. Usar água com consciência, cuidar do solo e respeitar o meio ambiente faz toda a diferença.",
+
+        card1H4: "Produção Forte",
+        card1P: "O campo ajuda a alimentar milhões de pessoas. Com tecnologia e organização, os agricultores conseguem produzir mais sem desperdiçar recursos.",
+
+        card2H4: "Preservação Ativa",
+        card2P: "Cuidar da natureza também faz parte do trabalho no campo. Proteger rios, árvores e o solo garante que tudo continue fértil por muito tempo.",
+
+        videoH4: "Projeto em Vídeo",
+
+        secaoTecH3: "Inovação e Tecnologia Sustentável",
+        secaoTecP: "Hoje a tecnologia ajuda muito no campo. Ela permite produzir mais, gastar menos recursos e cuidar melhor da natureza.",
+
+        droneTitulo: "Drones agrícolas",
+        droneTexto: "Eles sobrevoam as plantações e ajudam a identificar pragas ou problemas nas plantas sem precisar destruir nada.",
+
+        irriTitulo: "Irrigação gota a gota",
+        irriTexto: "Cada planta recebe exatamente a quantidade de água que precisa, evitando desperdício e economizando recursos naturais.",
+
+        solarTitulo: "Energia Solar",
+        solarTexto: "As fazendas usam energia do sol para funcionar, diminuindo a poluição e ajudando o meio ambiente.",
+
+        secaoIntH3: "Participe da Nossa Ideia",
+        secaoIntP: "Você também pode ajudar o meio ambiente. Envie ideias, sugestões ou apenas apoie nosso projeto.",
+
         botaoLike: "👍 Apoiar Projeto",
+
         formH4: "Envie sua Sugestão",
-        sucesso: "Obrigado pela sua contribuição!"
+        labelNome: "Seu Nome:",
+        labelMensagem: "Sua Sugestão Ambiental:",
+        botaoEnviar: "Enviar Mensagem",
+
+        alertaSucesso: "Obrigado pela sua contribuição, {nome}!",
+        alertaErro: "Preencha todos os campos antes de enviar."
     },
 
     en: {
         titulo: "Agrinho Project 2026",
         menu: ["Home", "Balance", "Farm Technology", "Join"],
-        bannerH2: "Strong Agro, Sustainable Future",
-        bannerP: "Discover how food production and environmental preservation work together for tomorrow.",
-        botao: "Understand the Project",
+
+        bannerH2: "Strong Agriculture, Sustainable Future",
+        bannerP: "The countryside shows how we can produce food responsibly while taking care of nature and thinking about future generations.",
+        bannerBtn: "Understand the Project",
+
         equilibrioH3: "The Necessary Balance",
-        equilibrioP: "For a safe future, farming must produce efficiently without exhausting natural resources.",
-        card1: "Strong Production",
-        card2: "Active Preservation",
-        tecH3: "Innovation and Sustainable Technology",
-        tecP: "Modern tools help reduce waste in agriculture. See real examples:",
-        drone: "Agricultural drones: Monitor crops from above, detecting pests and reducing pesticide use.",
-        irrigacao: "Drip irrigation: Delivers exact water to plant roots, saving large amounts of water.",
-        solar: "Solar Energy: Clean energy generation using photovoltaic panels in farms.",
-        interacaoH3: "Join Our Idea",
-        interacaoP: "Support our school project or send sustainable ideas!",
+        equilibrioP: "For a better future, we need to balance food production and nature care.",
+
+        card1H4: "Strong Production",
+        card1P: "The countryside feeds millions of people using technology and organization to reduce waste.",
+
+        card2H4: "Active Preservation",
+        card2P: "Protecting rivers, soil and trees ensures long-term fertility of the land.",
+
+        videoH4: "Project Video",
+
+        secaoTecH3: "Innovation and Sustainable Technology",
+        secaoTecP: "Technology helps farmers produce more while using fewer resources.",
+
+        droneTitulo: "Agricultural drones",
+        droneTexto: "They fly over crops and detect problems without damaging plants.",
+
+        irriTitulo: "Drip irrigation",
+        irriTexto: "Each plant receives only the water it needs, reducing waste.",
+
+        solarTitulo: "Solar Energy",
+        solarTexto: "Farms use solar power to reduce pollution.",
+
+        secaoIntH3: "Join Our Idea",
+        secaoIntP: "You can help by sending ideas or supporting the project.",
+
         botaoLike: "👍 Support Project",
+
         formH4: "Send Your Suggestion",
-        sucesso: "Thank you for your contribution!"
+        labelNome: "Your Name:",
+        labelMensagem: "Your Suggestion:",
+        botaoEnviar: "Send Message",
+
+        alertaSucesso: "Thank you for your contribution, {name}!",
+        alertaErro: "Please fill all fields before sending."
     },
 
     es: {
         titulo: "Proyecto Agrinho 2026",
-        menu: ["Inicio", "Equilibrio", "Tecnología del Campo", "Participa"],
+        menu: ["Inicio", "Equilibrio", "Tecnología", "Participa"],
+
         bannerH2: "Agro Fuerte, Futuro Sostenible",
-        bannerP: "Descubra cómo la producción y la preservación trabajan juntas.",
-        botao: "Entender el Proyecto",
+        bannerP: "El campo muestra cómo producir alimentos cuidando la naturaleza y pensando en el futuro.",
+
+        bannerBtn: "Entender el Proyecto",
+
         equilibrioH3: "El Equilibrio Necesario",
-        equilibrioP: "El campo debe producir sin agotar los recursos naturales.",
-        card1: "Producción Fuerte",
-        card2: "Preservación Activa",
-        tecH3: "Innovación y Tecnología Sostenible",
-        tecP: "La tecnología ayuda a reducir desperdicios en el campo.",
-        drone: "Drones agrícolas: Monitorean cultivos y reducen pesticidas.",
-        irrigacao: "Riego por goteo: Usa solo el agua necesaria para cada planta.",
-        solar: "Energía Solar: Energía limpia en las fincas.",
-        interacaoH3: "Participa de Nuestra Idea",
-        interacaoP: "Apoya nuestro proyecto o envía ideas sostenibles.",
+        equilibrioP: "El futuro depende del equilibrio entre producción y naturaleza.",
+
+        card1H4: "Producción Fuerte",
+        card1P: "El campo alimenta a millones usando tecnología para evitar desperdicios.",
+
+        card2H4: "Preservación Activa",
+        card2P: "Cuidar la naturaleza mantiene el suelo fértil.",
+
+        videoH4: "Video del Proyecto",
+
+        secaoTecH3: "Tecnología Sostenible",
+        secaoTecP: "La tecnología ayuda a producir más con menos impacto ambiental.",
+
+        droneTitulo: "Drones agrícolas",
+        droneTexto: "Detectan problemas en cultivos sin dañarlos.",
+
+        irriTitulo: "Riego por goteo",
+        irriTexto: "Cada planta recibe el agua necesaria.",
+
+        solarTitulo: "Energía Solar",
+        solarTexto: "Energía limpia para las granjas.",
+
+        secaoIntH3: "Participa",
+        secaoIntP: "Envía ideas o apoya el proyecto.",
+
         botaoLike: "👍 Apoyar Proyecto",
+
         formH4: "Enviar Sugerencia",
-        sucesso: "¡Gracias por tu contribución!"
+        labelNome: "Tu Nombre:",
+        labelMensagem: "Tu Sugerencia:",
+
+        botaoEnviar: "Enviar",
+
+        alertaSucesso: "¡Gracias por tu contribución, {name}!",
+        alertaErro: "Complete todos los campos."
     }
 };
 
-/* =====================================================
+/* =========================================================
    TROCA DE IDIOMA
-===================================================== */
+========================================================= */
 
 function mudarIdioma(lang) {
     idiomaAtual = lang;
@@ -93,100 +166,111 @@ function mudarIdioma(lang) {
 
     document.getElementById("banner-h2").textContent = t.bannerH2;
     document.getElementById("banner-p").textContent = t.bannerP;
-    document.getElementById("banner-btn").textContent = t.botao;
+    document.getElementById("banner-btn").textContent = t.bannerBtn;
 
-    document.getElementById("secao-equi-h3").textContent = t.equilibrioH3;
-    document.getElementById("secao-equi-p").textContent = t.equilibrioP;
-    document.getElementById("card1-h4").textContent = t.card1;
-    document.getElementById("card2-h4").textContent = t.card2;
+    document.getElementById("secaoEquiH3").textContent = t.equilibrioH3;
+    document.getElementById("secaoEquiP").textContent = t.equilibrioP;
 
-    document.getElementById("secao-tec-h3").textContent = t.tecH3;
-    document.getElementById("secao-tec-p").textContent = t.tecP;
+    document.getElementById("card1H4").textContent = t.card1H4;
+    document.getElementById("card2H4").textContent = t.card2H4;
 
-    document.getElementById("drone-text").textContent = t.drone;
-    document.getElementById("irri-text").textContent = t.irrigacao;
-    document.getElementById("solar-text").textContent = t.solar;
+    document.getElementById("card1P").textContent = t.card1P;
+    document.getElementById("card2P").textContent = t.card2P;
 
-    document.getElementById("secao-int-h3").textContent = t.interacaoH3;
-    document.getElementById("secao-int-p").textContent = t.interacaoP;
+    document.getElementById("secaoTecH3").textContent = t.secaoTecH3;
+    document.getElementById("secaoTecP").textContent = t.secaoTecP;
+
+    document.getElementById("droneTitulo").textContent = t.droneTitulo;
+    document.getElementById("droneTexto").textContent = t.droneTexto;
+
+    document.getElementById("irriTitulo").textContent = t.irriTitulo;
+    document.getElementById("irriTexto").textContent = t.irriTexto;
+
+    document.getElementById("solarTitulo").textContent = t.solarTitulo;
+    document.getElementById("solarTexto").textContent = t.solarTexto;
+
+    document.getElementById("secaoIntH3").textContent = t.secaoIntH3;
+    document.getElementById("secaoIntP").textContent = t.secaoIntP;
+
     document.getElementById("botao-like").textContent = t.botaoLike;
-    document.getElementById("form-h4").textContent = t.formH4;
+
+    document.getElementById("formH4").textContent = t.formH4;
+    document.getElementById("labelNome").textContent = t.labelNome;
+    document.getElementById("labelMensagem").textContent = t.labelMensagem;
+    document.getElementById("btnEnviar").textContent = t.botaoEnviar;
 }
 
-/* =====================================================
-   EVENTOS DE IDIOMA
-===================================================== */
+/* =========================================================
+   BOTÕES DE IDIOMA
+========================================================= */
 
-document.getElementById("btn-pt").onclick = () => mudarIdioma("pt");
-document.getElementById("btn-en").onclick = () => mudarIdioma("en");
-document.getElementById("btn-es").onclick = () => mudarIdioma("es");
+document.querySelectorAll("[data-lang]").forEach(btn => {
+    btn.addEventListener("click", () => {
+        mudarIdioma(btn.dataset.lang);
+    });
+});
 
-/* =====================================================
+/* =========================================================
    TEMAS
-===================================================== */
+========================================================= */
 
-document.getElementById("btn-colorido").onclick = () => {
-    document.body.className = "tema-colorido";
-};
+document.querySelectorAll("[data-theme]").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.body.className = "tema-" + btn.dataset.theme;
+    });
+});
 
-document.getElementById("btn-branco").onclick = () => {
-    document.body.className = "tema-claro";
-};
+/* =========================================================
+   FONTE
+========================================================= */
 
-document.getElementById("btn-preto").onclick = () => {
-    document.body.className = "tema-escuro";
-};
-
-/* =====================================================
-   FONTE (A+ / A-)
-===================================================== */
-
-document.getElementById("btn-Amais").onclick = () => {
+document.getElementById("aumentarFonte").onclick = () => {
     if (fonteBase < 24) fonteBase += 2;
     document.documentElement.style.fontSize = fonteBase + "px";
 };
 
-document.getElementById("btn-Amenos").onclick = () => {
+document.getElementById("diminuirFonte").onclick = () => {
     if (fonteBase > 12) fonteBase -= 2;
     document.documentElement.style.fontSize = fonteBase + "px";
 };
 
-/* =====================================================
+/* =========================================================
    LIKES
-===================================================== */
+========================================================= */
 
 document.getElementById("botao-like").onclick = () => {
     likes++;
-    document.getElementById("contador-likes").textContent = likes;
+    document.getElementById("contador-likes").textContent =
+        `Este projeto já recebeu ${likes} apoios!`;
 };
 
-/* =====================================================
-   NARRADOR (IDIOMA AUTOMÁTICO)
-===================================================== */
+/* =========================================================
+   NARRADOR (VOZ POR IDIOMA)
+========================================================= */
 
-document.getElementById("btn-narrar").onclick = () => {
+document.getElementById("narrar").onclick = () => {
     const synth = window.speechSynthesis;
     synth.cancel();
 
-    let texto = `
-        ${document.getElementById("banner-h2").textContent}.
-        ${document.getElementById("banner-p").textContent}.
-        ${document.getElementById("secao-equi-h3").textContent}.
-        ${document.getElementById("secao-tec-p").textContent}.
-        ${document.getElementById("secao-int-p").textContent}.
-    `;
+    const texto =
+        document.getElementById("banner-h2").textContent + ". " +
+        document.getElementById("banner-p").textContent + ". " +
+        document.getElementById("secaoEquiH3").textContent + ". " +
+        document.getElementById("secaoTecP").textContent + ". " +
+        document.getElementById("secaoIntP").textContent;
 
     const fala = new SpeechSynthesisUtterance(texto);
 
-    if (idiomaAtual === "pt") fala.lang = "pt-BR";
-    if (idiomaAtual === "en") fala.lang = "en-US";
-    if (idiomaAtual === "es") fala.lang = "es-ES";
+    fala.lang =
+        idiomaAtual === "pt" ? "pt-BR" :
+        idiomaAtual === "en" ? "en-US" :
+        "es-ES";
 
     synth.speak(fala);
 };
 
-/* =====================================================
+/* =========================================================
    INICIALIZAÇÃO
-===================================================== */
+========================================================= */
 
 mudarIdioma("pt");
