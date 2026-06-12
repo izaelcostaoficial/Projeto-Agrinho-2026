@@ -8,8 +8,14 @@
 </head>
 <body>
 
-    <!-- BARRA DE ACESSIBILIDADE NO TOPO -->
+    <!-- BARRA DE ACESSIBILIDADE E TRADUÇÃO NO TOPO -->
     <div class="barra-acessibilidade">
+        <div class="grupo-botoes">
+            <span>Idioma:</span>
+            <button id="btn-pt" class="btn-ace">Português</button>
+            <button id="btn-en" class="btn-ace">English</button>
+            <button id="btn-es" class="btn-ace">Español</button>
+        </div>
         <div class="grupo-botoes">
             <span>Visual:</span>
             <button id="btn-colorido" class="btn-ace">Colorido</button>
@@ -34,51 +40,51 @@
         </div>
         <nav class="menu">
             <ul>
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#equilibrio">O Equilíbrio</a></li>
-                <li><a href="#tecnologia">Tecnologia no Campo</a></li>
-                <li><a href="#interacao">Participe</a></li>
+                <li><a href="#inicio" id="menu-inicio">Início</a></li>
+                <li><a href="#equilibrio" id="menu-equilibrio">O Equilíbrio</a></li>
+                <li><a href="#tecnologia" id="menu-tecnologia">Tecnologia no Campo</a></li>
+                <li><a href="#interacao" id="menu-participe">Participe</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Conteúdo principal embrulhado para a narração -->
+    <!-- Conteúdo principal embrulhado para a narração e tradução -->
     <main id="conteudo-principal">
 
         <!-- Banner de Destaque -->
         <section id="inicio" class="banner">
             <div class="banner-conteudo">
-                <h2>Agro Forte, Futuro Sustentável</h2>
-                <p>Descubra como a produção de alimentos e a preservação do meio ambiente andam juntas para garantir o amanhã.</p>
-                <a href="#equilibrio" class="botao-saber-mais">Entender o Projeto</a>
+                <h2 id="banner-titulo">Agro Forte, Futuro Sustentável</h2>
+                <p id="banner-txt">Descubra como a produção de alimentos e a preservação do meio ambiente andam juntas para garantir o amanhã.</p>
+                <a href="#equilibrio" class="botao-saber-mais" id="banner-btn">Entender o Projeto</a>
             </div>
         </section>
 
         <!-- Seção sobre o Equilíbrio -->
         <section id="equilibrio" class="secao-conteudo">
             <div class="container">
-                <h3>O Equilíbrio Necessário</h3>
-                <p>Para o nosso futuro ser seguro, o campo precisa produzir alimentos de forma eficiente sem esgotar os recursos naturais da nossa terra.</p>
+                <h3 id="eq-titulo">O Equilíbrio Necessário</h3>
+                <p id="eq-txt">Para o nosso futuro ser seguro, o campo precisa produzir alimentos de forma eficiente sem esgotar os recursos naturais da nossa terra.</p>
                 
                 <div class="cards-grade">
                     <div class="card">
-                        <h4>Produção Forte</h4>
-                        <p>O agro abastece as cidades, gera empregos e garante que a comida chegue na mesa de milhões de pessoas todos os dias.</p>
+                        <h4 id="card1-titulo">Produção Forte</h4>
+                        <p id="card1-txt">O agro abastece as cidades, gera empregos e garante que a comida chegue na mesa de milhões de pessoas todos os dias.</p>
                     </div>
                     <div class="card">
-                        <h4>Preservação Ativa</h4>
-                        <p>Cuidar das florestas, proteger as nascentes de água e evitar poluição é o que mantém a terra fértil para as próximas gerações.</p>
+                        <h4 id="card2-titulo">Preservação Ativa</h4>
+                        <p id="card2-txt">Cuidar das florestas, proteger as nascentes de água e evitar poluição é o que mantém a terra fértil para as próximas gerações.</p>
                     </div>
                 </div>
 
-                <!-- Vídeo Educativo com legenda de áudio descritiva -->
+                <!-- Vídeo Educativo -->
                 <div class="container-video">
-                    <h4>Assista: O Futuro do Agro Sustentável</h4>
+                    <h4 id="vid-titulo">Assista: O Futuro do Agro Sustentável</h4>
                     <video class="video-midia" controls muted autoplay loop id="video-projeto">
                         <source src="vídeos/projeto.mp4" type="video/mp4">
                         Seu navegador não suporta a reprodução deste vídeo.
                     </video>
-                    <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Vídeo por: Fernando Sánchez Aranguren (Pexels) - Vídeo Narrado e Descritivo do Campo Russo.</p>
+                    <p style="font-size: 0.8rem; color: #666; margin-top: 5px;" id="vid-credito">Vídeo por: Fernando Sánchez Aranguren (Pexels) - Vídeo Narrado e Descritivo do Campo.</p>
                 </div>
             </div>
         </section>
@@ -86,24 +92,24 @@
         <!-- Seção de Tecnologia -->
         <section id="tecnologia" class="secao-tecnologia">
             <div class="container">
-                <h3>Inovação e Tecnologia Sustentável</h3>
-                <p>Hoje, o produtor rural usa ferramentas modernas para evitar desperdícios. Veja alguns exemplos de práticas reais:</p>
+                <h3 id="tec-titulo">Inovação e Tecnologia Sustentável</h3>
+                <p id="tec-sub">Hoje, o produtor rural usa ferramentas modernas para evitar desperdícios. Veja alguns exemplos de práticas reais:</p>
                 
                 <ul class="lista-tecnologias">
                     <li>
-                        <img src="imagens/drone.jpg" alt="Drone voando sobre plantação" class="foto-tecnologia">
+                        <img src="imagens/drone.jpg" alt="Drone" class="foto-tecnologia">
                         <span style="font-size: 0.75rem; color: #777; display: block; margin-top: -5px; margin-bottom: 10px;">Foto: DRONE EFT / Unsplash</span>
-                        <strong>Drones agrícolas:</strong> Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.
+                        <span id="tec-item1"><strong>Drones agrícolas:</strong> Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.</span>
                     </li>
                     <li>
-                        <img src="imagens/irrigacao.jpg" alt="Sistema de gotejamento de água" class="foto-tecnologia">
+                        <img src="imagens/irrigacao.jpg" alt="Irrigação" class="foto-tecnologia">
                         <span style="font-size: 0.75rem; color: #777; display: block; margin-top: -5px; margin-bottom: 10px;">Foto: Being Organic in EU / Unsplash</span>
-                        <strong>Irrigação gota a gota:</strong> Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.
+                        <span id="tec-item2"><strong>Irrigação gota a gota:</strong> Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.</span>
                     </li>
                     <li>
-                        <img src="imagens/solar.jpg" alt="Placas de energia solar no campo" class="foto-tecnologia">
+                        <img src="imagens/solar.jpg" alt="Painéis Solares" class="foto-tecnologia">
                         <span style="font-size: 0.75rem; color: #777; display: block; margin-top: -5px; margin-bottom: 10px;">Foto: American Public Power Assoc. / Unsplash</span>
-                        <strong>Energia Solar:</strong> Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.
+                        <span id="tec-item3"><strong>Energia Solar:</strong> Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.</span>
                     </li>
                 </ul>
             </div>
@@ -114,25 +120,25 @@
     <!-- Seção de Interação -->
     <section id="interacao" class="secao-interacao">
         <div class="container">
-            <h3>Participe da Nossa Ideia</h3>
-            <p>Apoie o nosso projeto escolar ou envie uma sugestão de prática sustentável para o campo!</p>
+            <h3 id="int-titulo">Participe da Nossa Ideia</h3>
+            <p id="int-txt">Apoie o nosso projeto escolar ou envie uma sugestão de prática sustentável para o campo!</p>
 
             <div class="caixa-likes">
                 <button id="botao-like">👍 Apoiar Projeto</button>
-                <p>Este projeto já recebeu <span id="contador-likes">0</span> apoios!</p>
+                <p id="txt-likes">Este projeto já recebeu <span id="contador-likes">0</span> apoios!</p>
             </div>
 
             <form id="formulario-contato" class="form-sustentavel">
-                <h4>Envie sua Sugestão</h4>
+                <h4 id="form-titulo">Envie sua Sugestão</h4>
                 <div class="campo">
-                    <label for="nome">Seu Nome:</label>
+                    <label for="nome" id="lbl-nome">Seu Nome:</label>
                     <input type="text" id="nome" placeholder="Digite seu nome completo">
                 </div>
                 <div class="campo">
-                    <label for="mensagem">Sua Sugestão Ambiental:</label>
+                    <label for="mensagem" id="lbl-msg">Sua Sugestão Ambiental:</label>
                     <textarea id="mensagem" rows="4" placeholder="Escreva aqui uma ideia para ajudar o meio ambiente..."></textarea>
                 </div>
-                <button type="submit" class="botao-enviar">Enviar Mensagem</button>
+                <button type="submit" class="botao-enviar" id="form-btn">Enviar Mensagem</button>
                 <p id="mensagem-alerta" class="alerta"></p>
             </form>
         </div>
@@ -140,11 +146,10 @@
 
     <!-- Rodapé -->
     <footer class="rodape">
-        <p>&copy; 2026 - Desenvolvido para o Concurso Agrinho | Categoria Front-End</p>
-        <p>Ensino Médio - Colégio Estadual do Paraná</p>
+        <p id="rod-txt">&copy; 2026 - Desenvolvido para o Concurso Agrinho | Categoria Front-End</p>
+        <p id="rod-sub">Ensino Médio - Colégio Estadual do Paraná</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-
