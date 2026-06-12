@@ -8,10 +8,29 @@
 </head>
 <body>
 
+    <!-- BARRA DE ACESSIBILIDADE NO TOPO -->
+    <div class="barra-acessibilidade">
+        <div class="grupo-botoes">
+            <span>Visual:</span>
+            <button id="btn-colorido" class="btn-ace">Colorido</button>
+            <button id="btn-branco" class="btn-ace">Branco</button>
+            <button id="btn-preto" class="btn-ace">Preto</button>
+        </div>
+        <div class="grupo-botoes">
+            <span>Texto:</span>
+            <button id="btn-Amais" class="btn-ace">A+</button>
+            <button id="btn-Amenos" class="btn-ace">A-</button>
+        </div>
+        <div class="grupo-botoes">
+            <span>Áudio:</span>
+            <button id="btn-narrar" class="btn-ace">🔊 Narrar Site</button>
+        </div>
+    </div>
+
     <!-- Cabeçalho principal do site -->
     <header class="cabecalho">
         <div class="logo">
-            <h1>Projeto Agrinho 2026</h1>
+            <h1 id="titulo-site">Projeto Agrinho 2026</h1>
         </div>
         <nav class="menu">
             <ul>
@@ -23,75 +42,74 @@
         </nav>
     </header>
 
-    <!-- Banner de Destaque -->
-    <section id="inicio" class="banner">
-        <div class="banner-conteudo">
-            <h2>Agro Forte, Futuro Sustentável</h2>
-            <p>Descubra como a produção de alimentos e a preservação do meio ambiente andam juntas para garantir o amanhã.</p>
-            <a href="#equilibrio" class="botao-saber-mais">Entender o Projeto</a>
-        </div>
-    </section>
+    <!-- Conteúdo principal embrulhado para a narração -->
+    <main id="conteudo-principal">
 
-    <!-- Seção sobre o Equilíbrio -->
-    <section id="equilibrio" class="secao-conteudo">
-        <div class="container">
-            <h3>O Equilíbrio Necessário</h3>
-            <p>Para o nosso futuro ser seguro, o campo precisa produzir alimentos de forma eficiente sem esgotar os recursos naturais da nossa terra.</p>
-            
-            <div class="cards-grade">
-                <div class="card">
-                    <h4>Produção Forte</h4>
-                    <p>O agro abastece as cidades, gera empregos e garante que a comida chegue na mesa de milhões de pessoas todos os dias.</p>
+        <!-- Banner de Destaque -->
+        <section id="inicio" class="banner">
+            <div class="banner-conteudo">
+                <h2>Agro Forte, Futuro Sustentável</h2>
+                <p>Descubra como a produção de alimentos e a preservação do meio ambiente andam juntas para garantir o amanhã.</p>
+                <a href="#equilibrio" class="botao-saber-mais">Entender o Projeto</a>
+            </div>
+        </section>
+
+        <!-- Seção sobre o Equilíbrio -->
+        <section id="equilibrio" class="secao-conteudo">
+            <div class="container">
+                <h3>O Equilíbrio Necessário</h3>
+                <p>Para o nosso futuro ser seguro, o campo precisa produzir alimentos de forma eficiente sem esgotar os recursos naturais da nossa terra.</p>
+                
+                <div class="cards-grade">
+                    <div class="card">
+                        <h4>Produção Forte</h4>
+                        <p>O agro abastece as cidades, gera empregos e garante que a comida chegue na mesa de milhões de pessoas todos os dias.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Preservação Ativa</h4>
+                        <p>Cuidar das florestas, proteger as nascentes de água e evitar poluição é o que mantém a terra fértil para as próximas gerações.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <h4>Preservação Ativa</h4>
-                    <p>Cuidar das florestas, proteger as nascentes de água e evitar poluição é o que mantém a terra fértil para as próximas gerações.</p>
+
+                <!-- Vídeo Educativo com legenda de áudio descritiva -->
+                <div class="container-video">
+                    <h4>Assista: O Futuro do Agro Sustentável</h4>
+                    <video class="video-midia" controls muted autoplay loop id="video-projeto">
+                        <source src="vídeos/projeto.mp4" type="video/mp4">
+                        Seu navegador não suporta a reprodução deste vídeo.
+                    </video>
+                    <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Vídeo por: Fernando Sánchez Aranguren (Pexels) - Vídeo Narrado e Descritivo do Campo Russo.</p>
                 </div>
             </div>
+        </section>
 
-            <!-- Vídeo com Caminho Corrigido e Limpo -->
-            <div class="container-video">
-                <h4>Assista: O Futuro do Agro Sustentável</h4>
-                <video class="video-midia" controls muted autoplay loop>
-                    <source src="vídeos/projeto.mp4" type="video/mp4">
-                    Seu navegador não suporta a reprodução deste vídeo.
-                </video>
-                <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Vídeo por: Fernando Sánchez Aranguren (Pexels)</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção de Tecnologia com Caminhos Corrigidos e Limpos -->
-    <section id="tecnologia" class="secao-tecnologia">
-        <div class="container">
-            <h3>Inovação e Tecnologia Sustentável</h3>
-            <p>Hoje, o produtor rural usa ferramentas modernas para evitar desperdícios. Veja alguns exemplos de práticas reais:</p>
-            
-            <ul class="lista-tecnologias">
-                <li>
-                    <div>
+        <!-- Seção de Tecnologia -->
+        <section id="tecnologia" class="secao-tecnologia">
+            <div class="container">
+                <h3>Inovação e Tecnologia Sustentável</h3>
+                <p>Hoje, o produtor rural usa ferramentas modernas para evitar desperdícios. Veja alguns exemplos de práticas reais:</p>
+                
+                <ul class="lista-tecnologias">
+                    <li>
                         <img src="imagens/drone.jpg" alt="Drone voando sobre plantação" class="foto-tecnologia">
                         <span style="font-size: 0.75rem; color: #777; display: block; margin-top: -5px; margin-bottom: 10px;">Foto: DRONE EFT / Unsplash</span>
-                    </div>
-                    <strong>Drones agrícolas:</strong> Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.
-                </li>
-                <li>
-                    <div>
+                        <strong>Drones agrícolas:</strong> Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.
+                    </li>
+                    <li>
                         <img src="imagens/irrigacao.jpg" alt="Sistema de gotejamento de água" class="foto-tecnologia">
                         <span style="font-size: 0.75rem; color: #777; display: block; margin-top: -5px; margin-bottom: 10px;">Foto: Being Organic in EU / Unsplash</span>
-                    </div>
-                    <strong>Irrigação gota a gota:</strong> Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.
-                </li>
-                <li>
-                    <div>
+                        <strong>Irrigação gota a gota:</strong> Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.
+                    </li>
+                    <li>
                         <img src="imagens/solar.jpg" alt="Placas de energia solar no campo" class="foto-tecnologia">
                         <span style="font-size: 0.75rem; color: #777; display: block; margin-top: -5px; margin-bottom: 10px;">Foto: American Public Power Assoc. / Unsplash</span>
-                    </div>
-                    <strong>Energia Solar:</strong> Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.
-                </li>
-            </ul>
-        </div>
-    </section>
+                        <strong>Energia Solar:</strong> Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
 
     <!-- Seção de Interação -->
     <section id="interacao" class="secao-interacao">
@@ -124,8 +142,9 @@
     <footer class="rodape">
         <p>&copy; 2026 - Desenvolvido para o Concurso Agrinho | Categoria Front-End</p>
         <p>Ensino Médio - Colégio Estadual do Paraná</p>
-    </footer
+    </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
+
