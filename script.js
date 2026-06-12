@@ -2,7 +2,7 @@
 // BLOCO 1: DICIONÁRIO DE TRADUÇÃO MULTI-IDIOMA
 // =================================================================
 
-// Objeto manual contendo todo o mapeamento de textos do site para as 3 línguas
+// Objeto manual que armazena os textos correspondentes para os 3 idiomas do site
 const traducoes = {
     pt: {
         titulo: "Projeto Agrinho 2026",
@@ -86,7 +86,7 @@ const traducoes = {
         bannerP: "Descubra cómo la producción de alimentos y la preservación del medio ambiente trabajan juntas para garantizar el mañana.",
         bannerBtn: "Entender el Proyecto",
         secaoEquiH3: "El Equilibrio Necesario",
-        secaoEquiP: "Para que nuestro futuro sea seguro, el campo debe producir alimentos de manera eficiente sin agotar los recursos naturais de nuestra tierra.",
+        secaoEquiP: "Para que nuestro futuro sea seguro, el campo debe producir alimentos de manera eficiente sin agotar los recursos naturales de nuestra tierra.",
         card1H4: "Producción Fuerte",
         card1P: "El agronegocio abastece a las ciudades, genera empleos y garantiza que la comida llegue a la mesa de millones todos los días.",
         card2H4: "Preservación Activa",
@@ -114,18 +114,18 @@ const traducoes = {
     }
 };
 
-// Variáveis globais de controle que conectam todos os blocos do script
+// Variáveis de escopo global para sincronizar os dados entre os blocos do script
 let idiomaAtual = "pt";
 let numeroDeLikes = 0;
 // =================================================================
-// BLOCO 2: MECANISMO DE TROCA DE IDIOMAS DO SITE
+// BLOCO 2: MECANISMO DE TROCA DE IDIOMAS DO SITE (CORRIGIDO)
 // =================================================================
 
-// Função que reescreve os textos internos do HTML consultando o dicionário do Bloco 1
 function alternarIdioma(idioma) {
     idiomaAtual = idioma;
     const txt = traducoes[idioma];
 
+    // Atualiza os cabeçalhos, menus e parágrafos estruturais
     document.getElementById("titulo-site").textContent = txt.titulo;
     document.getElementById("menu-inicio").textContent = txt.menuInicio;
     document.getElementById("menu-equilibrio").textContent = txt.menuEquilibrio;
@@ -144,11 +144,12 @@ function alternarIdioma(idioma) {
     document.getElementById("secao-tec-h3").textContent = txt.secaoTecH3;
     document.getElementById("secao-tec-p").textContent = txt.secaoTecP;
     
-    // Atualiza os elementos da lista injetando as tags de negrito corretas
+    // EVITA DUPLICAÇÃO: Modifica apenas o texto dos spans internos do HTML, sem tocar nas imagens
     document.getElementById("drone-text").innerHTML = `<strong>${txt.droneTitulo}:</strong>${txt.droneTexto}`;
     document.getElementById("irri-text").innerHTML = `<strong>${txt.irriTitulo}:</strong>${txt.irriTexto}`;
     document.getElementById("solar-text").innerHTML = `<strong>${txt.solarTitulo}:</strong>${txt.solarTexto}`;
     
+    // Atualiza o formulário de sugestões e curtidas
     document.getElementById("secao-int-h3").textContent = txt.secaoIntH3;
     document.getElementById("secao-int-p").textContent = txt.secaoIntP;
     document.getElementById("botao-like").textContent = txt.btnLike;
@@ -157,11 +158,11 @@ function alternarIdioma(idioma) {
     document.getElementById("label-mensagem").textContent = txt.labelMensagem;
     document.getElementById("botao-enviar").textContent = txt.btnEnviar;
 
-    // Atualiza a frase do contador de curtidas preservando o número ativo
+    // Atualiza a frase das curtidas mantendo a numeração estática
     document.getElementById("texto-apoios").innerHTML = `${txt.contadorTextoPre}<span id="contador-likes">${numeroDeLikes}</span>${txt.contadorTextoPos}`;
 }
 
-// Vincula os cliques dos botões superiores às ações de troca de idioma
+// Vincula a ação de clique dos botões da barra aos seus respectivos idiomas
 document.getElementById("btn-pt").addEventListener("click", function() { alternarIdioma("pt"); });
 document.getElementById("btn-en").addEventListener("click", function() { alternarIdioma("en"); });
 document.getElementById("btn-es").addEventListener("click", function() { alternarIdioma("es"); });
@@ -169,7 +170,7 @@ document.getElementById("btn-es").addEventListener("click", function() { alterna
 // BLOCO 3: ACESSIBILIDADE VISUAL, LEITOR DE VOZ E INTERAÇÕES
 // =================================================================
 
-// --- A. CONTRASTE DE CORES ---
+// --- A. GERENCIAMENTO DE ALTO CONTRASTE (TEMAS DE CORES) ---
 const body = document.body;
 document.getElementById("btn-colorido").addEventListener("click", function() { body.className = ""; });
 document.getElementById("btn-branco").addEventListener("click", function() { body.className = "tema-branco"; });
@@ -184,7 +185,7 @@ document.getElementById("btn-Amenos").addEventListener("click", function() {
     if (tamanhoBase > 12) { tamanhoBase = tamanhoBase - 2; document.documentElement.style.fontSize = tamanhoBase + "px"; }
 });
 
-// --- C. LEITOR DE TELA POR VOZ (NARRADOR) ---
+// --- C. LEITOR DE TELA POR VOZ (NARRADOR ADAPTADO) ---
 let narrando = false;
 let sinteseVoz = window.speechSynthesis;
 let escopoLeitura;
@@ -198,7 +199,7 @@ document.getElementById("btn-narrar").addEventListener("click", function() {
         const textoParaLer = document.getElementById("conteudo-principal").innerText;
         escopoLeitura = new SpeechSynthesisUtterance(textoParaLer);
         
-        // Define o sotaque correto do motor de voz do sistema baseado no idioma do site
+        // Define a pronúncia correta de fala baseado no idioma ativo
         escopoLeitura.lang = idiomaAtual === "pt" ? "pt-BR" : (idiomaAtual === "en" ? "en-US" : "es-ES");
         
         escopoLeitura.onend = function() {
@@ -218,7 +219,7 @@ document.getElementById("botao-like").addEventListener("click", function() {
     document.getElementById("contador-likes").textContent = numeroDeLikes;
 });
 
-// --- E. VALIDAÇÃO E ENVIO DO FORMULÁRIO ---
+// --- E. VALIDAÇÃO DO FORMULÁRIO SUSTENTÁVEL ---
 const formulario = document.getElementById("formulario-contato");
 const campoNome = document.getElementById("nome");
 const campoMensagem = document.getElementById("mensagem");
