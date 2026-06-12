@@ -1,301 +1,130 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projeto Agrinho 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap" rel="stylesheet">
-<style>
-/* --- RESET E CONFIGURAÇÕES GERAIS --- */
-* { margin:0; padding:0; box-sizing:border-box; }
-html { font-size:16px; }
-body { font-family: 'Arial', sans-serif; line-height:1.6; color: var(--text, #333); background: var(--bg,#f0fdf4); transition: background 0.3s, color 0.3s; overflow-x:hidden;}
-.container { max-width:1100px; margin:0 auto; padding:40px 20px; }
-
-/* --- VARIÁVEIS DE TEMA --- */
-:root {
-  --bg: #f0fdf4;
-  --surface: #ffffff;
-  --primary: #2e7d32;
-  --secondary: #0288d1;
-  --accent: #ff9800;
-  --text: #212121;
-}
-
-/* --- TEMAS --- */
-body.tema-branco { --bg:#ffffff; --surface:#f8f8f8; --text:#111; }
-body.tema-preto { --bg:#121212; --surface:#1f1f1f; --text:#fff; --accent:#ffb300; --primary:#4caf50; }
-
-/* --- BARRA DE ACESSIBILIDADE --- */
-.barra-acessibilidade {
-  display:flex; justify-content:center; gap:15px; padding:10px; flex-wrap:wrap; font-size:0.85rem; background:#212121; color:#fff;
-}
-.barra-acessibilidade button {
-  padding:4px 10px; border:none; cursor:pointer; border-radius:4px; font-weight:bold; background:#424242; color:#fff; transition:0.3s;
-}
-.barra-acessibilidade button:hover { background:var(--accent); }
-
-/* --- CABEÇALHO --- */
-.cabecalho {
-  background:var(--primary); color:#fff; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; padding:15px 5%;
-  position:sticky; top:0; z-index:100; border-bottom:4px solid var(--accent);
-}
-.logo h1 { font-size:1.4rem; text-shadow:1px 1px 2px #000; }
-.menu ul { display:flex; gap:10px; list-style:none; flex-wrap:wrap; }
-.menu ul li a {
-  color:#fff; text-decoration:none; font-weight:bold; padding:8px 12px; border-radius:4px; display:inline-block; font-size:0.95rem;
-  transition:0.2s;
-}
-.menu ul li a:hover { background:var(--accent); color:var(--primary); }
-
-/* --- BANNER --- */
-.banner { background:var(--secondary); color:#fff; text-align:center; padding:60px 20px; border-bottom:5px solid var(--primary);}
-.banner h2 { font-size:2.2rem; margin-bottom:15px; text-shadow:2px 2px 4px rgba(0,0,0,0.3);}
-.banner p { font-size:1.1rem; max-width:700px; margin:0 auto 25px auto;}
-.botao-saber-mais {
-  display:inline-block; background:var(--accent); color:#fff; padding:12px 30px; border-radius:30px; font-weight:bold;
-  text-decoration:none; box-shadow:0 4px 8px rgba(0,0,0,0.2); transition:0.2s;
-}
-.botao-saber-mais:hover { background:#e65100; }
-
-/* --- SEÇÕES --- */
-.secao-conteudo { background:#c8e6c9; text-align:center; padding:50px 20px;}
-.secao-conteudo h3 { font-size:1.8rem; color:var(--primary); margin-bottom:15px;}
-.secao-conteudo p { font-size:1.05rem; max-width:800px; margin:0 auto 30px auto;}
-
-/* CARDS */
-.cards-grade { display:flex; flex-wrap:wrap; justify-content:center; gap:20px;}
-.card { flex:1; min-width:280px; padding:25px; border-radius:12px; box-shadow:0 6px 12px rgba(0,0,0,0.1); text-align:left; background:var(--surface);}
-.card:nth-child(1) { border-top:6px solid #fbc02d; }
-.card:nth-child(2) { border-top:6px solid #4caf50; }
-.card h4 { font-size:1.25rem; margin-bottom:12px; }
-
-/* VÍDEO */
-.container-video { margin-top:40px; background:#fff3e0; padding:25px 15px; border-radius:12px; border:3px solid #ffb300; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
-.container-video h4 { color:#e65100; margin-bottom:15px; font-size:1.3rem; }
-.video-midia { width:100%; max-width:560px; height:auto; max-height:315px; border-radius:8px; border:3px solid #fff; background:#000; }
-
-/* TECNOLOGIA */
-.secao-tecnologia { background:#ffe082; border-top:4px solid #ffb300; border-bottom:4px solid #ffb300; padding:50px 20px;}
-.secao-tecnologia h3 { font-size:1.8rem; color:#e65100; text-align:center; margin-bottom:15px;}
-.lista-tecnologias { max-width:700px; margin:0 auto; list-style:none; }
-.lista-tecnologias li { font-size:1.05rem; margin-bottom:20px; background:#fff; padding:20px; border-radius:12px; border-left:6px solid #e65100; display:flex; align-items:center; gap:20px; box-shadow:0 4px 6px rgba(0,0,0,0.05);}
-.foto-tecnologia { width:250px; height:150px; object-fit:cover; border-radius:8px; flex-shrink:0; }
-
-/* PARTICIPE */
-.secao-interacao { background:#b3e5fc; text-align:center; padding:50px 20px; }
-.secao-interacao h3 { font-size:1.8rem; color:#01579b; margin-bottom:15px; }
-.caixa-likes { margin-bottom:35px; background:#fff; padding:20px; display:inline-block; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1);}
-#botao-like { background:#0288d1; color:#fff; border:none; padding:12px 25px; font-weight:bold; font-size:1rem; border-radius:8px; cursor:pointer; transition:0.2s; margin-bottom:12px;}
-#botao-like:hover { background:#01579b; }
-#contador-likes { font-weight:bold; color:#d32f2f; font-size:1.3rem; }
-
-.form-sustentavel { max-width:500px; margin:0 auto; background:#fff; padding:25px; border-radius:12px; box-shadow:0 8px 16px rgba(0,0,0,0.1); text-align:left;}
-.form-sustentavel h4 { color:#01579b; font-size:1.25rem; margin-bottom:15px;}
-.campo { margin-bottom:15px;}
-.campo label { display:block; font-weight:bold; margin-bottom:5px;}
-.campo input, .campo textarea { width:100%; padding:12px; border:2px solid #b3e5fc; border-radius:6px; background:#fafafa; }
-.botao-enviar { width:100%; padding:14px 20px; background:#4caf50; color:#fff; font-weight:bold; font-size:1rem; border-radius:6px; border:none; cursor:pointer; transition:0.2s;}
-.botao-enviar:hover { background:#388e3c; }
-.alerta { text-align:center; font-weight:bold; margin-top:15px; }
-
-/* RODAPÉ */
-.rodape { background:#1a1a1a; color:#fff; text-align:center; padding:25px 15px; font-size:0.85rem; border-top:4px solid #4caf50; }
-
-/* RESPONSIVIDADE */
-@media (max-width:768px){
-  .cabecalho{flex-direction:column; text-align:center; gap:15px;}
-  .menu ul{justify-content:center;}
-  .banner{padding:45px 15px;}
-  .banner h2{font-size:1.8rem;}
-  .cards-grade{flex-direction:column; align-items:center;}
-  .card{width:100%;}
-  .video-midia{height:200px;}
-}
-
-@media (min-width:600px){
-  .lista-tecnologias li{flex-direction:row;}
-}
-
-/* FOCUS VISUAL */
-button:focus,
-a:focus,
-input:focus,
-textarea:focus { outline:3px solid var(--accent); outline-offset:3px;}
-</style>
+<title>Agrinho 2026 - Agro Sustentável</title>
+<link rel="stylesheet" href="style.css">
 </head>
-<body class="tema-colorido">
+<body>
 
-<!-- BARRA DE ACESSIBILIDADE -->
+<!-- =========================
+  BARRA DE ACESSIBILIDADE
+========================= -->
 <div class="barra-acessibilidade">
-  <div>
-    Idioma: 
-    <button data-id="pt">PT</button>
-    <button data-id="en">EN</button>
-    <button data-id="es">ES</button>
-  </div>
-  <div>
-    Visual:
-    <button data-theme="colorido">Colorido</button>
-    <button data-theme="branco">Branco</button>
-    <button data-theme="preto">Preto</button>
-  </div>
-  <div>
-    Texto:
-    <button data-font="increase">A+</button>
-    <button data-font="decrease">A-</button>
-  </div>
-  <div>
-    Áudio:
-    <button id="btn-narrar">🔊 Narrar Site</button>
-  </div>
+    <div class="grupo-botoes">
+        <!-- Idiomas -->
+        <button class="btn-ace" onclick="setLang('pt')">PT</button>
+        <button class="btn-ace" onclick="setLang('en')">EN</button>
+        <button class="btn-ace" onclick="setLang('es')">ES</button>
+    </div>
+
+    <div class="grupo-botoes">
+        <!-- Temas -->
+        <button class="btn-ace" onclick="setTheme('colorido')">Colorido</button>
+        <button class="btn-ace" onclick="setTheme('claro')">Branco</button>
+        <button class="btn-ace" onclick="setTheme('escuro')">Preto</button>
+    </div>
+
+    <div class="grupo-botoes">
+        <!-- Fonte -->
+        <button class="btn-ace" onclick="fontUp()">A+</button>
+        <button class="btn-ace" onclick="fontDown()">A-</button>
+    </div>
+
+    <div class="grupo-botoes">
+        <!-- Áudio -->
+        <button class="btn-ace" onclick="speak()">🔊 Narrar Site</button>
+    </div>
 </div>
 
-<!-- CABEÇALHO -->
+<!-- =========================
+  CABEÇALHO
+========================= -->
 <header class="cabecalho">
-  <div class="logo"><h1>Projeto Agrinho 2026</h1></div>
-  <nav class="menu">
-    <ul>
-      <li><a href="#inicio">Início</a></li>
-      <li><a href="#conteudo">Conteúdo</a></li>
-      <li><a href="#tecnologia">Tecnologia</a></li>
-      <li><a href="#interacao">Participe</a></li>
-    </ul>
-  </nav>
+    <div class="logo">
+        <h1 id="title">Projeto Agrinho 2026</h1>
+    </div>
+    <nav class="menu">
+        <ul>
+            <li><a href="#sobre" id="menu-sobre">Sobre</a></li>
+            <li><a href="#tecnologia" id="menu-tec">Tecnologia</a></li>
+            <li><a href="#interacao" id="menu-int">Participe</a></li>
+        </ul>
+    </nav>
 </header>
 
-<!-- BANNER -->
-<section class="banner" id="inicio">
-  <h2>Bem-vindo ao Projeto Agrinho 2026</h2>
-  <p>Educação, sustentabilidade e tecnologia para um futuro melhor.</p>
-  <a href="#conteudo" class="botao-saber-mais">Saiba Mais</a>
-</section>
+<!-- =========================
+  SEÇÕES
+========================= -->
+<main>
+    <!-- Banner -->
+    <section class="banner" id="sobre">
+        <div class="banner-conteudo">
+            <h2 id="h2">Agro e Sustentabilidade</h2>
+            <p id="text">O agro é essencial para o futuro sustentável do planeta.</p>
+            <a href="#interacao" class="botao-saber-mais" id="btn-saber">Saiba Mais</a>
+        </div>
+    </section>
 
-<!-- CONTEÚDO -->
-<section class="secao-conteudo" id="conteudo">
-  <h3>Nosso Conteúdo</h3>
-  <p>Aqui você encontrará informações sobre educação ambiental e práticas sustentáveis para escolas e comunidades.</p>
-  <div class="cards-grade">
-    <div class="card">
-      <h4>Educação</h4>
-      <p>Projetos educativos que incentivam o cuidado com o meio ambiente.</p>
-    </div>
-    <div class="card">
-      <h4>Sustentabilidade</h4>
-      <p>Iniciativas de reciclagem, economia de água e energia.</p>
-    </div>
-  </div>
-  <div class="container-video">
-    <h4>Assista ao Vídeo</h4>
-    <iframe class="video-midia" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo Agrinho" frameborder="0" allowfullscreen></iframe>
-  </div>
-</section>
+    <!-- Conteúdo -->
+    <section class="secao-conteudo">
+        <h3 id="h3-conteudo">Por que a Sustentabilidade é importante?</h3>
+        <p id="p-conteudo">Integrar tecnologia e práticas sustentáveis garante um futuro melhor para todos.</p>
+        <div class="cards-grade">
+            <div class="card">
+                <h4 id="card1-title">Energia Renovável</h4>
+                <p id="card1-text">Reduzimos impacto ambiental usando energia solar e eólica.</p>
+            </div>
+            <div class="card">
+                <h4 id="card2-title">Agricultura Inteligente</h4>
+                <p id="card2-text">Monitoramento por sensores melhora a produção e reduz desperdício.</p>
+            </div>
+        </div>
+    </section>
 
-<!-- TECNOLOGIA -->
-<section class="secao-tecnologia" id="tecnologia">
-  <h3>Tecnologia Aplicada</h3>
-  <p>Como usamos tecnologia para melhorar o aprendizado e a sustentabilidade.</p>
-  <ul class="lista-tecnologias">
-    <li><img src="https://via.placeholder.com/250x150" alt="Robótica" class="foto-tecnologia"> Robótica Educativa</li>
-    <li><img src="https://via.placeholder.com/250x150" alt="Sensores" class="foto-tecnologia"> Sensores de Irrigação Inteligente</li>
-  </ul>
-</section>
+    <!-- Tecnologia -->
+    <section class="secao-tecnologia" id="tecnologia">
+        <h3 id="tec-title">Tecnologias no Campo</h3>
+        <ul class="lista-tecnologias">
+            <li>
+                <img class="foto-tecnologia" src="https://via.placeholder.com/250x150" alt="Drone">
+                <span id="tec1-text">Drones para monitoramento de culturas</span>
+            </li>
+            <li>
+                <img class="foto-tecnologia" src="https://via.placeholder.com/250x150" alt="IoT">
+                <span id="tec2-text">Sensores IoT para irrigação eficiente</span>
+            </li>
+        </ul>
+    </section>
 
-<!-- PARTICIPE -->
-<section class="secao-interacao" id="interacao">
-  <h3>Participe</h3>
-  <div class="caixa-likes">
-    <button id="botao-like">Curtir ❤️</button>
-    <div id="contador-likes">0</div>
-  </div>
-  <form class="form-sustentavel" id="form-sugestao">
-    <h4>Envie sua Sugestão</h4>
-    <div class="campo">
-      <label for="nome">Nome</label>
-      <input type="text" id="nome" required>
-    </div>
-    <div class="campo">
-      <label for="mensagem">Mensagem</label>
-      <textarea id="mensagem" rows="4" required></textarea>
-    </div>
-    <button type="submit" class="botao-enviar">Enviar</button>
-    <div class="alerta" id="alerta"></div>
-  </form>
-</section>
+    <!-- Interação -->
+    <section class="secao-interacao" id="interacao">
+        <h3 id="int-title">Participe</h3>
+        <div class="caixa-likes">
+            <button id="botao-like" onclick="like()">❤️ Like</button>
+            <div id="contador-likes">0</div>
+        </div>
+        <form class="form-sustentavel">
+            <h4 id="form-title">Envie sua sugestão</h4>
+            <div class="campo">
+                <label for="nome" id="label-nome">Nome</label>
+                <input type="text" id="nome" placeholder="Digite seu nome">
+            </div>
+            <div class="campo">
+                <label for="mensagem" id="label-msg">Mensagem</label>
+                <textarea id="mensagem" placeholder="Digite sua mensagem"></textarea>
+            </div>
+            <button type="button" class="botao-enviar" onclick="alert('Mensagem enviada!')">Enviar</button>
+        </form>
+    </section>
+</main>
 
-<!-- RODAPÉ -->
+<!-- Rodapé -->
 <footer class="rodape">
-  &copy; 2026 Projeto Agrinho. Todos os direitos reservados.
+    <p>© 2026 Agrinho - Todos os direitos reservados</p>
 </footer>
 
-<script>
-// ---------- IDIOMA ----------
-const idiomas = document.querySelectorAll('.barra-acessibilidade button[data-id]');
-idiomas.forEach(btn => btn.addEventListener('click', e => {
-  const lang = e.target.dataset.id;
-  localStorage.setItem('idioma', lang);
-  alert(`Idioma alterado para ${lang.toUpperCase()}`);
-}));
-
-const idiomaSalvo = localStorage.getItem('idioma');
-if(idiomaSalvo){ console.log(`Idioma salvo: ${idiomaSalvo}`); }
-
-// ---------- TEMA ----------
-const temas = document.querySelectorAll('.barra-acessibilidade button[data-theme]');
-temas.forEach(btn => btn.addEventListener('click', e => {
-  document.body.className = 'tema-'+ e.target.dataset.theme;
-  localStorage.setItem('tema', e.target.dataset.theme);
-}));
-
-const temaSalvo = localStorage.getItem('tema');
-if(temaSalvo){ document.body.className = 'tema-'+temaSalvo; }
-
-// ---------- FONTE ----------
-const btnFont = document.querySelectorAll('.barra-acessibilidade button[data-font]');
-btnFont.forEach(btn => btn.addEventListener('click', e=>{
-  const html = document.documentElement;
-  let tamanho = parseFloat(getComputedStyle(html).fontSize);
-  if(e.target.dataset.font === 'increase') tamanho += 2;
-  if(e.target.dataset.font === 'decrease') tamanho -= 2;
-  html.style.fontSize = tamanho+'px';
-}));
-
-// ---------- LIKES ----------
-const botaoLike = document.getElementById('botao-like');
-const contador = document.getElementById('contador-likes');
-let numeroDeLikes = Number(localStorage.getItem('likes')) || 0;
-contador.textContent = numeroDeLikes;
-botaoLike.addEventListener('click', ()=>{
-  numeroDeLikes++;
-  localStorage.setItem('likes', numeroDeLikes);
-  contador.textContent = numeroDeLikes;
-});
-
-// ---------- FORMULÁRIO ----------
-const form = document.getElementById('form-sugestao');
-const alerta = document.getElementById('alerta');
-form.addEventListener('submit', e=>{
-  e.preventDefault();
-  alerta.textContent = "Sugestão enviada com sucesso!";
-  form.reset();
-  setTimeout(()=>{alerta.textContent=''},3000);
-});
-
-// ---------- NARRADOR ----------
-let narrando = false;
-const btnNarrar = document.getElementById('btn-narrar');
-const synth = window.speechSynthesis;
-btnNarrar.addEventListener('click', ()=>{
-  if(!narrando){
-    const texto = document.body.innerText;
-    const utter = new SpeechSynthesisUtterance(texto);
-    synth.speak(utter);
-    narrando = true;
-    btnNarrar.textContent = '🛑 Parar Narração';
-    utter.onend = ()=>{ narrando=false; btnNarrar.textContent='🔊 Narrar Site'; }
-  } else { synth.cancel(); narrando=false; btnNarrar.textContent='🔊 Narrar Site'; }
-});
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
