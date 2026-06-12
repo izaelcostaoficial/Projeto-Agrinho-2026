@@ -1,243 +1,213 @@
-// =================================================================
-// BLOCO 1: DICIONÁRIO DE TRADUÇÃO MULTI-IDIOMA
-// =================================================================
+// ============================================================
+// JS PROFISSIONAL - AGRINHO 2026
+// ============================================================
 
-// Objeto manual que armazena os textos correspondentes para os 3 idiomas do site
+// ============================================================
+// BLOCO 1: DICIONÁRIO DE TRADUÇÃO MULTI-IDIOMA
+// ============================================================
 const traducoes = {
-    pt: {
-        titulo: "Projeto Agrinho 2026",
-        menuInicio: "Início",
-        menuEquilibrio: "O Equilíbrio",
-        menuTecnologia: "Tecnologia no Campo",
-        menuParticipe: "Participe",
-        bannerH2: "Agro Forte, Futuro Sustentável",
-        bannerP: "Descubra como a produção de alimentos e a preservação do meio ambiente andam juntas para garantir o amanhã.",
-        bannerBtn: "Entender o Projeto",
-        secaoEquiH3: "O Equilíbrio Necessário",
-        secaoEquiP: "Para o nosso futuro ser seguro, o campo precisa produzir alimentos de forma eficiente sem esgotar os recursos naturais da nossa terra.",
-        card1H4: "Produção Forte",
-        card1P: "O agro abastece as cidades, gera empregos e garante que a comida chegue na mesa de milhões de pessoas todos os dias.",
-        card2H4: "Preservação Ativa",
-        card2P: "Cuidar das florestas, proteger as nascentes de água e evitar poluição é o que mantém a terra fértil para as próximas gerações.",
-        videoH4: "Assista: O Futuro do Agro Sustentável",
-        secaoTecH3: "Inovação e Tecnologia Sustentável",
-        secaoTecP: "Hoje, o produtor rural usa ferramentas modernas para evitar desperdícios. Veja alguns exemplos de práticas reais:",
-        droneTitulo: "Drones agrícolas",
-        droneTexto: " Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.",
-        irriTitulo: "Irrigação gota a gota",
-        irriTexto: " Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.",
-        solarTitulo: "Energia Solar",
-        solarTexto: " Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.",
-        secaoIntH3: "Participe da Nossa Ideia",
-        secaoIntP: "Apoie o nosso projeto escolar ou envie uma sugestão de prática sustentável para o campo!",
-        btnLike: "👍 Apoiar Projeto",
-        contadorTextoPre: "Este projeto já recebeu ",
-        contadorTextoPos: " apoios!",
-        formH4: "Envie sua Sugestão",
-        labelNome: "Seu Nome:",
-        labelMensagem: "Sua Sugestão Ambiental:",
-        btnEnviar: "Enviar Mensagem",
-        alertaCampos: "Por favor, preencha todos os campos antes de enviar!",
-        alertaSucesso: "Obrigado por sua sugestão, {nome}! Juntos pelo agro sustentável."
+    pt: { /* ... mesmo conteúdo do seu pt ... */ },
+    en: { /* ... mesmo conteúdo do seu en ... */ },
+    es: { /* ... mesmo conteúdo do seu es ... */ }
+};
+
+// ============================================================
+// BLOCO 2: ESTADO GLOBAL
+// ============================================================
+const estado = {
+    idiomaAtual: "pt",
+    numeroDeLikes: 0,
+    tamanhoFonte: 16,
+    narrando: false
+};
+
+// ============================================================
+// BLOCO 3: FUNÇÕES DE TRADUÇÃO
+// ============================================================
+const tradutor = {
+    atualizarIdioma: function(idioma) {
+        estado.idiomaAtual = idioma;
+        const txt = traducoes[idioma];
+
+        const mapIDs = {
+            titulo: "titulo-site",
+            menuInicio: "menu-inicio",
+            menuEquilibrio: "menu-equilibrio",
+            menuTecnologia: "menu-tecnologia",
+            menuParticipe: "menu-participe",
+            bannerH2: "banner-h2",
+            bannerP: "banner-p",
+            bannerBtn: "banner-btn",
+            secaoEquiH3: "secao-equi-h3",
+            secaoEquiP: "secao-equi-p",
+            card1H4: "card1-h4",
+            card1P: "card1-p",
+            card2H4: "card2-h4",
+            card2P: "card2-p",
+            videoH4: "video-h4",
+            secaoTecH3: "secao-tec-h3",
+            secaoTecP: "secao-tec-p",
+            secaoIntH3: "secao-int-h3",
+            secaoIntP: "secao-int-p",
+            botaoLike: "botao-like",
+            formH4: "form-h4",
+            labelNome: "label-nome",
+            labelMensagem: "label-mensagem",
+            botaoEnviar: "botao-enviar"
+        };
+
+        // Atualiza todos os textos via mapeamento
+        Object.entries(mapIDs).forEach(([chave, id]) => {
+            const elemento = document.getElementById(id);
+            if (elemento) elemento.textContent = txt[chave];
+        });
+
+        // Atualiza cards de tecnologia sem tocar nas imagens
+        const techMap = [
+            { id: "drone-text", titulo: "droneTitulo", texto: "droneTexto" },
+            { id: "irri-text", titulo: "irriTitulo", texto: "irriTexto" },
+            { id: "solar-text", titulo: "solarTitulo", texto: "solarTexto" }
+        ];
+
+        techMap.forEach(item => {
+            const el = document.getElementById(item.id);
+            if (el) el.innerHTML = `<strong>${txt[item.titulo]}:</strong>${txt[item.texto]}`;
+        });
+
+        // Atualiza contador de likes mantendo o número atual
+        const contadorEl = document.getElementById("texto-apoios");
+        if (contadorEl) {
+            contadorEl.innerHTML = `${txt.contadorTextoPre}<span id="contador-likes">${estado.numeroDeLikes}</span>${txt.contadorTextoPos}`;
+        }
     },
-    en: {
-        titulo: "Agrinho Project 2026",
-        menuInicio: "Home",
-        menuEquilibrio: "The Balance",
-        menuTecnologia: "Farm Tech",
-        menuParticipe: "Join In",
-        bannerH2: "Strong Agro, Sustainable Future",
-        bannerP: "Discover how food production and environmental preservation work together to guarantee tomorrow.",
-        bannerBtn: "Understand the Project",
-        secaoEquiH3: "The Necessary Balance",
-        secaoEquiP: "For our future to be safe, the countryside must produce food efficiently without depleting our land's natural resources.",
-        card1H4: "Strong Production",
-        card1P: "Agribusiness supplies cities, creates jobs, and ensures food reaches the tables of millions every day.",
-        card2H4: "Active Preservation",
-        card2P: "Caring for forests, protecting water sources, and avoiding pollution is what keeps the soil fertile for future generations.",
-        videoH4: "Watch: The Future of Sustainable Agro",
-        secaoTecH3: "Innovation and Sustainable Technology",
-        secaoTecP: "Today, rural producers use modern tools to avoid waste. See some examples of real practices:",
-        droneTitulo: "Agricultural drones",
-        droneTexto: " Monitor crops from above, finding pests and avoiding the excessive use of pesticides.",
-        irriTitulo: "Drip irrigation",
-        irriTexto: " Delivers the exact amount of water the plant needs directly to the root, saving tons of water.",
-        solarTitulo: "Solar Energy",
-        solarTexto: " Use of photovoltaic panels to generate clean energy on farms and reduce environmental impact.",
-        secaoIntH3: "Join Our Idea",
-        secaoIntP: "Support our school project or send a suggestion for a sustainable practice for the countryside!",
-        btnLike: "👍 Support Project",
-        contadorTextoPre: "This project has already received ",
-        contadorTextoPos: " supports!",
-        formH4: "Send your Suggestion",
-        labelNome: "Your Name:",
-        labelMensagem: "Your Environmental Suggestion:",
-        btnEnviar: "Send Message",
-        alertaCampos: "Please fill in all fields before sending!",
-        alertaSucesso: "Thank you for your suggestion, {nome}! Together for sustainable agro."
-    },
-    es: {
-        titulo: "Proyecto Agrinho 2026",
-        menuInicio: "Inicio",
-        menuEquilibrio: "El Equilibrio",
-        menuTecnologia: "Tecnología de Campo",
-        menuParticipe: "Participe",
-        bannerH2: "Agro Fuerte, Futuro Sostenible",
-        bannerP: "Descubra cómo la producción de alimentos y la preservación del medio ambiente trabajan juntas para garantizar el mañana.",
-        bannerBtn: "Entender el Proyecto",
-        secaoEquiH3: "El Equilibrio Necesario",
-        secaoEquiP: "Para que nuestro futuro sea seguro, el campo debe producir alimentos de manera eficiente sin agotar los recursos naturales de nuestra tierra.",
-        card1H4: "Producción Fuerte",
-        card1P: "El agronegocio abastece a las ciudades, genera empleos y garantiza que la comida llegue a la mesa de millones todos los días.",
-        card2H4: "Preservación Activa",
-        card2P: "Cuidar los bosques, proteger las fuentes de agua y evitar la contaminación mantiene el suelo fértil para las próximas generaciones.",
-        videoH4: "Vea: El Futuro del Agro Sostenible",
-        secaoTecH3: "Innovación y Tecnología Sostenible",
-        secaoTecP: "Hoy en día, los productores rurales utilizan herramientas modernas para evitar el desperdicio. Vea algunos ejemplos prácticos:",
-        droneTitulo: "Drones agrícolas",
-        droneTexto: " Monitorean los cultivos desde arriba, encontrando plagas y evitando el uso excesivo de pesticidas.",
-        irriTitulo: "Riego por goteo",
-        irriTexto: " Lleva la cantidad exacta de agua que la planta necesita directamente a la raíz, ahorrando ríos de agua.",
-        solarTitulo: "Energía Solar",
-        solarTexto: " Uso de paneles fotovoltaicos para generar energía limpia en las fincas y reducir el impacto ambiental.",
-        secaoIntH3: "Participe de Nuestra Idea",
-        secaoIntP: "¡Apoye nuestro proyecto escolar o envíe una sugerencia de práctica sostenible para el campo!",
-        btnLike: "👍 Apoyar Proyecto",
-        contadorTextoPre: "¡Este proyecto ya ha recibido ",
-        contadorTextoPos: " apoyos!",
-        formH4: "Envíe su Sugerencia",
-        labelNome: "Su Nombre:",
-        labelMensagem: "Su Sugerencia Ambiental:",
-        btnEnviar: "Enviar Mensaje",
-        alertaCampos: "¡Por favor, complete todos los campos antes de enviar!",
-        alertaSucesso: "¡Gracias por su sugerencia, {nome}! Juntos por el agro sostenible."
+    vincularBotoes: function() {
+        ["pt", "en", "es"].forEach(idioma => {
+            const btn = document.getElementById(`btn-${idioma}`);
+            if (btn) btn.addEventListener("click", () => this.atualizarIdioma(idioma));
+        });
     }
 };
 
-// Variáveis de escopo global para sincronizar os dados entre os blocos do script
-let idiomaAtual = "pt";
-let numeroDeLikes = 0;
-// =================================================================
-// BLOCO 2: MECANISMO DE TROCA DE IDIOMAS DO SITE (CORRIGIDO)
-// =================================================================
+// ============================================================
+// BLOCO 4: ACESSIBILIDADE VISUAL E FONTES
+// ============================================================
+const acessibilidade = {
+    temas: {
+        colorido: "",
+        branco: "tema-branco",
+        preto: "tema-preto"
+    },
+    init: function() {
+        Object.entries(this.temas).forEach(([chave, classe]) => {
+            const btn = document.getElementById(`btn-${chave}`);
+            if (btn) btn.addEventListener("click", () => document.body.className = classe);
+        });
 
-function alternarIdioma(idioma) {
-    idiomaAtual = idioma;
-    const txt = traducoes[idioma];
-
-    // Atualiza os cabeçalhos, menus e parágrafos estruturais
-    document.getElementById("titulo-site").textContent = txt.titulo;
-    document.getElementById("menu-inicio").textContent = txt.menuInicio;
-    document.getElementById("menu-equilibrio").textContent = txt.menuEquilibrio;
-    document.getElementById("menu-tecnologia").textContent = txt.menuTecnologia;
-    document.getElementById("menu-participe").textContent = txt.menuParticipe;
-    document.getElementById("banner-h2").textContent = txt.bannerH2;
-    document.getElementById("banner-p").textContent = txt.bannerP;
-    document.getElementById("banner-btn").textContent = txt.bannerBtn;
-    document.getElementById("secao-equi-h3").textContent = txt.secaoEquiH3;
-    document.getElementById("secao-equi-p").textContent = txt.secaoEquiP;
-    document.getElementById("card1-h4").textContent = txt.card1H4;
-    document.getElementById("card1-p").textContent = txt.card1P;
-    document.getElementById("card2-h4").textContent = txt.card2H4;
-    document.getElementById("card2-p").textContent = txt.card2P;
-    document.getElementById("video-h4").textContent = txt.videoH4;
-    document.getElementById("secao-tec-h3").textContent = txt.secaoTecH3;
-    document.getElementById("secao-tec-p").textContent = txt.secaoTecP;
-    
-    // EVITA DUPLICAÇÃO: Modifica apenas o texto dos spans internos do HTML, sem tocar nas imagens
-    document.getElementById("drone-text").innerHTML = `<strong>${txt.droneTitulo}:</strong>${txt.droneTexto}`;
-    document.getElementById("irri-text").innerHTML = `<strong>${txt.irriTitulo}:</strong>${txt.irriTexto}`;
-    document.getElementById("solar-text").innerHTML = `<strong>${txt.solarTitulo}:</strong>${txt.solarTexto}`;
-    
-    // Atualiza o formulário de sugestões e curtidas
-    document.getElementById("secao-int-h3").textContent = txt.secaoIntH3;
-    document.getElementById("secao-int-p").textContent = txt.secaoIntP;
-    document.getElementById("botao-like").textContent = txt.btnLike;
-    document.getElementById("form-h4").textContent = txt.formH4;
-    document.getElementById("label-nome").textContent = txt.labelNome;
-    document.getElementById("label-mensagem").textContent = txt.labelMensagem;
-    document.getElementById("botao-enviar").textContent = txt.btnEnviar;
-
-    // Atualiza a frase das curtidas mantendo a numeração estática
-    document.getElementById("texto-apoios").innerHTML = `${txt.contadorTextoPre}<span id="contador-likes">${numeroDeLikes}</span>${txt.contadorTextoPos}`;
-}
-
-// Vincula a ação de clique dos botões da barra aos seus respectivos idiomas
-document.getElementById("btn-pt").addEventListener("click", function() { alternarIdioma("pt"); });
-document.getElementById("btn-en").addEventListener("click", function() { alternarIdioma("en"); });
-document.getElementById("btn-es").addEventListener("click", function() { alternarIdioma("es"); });
-// =================================================================
-// BLOCO 3: ACESSIBILIDADE VISUAL, LEITOR DE VOZ E INTERAÇÕES
-// =================================================================
-
-// --- A. GERENCIAMENTO DE ALTO CONTRASTE (TEMAS DE CORES) ---
-const body = document.body;
-document.getElementById("btn-colorido").addEventListener("click", function() { body.className = ""; });
-document.getElementById("btn-branco").addEventListener("click", function() { body.className = "tema-branco"; });
-document.getElementById("btn-preto").addEventListener("click", function() { body.className = "tema-preto"; });
-
-// --- B. DIMENSIONADOR DE TEXTO (A+ / A-) ---
-let tamanhoBase = 16;
-document.getElementById("btn-Amais").addEventListener("click", function() {
-    if (tamanhoBase < 24) { tamanhoBase = tamanhoBase + 2; document.documentElement.style.fontSize = tamanhoBase + "px"; }
-});
-document.getElementById("btn-Amenos").addEventListener("click", function() {
-    if (tamanhoBase > 12) { tamanhoBase = tamanhoBase - 2; document.documentElement.style.fontSize = tamanhoBase + "px"; }
-});
-
-// --- C. LEITOR DE TELA POR VOZ (NARRADOR ADAPTADO) ---
-let narrando = false;
-let sinteseVoz = window.speechSynthesis;
-let escopoLeitura;
-
-document.getElementById("btn-narrar").addEventListener("click", function() {
-    if (narrando) {
-        sinteseVoz.cancel();
-        document.getElementById("btn-narrar").textContent = idiomaAtual === "pt" ? "🔊 Narrar Site" : (idiomaAtual === "en" ? "🔊 Narrate Site" : "🔊 Narrar Sitio");
-        narrando = false;
-    } else {
-        const textoParaLer = document.getElementById("conteudo-principal").innerText;
-        escopoLeitura = new SpeechSynthesisUtterance(textoParaLer);
-        
-        // Define a pronúncia correta de fala baseado no idioma ativo
-        escopoLeitura.lang = idiomaAtual === "pt" ? "pt-BR" : (idiomaAtual === "en" ? "en-US" : "es-ES");
-        
-        escopoLeitura.onend = function() {
-            document.getElementById("btn-narrar").textContent = idiomaAtual === "pt" ? "🔊 Narrar Site" : (idiomaAtual === "en" ? "🔊 Narrate Site" : "🔊 Narrar Sitio");
-            narrando = false;
-        };
-
-        sinteseVoz.speak(escopoLeitura);
-        document.getElementById("btn-narrar").textContent = idiomaAtual === "pt" ? "🛑 Parar Narração" : (idiomaAtual === "en" ? "🛑 Stop Narration" : "🛑 Parar Narración");
-        narrando = true;
+        // Controle de tamanho de fonte
+        const aumentar = document.getElementById("btn-Amais");
+        const diminuir = document.getElementById("btn-Amenos");
+        if (aumentar) aumentar.addEventListener("click", () => this.alterarFonte(2));
+        if (diminuir) diminuir.addEventListener("click", () => this.alterarFonte(-2));
+    },
+    alterarFonte: function(valor) {
+        const novoTamanho = estado.tamanhoFonte + valor;
+        if (novoTamanho >= 12 && novoTamanho <= 24) {
+            estado.tamanhoFonte = novoTamanho;
+            document.documentElement.style.fontSize = `${estado.tamanhoFonte}px`;
+        }
     }
-});
+};
 
-// --- D. CONTADOR DE CURTIDAS (LIKES) ---
-document.getElementById("botao-like").addEventListener("click", function() {
-    numeroDeLikes = numeroDeLikes + 1;
-    document.getElementById("contador-likes").textContent = numeroDeLikes;
-});
-
-// --- E. VALIDAÇÃO DO FORMULÁRIO SUSTENTÁVEL ---
-const formulario = document.getElementById("formulario-contato");
-const campoNome = document.getElementById("nome");
-const campoMensagem = document.getElementById("mensagem");
-const textoAlerta = document.getElementById("mensagem-alerta");
-
-formulario.addEventListener("submit", function(event) {
-    event.preventDefault();
-    const nomeDigitado = campoNome.value.trim();
-    const mensagemDigitada = campoMensagem.value.trim();
-    const txt = traducoes[idiomaAtual];
-
-    if (nomeDigitado === "" || mensagemDigitada === "") {
-        textoAlerta.textContent = txt.alertaCampos;
-        textoAlerta.style.color = "red";
-    } else {
-        textoAlerta.textContent = txt.alertaSucesso.replace("{nome}", nomeDigitado);
-        textoAlerta.style.color = "green";
-        campoNome.value = "";
-        campoMensagem.value = "";
+// ============================================================
+// BLOCO 5: NARRADOR DE VOZ
+// ============================================================
+const narrador = {
+    init: function() {
+        const btn = document.getElementById("btn-narrar");
+        if (btn) btn.addEventListener("click", () => this.toggleNarracao(btn));
+    },
+    toggleNarracao: function(btn) {
+        const txt = traducoes[estado.idiomaAtual];
+        if (estado.narrando) {
+            speechSynthesis.cancel();
+            btn.textContent = this.textoBotao();
+            estado.narrando = false;
+        } else {
+            const utterance = new SpeechSynthesisUtterance(document.getElementById("conteudo-principal").innerText);
+            utterance.lang = this.getIdioma();
+            utterance.onend = () => {
+                btn.textContent = this.textoBotao();
+                estado.narrando = false;
+            };
+            speechSynthesis.speak(utterance);
+            btn.textContent = this.textoBotao(true);
+            estado.narrando = true;
+        }
+    },
+    getIdioma: function() {
+        return estado.idiomaAtual === "pt" ? "pt-BR" : estado.idiomaAtual === "en" ? "en-US" : "es-ES";
+    },
+    textoBotao: function(parando = false) {
+        if (!parando) {
+            return estado.idiomaAtual === "pt" ? "🔊 Narrar Site" :
+                   estado.idiomaAtual === "en" ? "🔊 Narrate Site" : "🔊 Narrar Sitio";
+        } else {
+            return estado.idiomaAtual === "pt" ? "🛑 Parar Narração" :
+                   estado.idiomaAtual === "en" ? "🛑 Stop Narration" : "🛑 Parar Narración";
+        }
     }
+};
+
+// ============================================================
+// BLOCO 6: CURTIDAS (LIKES)
+// ============================================================
+const likes = {
+    init: function() {
+        const btn = document.getElementById("botao-like");
+        if (btn) btn.addEventListener("click", () => this.adicionarLike());
+    },
+    adicionarLike: function() {
+        estado.numeroDeLikes++;
+        const contador = document.getElementById("contador-likes");
+        if (contador) contador.textContent = estado.numeroDeLikes;
+    }
+};
+
+// ============================================================
+// BLOCO 7: FORMULÁRIO DE SUGESTÕES
+// ============================================================
+const formularioSustentavel = {
+    init: function() {
+        const form = document.getElementById("formulario-contato");
+        if (form) form.addEventListener("submit", this.enviar);
+    },
+    enviar: function(event) {
+        event.preventDefault();
+        const nome = document.getElementById("nome").value.trim();
+        const mensagem = document.getElementById("mensagem").value.trim();
+        const alerta = document.getElementById("mensagem-alerta");
+        const txt = traducoes[estado.idiomaAtual];
+
+        if (!nome || !mensagem) {
+            alerta.textContent = txt.alertaCampos;
+            alerta.style.color = "red";
+        } else {
+            alerta.textContent = txt.alertaSucesso.replace("{nome}", nome);
+            alerta.style.color = "green";
+            document.getElementById("nome").value = "";
+            document.getElementById("mensagem").value = "";
+        }
+    }
+};
+
+// ============================================================
+// BLOCO 8: INICIALIZAÇÃO
+// ============================================================
+document.addEventListener("DOMContentLoaded", () => {
+    tradutor.vincularBotoes();
+    tradutor.atualizarIdioma(estado.idiomaAtual);
+    acessibilidade.init();
+    narrador.init();
+    likes.init();
+    formularioSustentavel.init();
 });
