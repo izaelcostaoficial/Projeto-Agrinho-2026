@@ -1,161 +1,301 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agrinho 2026 - Agro Forte e Sustentável</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeto Agrinho 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* --- RESET E CONFIGURAÇÕES GERAIS --- */
+* { margin:0; padding:0; box-sizing:border-box; }
+html { font-size:16px; }
+body { font-family: 'Arial', sans-serif; line-height:1.6; color: var(--text, #333); background: var(--bg,#f0fdf4); transition: background 0.3s, color 0.3s; overflow-x:hidden;}
+.container { max-width:1100px; margin:0 auto; padding:40px 20px; }
+
+/* --- VARIÁVEIS DE TEMA --- */
+:root {
+  --bg: #f0fdf4;
+  --surface: #ffffff;
+  --primary: #2e7d32;
+  --secondary: #0288d1;
+  --accent: #ff9800;
+  --text: #212121;
+}
+
+/* --- TEMAS --- */
+body.tema-branco { --bg:#ffffff; --surface:#f8f8f8; --text:#111; }
+body.tema-preto { --bg:#121212; --surface:#1f1f1f; --text:#fff; --accent:#ffb300; --primary:#4caf50; }
+
+/* --- BARRA DE ACESSIBILIDADE --- */
+.barra-acessibilidade {
+  display:flex; justify-content:center; gap:15px; padding:10px; flex-wrap:wrap; font-size:0.85rem; background:#212121; color:#fff;
+}
+.barra-acessibilidade button {
+  padding:4px 10px; border:none; cursor:pointer; border-radius:4px; font-weight:bold; background:#424242; color:#fff; transition:0.3s;
+}
+.barra-acessibilidade button:hover { background:var(--accent); }
+
+/* --- CABEÇALHO --- */
+.cabecalho {
+  background:var(--primary); color:#fff; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; padding:15px 5%;
+  position:sticky; top:0; z-index:100; border-bottom:4px solid var(--accent);
+}
+.logo h1 { font-size:1.4rem; text-shadow:1px 1px 2px #000; }
+.menu ul { display:flex; gap:10px; list-style:none; flex-wrap:wrap; }
+.menu ul li a {
+  color:#fff; text-decoration:none; font-weight:bold; padding:8px 12px; border-radius:4px; display:inline-block; font-size:0.95rem;
+  transition:0.2s;
+}
+.menu ul li a:hover { background:var(--accent); color:var(--primary); }
+
+/* --- BANNER --- */
+.banner { background:var(--secondary); color:#fff; text-align:center; padding:60px 20px; border-bottom:5px solid var(--primary);}
+.banner h2 { font-size:2.2rem; margin-bottom:15px; text-shadow:2px 2px 4px rgba(0,0,0,0.3);}
+.banner p { font-size:1.1rem; max-width:700px; margin:0 auto 25px auto;}
+.botao-saber-mais {
+  display:inline-block; background:var(--accent); color:#fff; padding:12px 30px; border-radius:30px; font-weight:bold;
+  text-decoration:none; box-shadow:0 4px 8px rgba(0,0,0,0.2); transition:0.2s;
+}
+.botao-saber-mais:hover { background:#e65100; }
+
+/* --- SEÇÕES --- */
+.secao-conteudo { background:#c8e6c9; text-align:center; padding:50px 20px;}
+.secao-conteudo h3 { font-size:1.8rem; color:var(--primary); margin-bottom:15px;}
+.secao-conteudo p { font-size:1.05rem; max-width:800px; margin:0 auto 30px auto;}
+
+/* CARDS */
+.cards-grade { display:flex; flex-wrap:wrap; justify-content:center; gap:20px;}
+.card { flex:1; min-width:280px; padding:25px; border-radius:12px; box-shadow:0 6px 12px rgba(0,0,0,0.1); text-align:left; background:var(--surface);}
+.card:nth-child(1) { border-top:6px solid #fbc02d; }
+.card:nth-child(2) { border-top:6px solid #4caf50; }
+.card h4 { font-size:1.25rem; margin-bottom:12px; }
+
+/* VÍDEO */
+.container-video { margin-top:40px; background:#fff3e0; padding:25px 15px; border-radius:12px; border:3px solid #ffb300; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+.container-video h4 { color:#e65100; margin-bottom:15px; font-size:1.3rem; }
+.video-midia { width:100%; max-width:560px; height:auto; max-height:315px; border-radius:8px; border:3px solid #fff; background:#000; }
+
+/* TECNOLOGIA */
+.secao-tecnologia { background:#ffe082; border-top:4px solid #ffb300; border-bottom:4px solid #ffb300; padding:50px 20px;}
+.secao-tecnologia h3 { font-size:1.8rem; color:#e65100; text-align:center; margin-bottom:15px;}
+.lista-tecnologias { max-width:700px; margin:0 auto; list-style:none; }
+.lista-tecnologias li { font-size:1.05rem; margin-bottom:20px; background:#fff; padding:20px; border-radius:12px; border-left:6px solid #e65100; display:flex; align-items:center; gap:20px; box-shadow:0 4px 6px rgba(0,0,0,0.05);}
+.foto-tecnologia { width:250px; height:150px; object-fit:cover; border-radius:8px; flex-shrink:0; }
+
+/* PARTICIPE */
+.secao-interacao { background:#b3e5fc; text-align:center; padding:50px 20px; }
+.secao-interacao h3 { font-size:1.8rem; color:#01579b; margin-bottom:15px; }
+.caixa-likes { margin-bottom:35px; background:#fff; padding:20px; display:inline-block; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1);}
+#botao-like { background:#0288d1; color:#fff; border:none; padding:12px 25px; font-weight:bold; font-size:1rem; border-radius:8px; cursor:pointer; transition:0.2s; margin-bottom:12px;}
+#botao-like:hover { background:#01579b; }
+#contador-likes { font-weight:bold; color:#d32f2f; font-size:1.3rem; }
+
+.form-sustentavel { max-width:500px; margin:0 auto; background:#fff; padding:25px; border-radius:12px; box-shadow:0 8px 16px rgba(0,0,0,0.1); text-align:left;}
+.form-sustentavel h4 { color:#01579b; font-size:1.25rem; margin-bottom:15px;}
+.campo { margin-bottom:15px;}
+.campo label { display:block; font-weight:bold; margin-bottom:5px;}
+.campo input, .campo textarea { width:100%; padding:12px; border:2px solid #b3e5fc; border-radius:6px; background:#fafafa; }
+.botao-enviar { width:100%; padding:14px 20px; background:#4caf50; color:#fff; font-weight:bold; font-size:1rem; border-radius:6px; border:none; cursor:pointer; transition:0.2s;}
+.botao-enviar:hover { background:#388e3c; }
+.alerta { text-align:center; font-weight:bold; margin-top:15px; }
+
+/* RODAPÉ */
+.rodape { background:#1a1a1a; color:#fff; text-align:center; padding:25px 15px; font-size:0.85rem; border-top:4px solid #4caf50; }
+
+/* RESPONSIVIDADE */
+@media (max-width:768px){
+  .cabecalho{flex-direction:column; text-align:center; gap:15px;}
+  .menu ul{justify-content:center;}
+  .banner{padding:45px 15px;}
+  .banner h2{font-size:1.8rem;}
+  .cards-grade{flex-direction:column; align-items:center;}
+  .card{width:100%;}
+  .video-midia{height:200px;}
+}
+
+@media (min-width:600px){
+  .lista-tecnologias li{flex-direction:row;}
+}
+
+/* FOCUS VISUAL */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus { outline:3px solid var(--accent); outline-offset:3px;}
+</style>
 </head>
-<body>
+<body class="tema-colorido">
 
-    <!-- BARRA DE ACESSIBILIDADE -->
-    <div class="barra-acessibilidade" role="region" aria-label="Configurações de acessibilidade">
-        <div class="grupo-botoes">
-            <span>Idioma:</span>
-            <button class="btn-ace" data-idioma="pt">PT</button>
-            <button class="btn-ace" data-idioma="en">EN</button>
-            <button class="btn-ace" data-idioma="es">ES</button>
-        </div>
-        <div class="grupo-botoes">
-            <span>Visual:</span>
-            <button class="btn-ace" data-tema="colorido">Colorido</button>
-            <button class="btn-ace" data-tema="branco">Branco</button>
-            <button class="btn-ace" data-tema="preto">Preto</button>
-        </div>
-        <div class="grupo-botoes">
-            <span>Texto:</span>
-            <button class="btn-ace" data-tamanho="a+">A+</button>
-            <button class="btn-ace" data-tamanho="a-">A-</button>
-        </div>
-        <div class="grupo-botoes">
-            <span>Áudio:</span>
-            <button class="btn-ace" id="btn-narrar" aria-label="Narrar conteúdo do site">🔊 Narrar Site</button>
-        </div>
+<!-- BARRA DE ACESSIBILIDADE -->
+<div class="barra-acessibilidade">
+  <div>
+    Idioma: 
+    <button data-id="pt">PT</button>
+    <button data-id="en">EN</button>
+    <button data-id="es">ES</button>
+  </div>
+  <div>
+    Visual:
+    <button data-theme="colorido">Colorido</button>
+    <button data-theme="branco">Branco</button>
+    <button data-theme="preto">Preto</button>
+  </div>
+  <div>
+    Texto:
+    <button data-font="increase">A+</button>
+    <button data-font="decrease">A-</button>
+  </div>
+  <div>
+    Áudio:
+    <button id="btn-narrar">🔊 Narrar Site</button>
+  </div>
+</div>
+
+<!-- CABEÇALHO -->
+<header class="cabecalho">
+  <div class="logo"><h1>Projeto Agrinho 2026</h1></div>
+  <nav class="menu">
+    <ul>
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#conteudo">Conteúdo</a></li>
+      <li><a href="#tecnologia">Tecnologia</a></li>
+      <li><a href="#interacao">Participe</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- BANNER -->
+<section class="banner" id="inicio">
+  <h2>Bem-vindo ao Projeto Agrinho 2026</h2>
+  <p>Educação, sustentabilidade e tecnologia para um futuro melhor.</p>
+  <a href="#conteudo" class="botao-saber-mais">Saiba Mais</a>
+</section>
+
+<!-- CONTEÚDO -->
+<section class="secao-conteudo" id="conteudo">
+  <h3>Nosso Conteúdo</h3>
+  <p>Aqui você encontrará informações sobre educação ambiental e práticas sustentáveis para escolas e comunidades.</p>
+  <div class="cards-grade">
+    <div class="card">
+      <h4>Educação</h4>
+      <p>Projetos educativos que incentivam o cuidado com o meio ambiente.</p>
     </div>
+    <div class="card">
+      <h4>Sustentabilidade</h4>
+      <p>Iniciativas de reciclagem, economia de água e energia.</p>
+    </div>
+  </div>
+  <div class="container-video">
+    <h4>Assista ao Vídeo</h4>
+    <iframe class="video-midia" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo Agrinho" frameborder="0" allowfullscreen></iframe>
+  </div>
+</section>
 
-    <!-- CABEÇALHO -->
-    <header class="cabecalho">
-        <div class="logo">
-            <h1>Projeto Agrinho 2026</h1>
-        </div>
-        <nav class="menu" aria-label="Menu principal">
-            <ul>
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#equilibrio">O Equilíbrio</a></li>
-                <li><a href="#tecnologia">Tecnologia no Campo</a></li>
-                <li><a href="#interacao">Participe</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- TECNOLOGIA -->
+<section class="secao-tecnologia" id="tecnologia">
+  <h3>Tecnologia Aplicada</h3>
+  <p>Como usamos tecnologia para melhorar o aprendizado e a sustentabilidade.</p>
+  <ul class="lista-tecnologias">
+    <li><img src="https://via.placeholder.com/250x150" alt="Robótica" class="foto-tecnologia"> Robótica Educativa</li>
+    <li><img src="https://via.placeholder.com/250x150" alt="Sensores" class="foto-tecnologia"> Sensores de Irrigação Inteligente</li>
+  </ul>
+</section>
 
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main id="conteudo-principal">
+<!-- PARTICIPE -->
+<section class="secao-interacao" id="interacao">
+  <h3>Participe</h3>
+  <div class="caixa-likes">
+    <button id="botao-like">Curtir ❤️</button>
+    <div id="contador-likes">0</div>
+  </div>
+  <form class="form-sustentavel" id="form-sugestao">
+    <h4>Envie sua Sugestão</h4>
+    <div class="campo">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" required>
+    </div>
+    <div class="campo">
+      <label for="mensagem">Mensagem</label>
+      <textarea id="mensagem" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="botao-enviar">Enviar</button>
+    <div class="alerta" id="alerta"></div>
+  </form>
+</section>
 
-        <!-- BANNER -->
-        <section id="inicio" class="banner">
-            <div class="banner-conteudo">
-                <h2>Agro Forte, Futuro Sustentável</h2>
-                <p>Descubra como a produção de alimentos e a preservação do meio ambiente andam juntas para garantir o amanhã.</p>
-                <a href="#equilibrio" class="botao-saber-mais">Entender o Projeto</a>
-            </div>
-        </section>
+<!-- RODAPÉ -->
+<footer class="rodape">
+  &copy; 2026 Projeto Agrinho. Todos os direitos reservados.
+</footer>
 
-        <!-- SEÇÃO O EQUILÍBRIO -->
-        <section id="equilibrio" class="secao-conteudo">
-            <div class="container">
-                <h3>O Equilíbrio Necessário</h3>
-                <p>Para o nosso futuro ser seguro, o campo precisa produzir alimentos de forma eficiente sem esgotar os recursos naturais da nossa terra.</p>
+<script>
+// ---------- IDIOMA ----------
+const idiomas = document.querySelectorAll('.barra-acessibilidade button[data-id]');
+idiomas.forEach(btn => btn.addEventListener('click', e => {
+  const lang = e.target.dataset.id;
+  localStorage.setItem('idioma', lang);
+  alert(`Idioma alterado para ${lang.toUpperCase()}`);
+}));
 
-                <div class="cards-grade">
-                    <article class="card">
-                        <h4>Produção Forte</h4>
-                        <p>O agro abastece as cidades, gera empregos e garante que a comida chegue na mesa de milhões de pessoas todos os dias.</p>
-                    </article>
-                    <article class="card">
-                        <h4>Preservação Ativa</h4>
-                        <p>Cuidar das florestas, proteger as nascentes de água e evitar poluição é o que mantém a terra fértil para as próximas gerações.</p>
-                    </article>
-                </div>
+const idiomaSalvo = localStorage.getItem('idioma');
+if(idiomaSalvo){ console.log(`Idioma salvo: ${idiomaSalvo}`); }
 
-                <!-- VÍDEO -->
-                <figure class="container-video">
-                    <h4>Assista: O Futuro do Agro Sustentável</h4>
-                    <video class="video-midia" controls muted autoplay loop>
-                        <source src="vídeos/projeto.mp4" type="video/mp4">
-                        Seu navegador não suporta a reprodução deste vídeo.
-                    </video>
-                    <figcaption style="font-size: 0.8rem; color: #666;">Vídeo por: Fernando Sánchez Aranguren (Pexels)</figcaption>
-                </figure>
-            </div>
-        </section>
+// ---------- TEMA ----------
+const temas = document.querySelectorAll('.barra-acessibilidade button[data-theme]');
+temas.forEach(btn => btn.addEventListener('click', e => {
+  document.body.className = 'tema-'+ e.target.dataset.theme;
+  localStorage.setItem('tema', e.target.dataset.theme);
+}));
 
-        <!-- SEÇÃO TECNOLOGIA -->
-        <section id="tecnologia" class="secao-tecnologia">
-            <div class="container">
-                <h3>Inovação e Tecnologia Sustentável</h3>
-                <p>Hoje, o produtor rural usa ferramentas modernas para evitar desperdícios. Veja alguns exemplos de práticas reais:</p>
+const temaSalvo = localStorage.getItem('tema');
+if(temaSalvo){ document.body.className = 'tema-'+temaSalvo; }
 
-                <ul class="lista-tecnologias">
-                    <li>
-                        <figure class="bloco-midia-lista">
-                            <img src="imagens/drone.jpg" alt="Drone sobre plantação" class="foto-tecnologia">
-                            <figcaption style="font-size: 0.75rem; color: #777;">Foto: DRONE EFT / Unsplash</figcaption>
-                        </figure>
-                        <p><strong>Drones agrícolas:</strong> Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.</p>
-                    </li>
-                    <li>
-                        <figure class="bloco-midia-lista">
-                            <img src="imagens/irrigacao.jpg" alt="Sistema de irrigação gota a gota" class="foto-tecnologia">
-                            <figcaption style="font-size: 0.75rem; color: #777;">Foto: Being Organic in EU / Unsplash</figcaption>
-                        </figure>
-                        <p><strong>Irrigação gota a gota:</strong> Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.</p>
-                    </li>
-                    <li>
-                        <figure class="bloco-midia-lista">
-                            <img src="imagens/solar.jpg" alt="Painéis solares em fazenda" class="foto-tecnologia">
-                            <figcaption style="font-size: 0.75rem; color: #777;">Foto: American Public Power Assoc. / Unsplash</figcaption>
-                        </figure>
-                        <p><strong>Energia Solar:</strong> Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.</p>
-                    </li>
-                </ul>
-            </div>
-        </section>
+// ---------- FONTE ----------
+const btnFont = document.querySelectorAll('.barra-acessibilidade button[data-font]');
+btnFont.forEach(btn => btn.addEventListener('click', e=>{
+  const html = document.documentElement;
+  let tamanho = parseFloat(getComputedStyle(html).fontSize);
+  if(e.target.dataset.font === 'increase') tamanho += 2;
+  if(e.target.dataset.font === 'decrease') tamanho -= 2;
+  html.style.fontSize = tamanho+'px';
+}));
 
-    </main>
+// ---------- LIKES ----------
+const botaoLike = document.getElementById('botao-like');
+const contador = document.getElementById('contador-likes');
+let numeroDeLikes = Number(localStorage.getItem('likes')) || 0;
+contador.textContent = numeroDeLikes;
+botaoLike.addEventListener('click', ()=>{
+  numeroDeLikes++;
+  localStorage.setItem('likes', numeroDeLikes);
+  contador.textContent = numeroDeLikes;
+});
 
-    <!-- SEÇÃO DE INTERAÇÃO -->
-    <section id="interacao" class="secao-interacao">
-        <div class="container">
-            <h3>Participe da Nossa Ideia</h3>
-            <p>Apoie o nosso projeto escolar ou envie uma sugestão de prática sustentável para o campo!</p>
+// ---------- FORMULÁRIO ----------
+const form = document.getElementById('form-sugestao');
+const alerta = document.getElementById('alerta');
+form.addEventListener('submit', e=>{
+  e.preventDefault();
+  alerta.textContent = "Sugestão enviada com sucesso!";
+  form.reset();
+  setTimeout(()=>{alerta.textContent=''},3000);
+});
 
-            <div class="caixa-likes">
-                <button id="botao-like">👍 Apoiar Projeto</button>
-                <p>Este projeto já recebeu <span id="contador-likes">0</span> apoios!</p>
-            </div>
+// ---------- NARRADOR ----------
+let narrando = false;
+const btnNarrar = document.getElementById('btn-narrar');
+const synth = window.speechSynthesis;
+btnNarrar.addEventListener('click', ()=>{
+  if(!narrando){
+    const texto = document.body.innerText;
+    const utter = new SpeechSynthesisUtterance(texto);
+    synth.speak(utter);
+    narrando = true;
+    btnNarrar.textContent = '🛑 Parar Narração';
+    utter.onend = ()=>{ narrando=false; btnNarrar.textContent='🔊 Narrar Site'; }
+  } else { synth.cancel(); narrando=false; btnNarrar.textContent='🔊 Narrar Site'; }
+});
+</script>
 
-            <form id="formulario-contato" class="form-sustentavel">
-                <h4>Envie sua Sugestão</h4>
-                <div class="campo">
-                    <label for="nome">Seu Nome:</label>
-                    <input type="text" id="nome" placeholder="Digite seu nome completo" required>
-                </div>
-                <div class="campo">
-                    <label for="mensagem">Sua Sugestão Ambiental:</label>
-                    <textarea id="mensagem" rows="4" placeholder="Escreva aqui uma ideia para ajudar o meio ambiente..." required></textarea>
-                </div>
-                <button type="submit" class="botao-enviar">Enviar Mensagem</button>
-                <p id="mensagem-alerta" class="alerta"></p>
-            </form>
-        </div>
-    </section>
-
-    <!-- RODAPÉ -->
-    <footer class="rodape">
-        <p>&copy; 2026 - Desenvolvido para o Concurso Agrinho | Categoria Front-End</p>
-        <p>Ensino Médio - Colégio Estadual do Paraná</p>
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
