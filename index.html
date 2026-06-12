@@ -4,135 +4,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto Agrinho 2026</title>
-    <link rel="stylesheet" href="estilo.css">
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- BARRA DE ACESSIBILIDADE -->
-    <div class="barra-acessibilidade">
-        <div class="grupo-botoes">
-            <button class="btn-ace" id="btn-pt">PT</button>
-            <button class="btn-ace" id="btn-en">EN</button>
-            <button class="btn-ace" id="btn-es">ES</button>
-        </div>
-        <div class="grupo-botoes">
-            <button class="btn-ace" id="btn-colorido">Colorido</button>
-            <button class="btn-ace" id="btn-branco">Branco</button>
-            <button class="btn-ace" id="btn-preto">Preto</button>
-        </div>
-        <div class="grupo-botoes">
-            <button class="btn-ace" id="btn-Amais">A+</button>
-            <button class="btn-ace" id="btn-Amenos">A-</button>
-        </div>
-        <div class="grupo-botoes">
-            <button class="btn-ace" id="btn-narrar">🔊 Narrar Site</button>
-        </div>
+
+<!-- =====================================================
+BARRA DE ACESSIBILIDADE
+===================================================== -->
+<div class="barra-acessibilidade">
+
+    <!-- Idiomas -->
+    <div class="grupo-botoes">
+        <span>Idioma:</span>
+        <button class="btn-ace" id="btn-pt">PT</button>
+        <button class="btn-ace" id="btn-en">EN</button>
+        <button class="btn-ace" id="btn-es">ES</button>
     </div>
 
-    <!-- CABEÇALHO -->
-    <header class="cabecalho">
-        <div class="logo">
-            <h1 id="titulo-site">Projeto Agrinho 2026</h1>
-        </div>
-        <nav class="menu">
-            <ul>
-                <li><a href="#inicio" id="menu-inicio">Início</a></li>
-                <li><a href="#equilibrio" id="menu-equilibrio">O Equilíbrio</a></li>
-                <li><a href="#tecnologia" id="menu-tecnologia">Tecnologia no Campo</a></li>
-                <li><a href="#participe" id="menu-participe">Participe</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Tema -->
+    <div class="grupo-botoes">
+        <span>Visual:</span>
+        <button class="btn-ace" id="btn-colorido">Colorido</button>
+        <button class="btn-ace" id="btn-branco">Branco</button>
+        <button class="btn-ace" id="btn-preto">Preto</button>
+    </div>
 
-    <!-- BANNER -->
-    <section class="banner" id="inicio">
-        <div class="banner-conteudo">
-            <h2 id="banner-h2">Agro Forte, Futuro Sustentável</h2>
-            <p id="banner-p">Descubra como a produção de alimentos e a preservação do meio ambiente andam juntas para garantir um amanhã mais seguro e saudável para todos nós. Aqui mostramos como cada escolha no campo pode impactar positivamente o nosso futuro.</p>
-            <a href="#equilibrio" class="botao-saber-mais" id="banner-btn">Entender o Projeto</a>
-        </div>
-    </section>
+    <!-- Fonte -->
+    <div class="grupo-botoes">
+        <span>Texto:</span>
+        <button class="btn-ace" id="btn-Amais">A+</button>
+        <button class="btn-ace" id="btn-Amenos">A-</button>
+    </div>
 
-    <!-- SEÇÃO O EQUILÍBRIO -->
-    <section class="secao-conteudo" id="equilibrio">
-        <h3 id="secao-equi-h3">O Equilíbrio Necessário</h3>
-        <p id="secao-equi-p">Para que o nosso futuro seja seguro e sustentável, o campo precisa produzir alimentos de maneira eficiente sem esgotar os recursos naturais. Cada planta cultivada, cada rio preservado e cada tecnologia utilizada faz a diferença para que possamos continuar vivendo em harmonia com a natureza.</p>
-        <div class="cards-grade">
-            <div class="card">
-                <h4 id="card1-h4">Produção Forte</h4>
-                <p id="card1-p">O agro garante que as cidades tenham alimento todos os dias, além de gerar empregos e sustentar famílias inteiras. Cada colheita é fruto de planejamento e dedicação de milhares de produtores que cuidam da terra com responsabilidade.</p>
-            </div>
-            <div class="card">
-                <h4 id="card2-h4">Preservação Ativa</h4>
-                <p id="card2-p">Preservar florestas, cuidar das nascentes e evitar poluição mantém a terra fértil para as futuras gerações. É a consciência ambiental aplicada diariamente, mostrando que o desenvolvimento pode caminhar junto com a natureza.</p>
-            </div>
-        </div>
+    <!-- Áudio -->
+    <div class="grupo-botoes">
+        <button class="btn-ace" id="btn-narrar">🔊 Narrar Site</button>
+    </div>
 
-        <!-- VÍDEO -->
-        <div class="container-video">
-            <h4 id="video-h4">Assista: O Futuro do Agro Sustentável</h4>
-            <video class="video-midia" controls>
-                <source src="projeto" type="video/mp4">
-                Seu navegador não suporta vídeo HTML5.
-            </video>
-            <p style="font-size:0.85rem; margin-top:10px;">Crédito do vídeo: Projeto Agrinho 2026</p>
-        </div>
-    </section>
+</div>
 
-    <!-- SEÇÃO TECNOLOGIA -->
-    <section class="secao-tecnologia" id="tecnologia">
-        <h3 id="secao-tec-h3">Inovação e Tecnologia Sustentável</h3>
-        <p id="secao-tec-p">Hoje, o produtor rural utiliza tecnologias modernas que ajudam a economizar água, controlar pragas e gerar energia limpa. Essas ferramentas garantem que a produção seja eficiente e que o impacto ambiental seja reduzido ao mínimo possível.</p>
-        <ul class="lista-tecnologias">
-            <li>
-                <img src="drone" alt="Drone Agrícola" class="foto-tecnologia">
-                <span id="drone-text"><strong>Drones agrícolas:</strong> Monitoram as plantações do alto, identificando pragas, analisando o crescimento das plantas e evitando o uso exagerado de defensivos.</span>
-                <p style="font-size:0.8rem; margin-top:5px;">Crédito da imagem: Drone Agrícola</p>
-            </li>
-            <li>
-                <img src="irrigacao" alt="Irrigação Gota a Gota" class="foto-tecnologia">
-                <span id="irri-text"><strong>Irrigação gota a gota:</strong> Leva água diretamente às raízes, economizando litros de água e garantindo que cada planta receba exatamente o que precisa.</span>
-                <p style="font-size:0.8rem; margin-top:5px;">Crédito da imagem: Irrigação Gota a Gota</p>
-            </li>
-            <li>
-                <img src="solar" alt="Energia Solar" class="foto-tecnologia">
-                <span id="solar-text"><strong>Energia Solar:</strong> Placas fotovoltaicas produzem energia limpa, reduzindo a dependência de combustíveis fósseis e ajudando o ambiente.</span>
-                <p style="font-size:0.8rem; margin-top:5px;">Crédito da imagem: Energia Solar</p>
-            </li>
-        </ul>
-    </section>
+<!-- =====================================================
+HEADER
+===================================================== -->
+<header class="cabecalho">
+    <h1 id="titulo-site">Projeto Agrinho 2026</h1>
 
-    <!-- SEÇÃO PARTICIPE -->
-    <section class="secao-interacao" id="participe">
-        <h3 id="secao-int-h3">Participe da Nossa Ideia</h3>
-        <p id="secao-int-p">Apoie nosso projeto escolar ou envie uma sugestão de prática sustentável que pode ser aplicada no campo. Sua participação é essencial para um futuro agro mais forte e consciente.</p>
+    <nav class="menu">
+        <a href="#inicio" id="menu-inicio">Início</a>
+        <a href="#equilibrio" id="menu-equilibrio">Equilíbrio</a>
+        <a href="#tecnologia" id="menu-tecnologia">Tecnologia</a>
+        <a href="#interacao" id="menu-participe">Participe</a>
+    </nav>
+</header>
 
-        <!-- LIKES -->
-        <div class="caixa-likes">
-            <button id="botao-like">👍 Apoiar Projeto</button>
-            <p id="texto-apoios">Este projeto já recebeu <span id="contador-likes">0</span> apoios!</p>
+<!-- =====================================================
+BANNER
+===================================================== -->
+<section class="banner" id="inicio">
+    <h2 id="banner-h2">Agro forte, futuro sustentável</h2>
+    <p id="banner-p">
+        O campo e a tecnologia caminham juntos para garantir um futuro melhor para todos.
+    </p>
+</section>
+
+<!-- =====================================================
+EQUILÍBRIO
+===================================================== -->
+<section class="secao-conteudo" id="equilibrio">
+    <h3 id="secao-equi-h3">O equilíbrio necessário</h3>
+    <p id="secao-equi-p">Produção e preservação precisam andar juntas.</p>
+
+    <div class="cards-grade">
+
+        <div class="card">
+            <h4 id="card1-h4">Produção forte</h4>
+            <p id="card1-p">O agro alimenta o mundo e gera empregos.</p>
         </div>
 
-        <!-- FORMULÁRIO -->
-        <form class="form-sustentavel" id="formulario-contato">
-            <h4 id="form-h4">Envie sua Sugestão</h4>
-            <div class="campo">
-                <label for="nome" id="label-nome">Seu Nome:</label>
-                <input type="text" id="nome">
-            </div>
-            <div class="campo">
-                <label for="mensagem" id="label-mensagem">Sua Sugestão Ambiental:</label>
-                <textarea id="mensagem" rows="4"></textarea>
-            </div>
-            <button type="submit" class="botao-enviar" id="botao-enviar">Enviar Mensagem</button>
-            <p class="alerta" id="mensagem-alerta"></p>
-        </form>
-    </section>
+        <div class="card">
+            <h4 id="card2-h4">Preservação ativa</h4>
+            <p id="card2-p">Cuidar da natureza garante o futuro.</p>
+        </div>
 
-    <!-- RODAPÉ -->
-    <footer class="rodape">
-        <p>Projeto Agrinho 2026 &copy; Todos os direitos reservados. Imagens e vídeo com créditos indicados em cada seção.</p>
-    </footer>
+    </div>
 
-    <script src="script.js"></script>
+    <!-- VÍDEO (SEM .MP4 COMO VOCÊ PEDIU) -->
+    <video class="video-midia" controls>
+        <source src="projeto" type="video/mp4">
+    </video>
+</section>
+
+<!-- =====================================================
+TECNOLOGIA
+===================================================== -->
+<section class="secao-tecnologia" id="tecnologia">
+
+    <h3 id="secao-tec-h3">Tecnologia no campo</h3>
+    <p id="secao-tec-p">Tecnologia ajuda a produzir mais com menos impacto.</p>
+
+    <ul class="lista-tecnologias">
+
+        <li>
+            <img src="drone" alt="Drone agrícola" class="foto-tecnologia">
+            <span id="drone-text">Drones monitoram plantações.</span>
+        </li>
+
+        <li>
+            <img src="irrigacao" alt="Irrigação" class="foto-tecnologia">
+            <span id="irri-text">Irrigação inteligente economiza água.</span>
+        </li>
+
+        <li>
+            <img src="solar" alt="Energia solar" class="foto-tecnologia">
+            <span id="solar-text">Energia solar reduz impacto ambiental.</span>
+        </li>
+
+    </ul>
+</section>
+
+<!-- =====================================================
+INTERAÇÃO
+===================================================== -->
+<section class="secao-interacao" id="interacao">
+
+    <h3 id="secao-int-h3">Participe</h3>
+    <p id="secao-int-p">Apoie o projeto e envie sugestões.</p>
+
+    <button id="botao-like">👍 Apoiar</button>
+    <p>
+        <span id="contador-likes">0</span> apoios
+    </p>
+
+    <form id="formulario-contato">
+        <input type="text" id="nome" placeholder="Seu nome">
+        <textarea id="mensagem" placeholder="Mensagem"></textarea>
+        <button type="submit">Enviar</button>
+        <p id="mensagem-alerta"></p>
+    </form>
+
+</section>
+
+<!-- =====================================================
+FOOTER
+===================================================== -->
+<footer class="rodape">
+    <p>Projeto Agrinho 2026</p>
+</footer>
+
+<!-- JS externo -->
+<script src="script.js"></script>
+
 </body>
 </html>
