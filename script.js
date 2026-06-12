@@ -1,8 +1,8 @@
-// ==========================================
-// PARTE 1: SISTEMA MULTI-IDIOMA (PT / EN)
-// ==========================================
+// =================================================================
+// BLOCO 1: DICIONÁRIO DE TRADUÇÃO MULTI-IDIOMA
+// =================================================================
 
-// 1. Criamos um objeto simples contendo os textos correspondentes de cada idioma
+// Objeto manual contendo todo o mapeamento de textos do site para as 3 línguas
 const traducoes = {
     pt: {
         titulo: "Projeto Agrinho 2026",
@@ -75,13 +75,53 @@ const traducoes = {
         btnEnviar: "Send Message",
         alertaCampos: "Please fill in all fields before sending!",
         alertaSucesso: "Thank you for your suggestion, {nome}! Together for sustainable agro."
+    },
+    es: {
+        titulo: "Proyecto Agrinho 2026",
+        menuInicio: "Inicio",
+        menuEquilibrio: "El Equilibrio",
+        menuTecnologia: "Tecnología de Campo",
+        menuParticipe: "Participe",
+        bannerH2: "Agro Fuerte, Futuro Sostenible",
+        bannerP: "Descubra cómo la producción de alimentos y la preservación del medio ambiente trabajan juntas para garantizar el mañana.",
+        bannerBtn: "Entender el Proyecto",
+        secaoEquiH3: "El Equilibrio Necesario",
+        secaoEquiP: "Para que nuestro futuro sea seguro, el campo debe producir alimentos de manera eficiente sin agotar los recursos naturais de nuestra tierra.",
+        card1H4: "Producción Fuerte",
+        card1P: "El agronegocio abastece a las ciudades, genera empleos y garantiza que la comida llegue a la mesa de millones todos los días.",
+        card2H4: "Preservación Activa",
+        card2P: "Cuidar los bosques, proteger las fuentes de agua y evitar la contaminación mantiene el suelo fértil para las próximas generaciones.",
+        videoH4: "Vea: El Futuro del Agro Sostenible",
+        secaoTecH3: "Innovación y Tecnología Sostenible",
+        secaoTecP: "Hoy en día, los productores rurales utilizan herramientas modernas para evitar el desperdicio. Vea algunos ejemplos prácticos:",
+        droneTitulo: "Drones agrícolas",
+        droneTexto: " Monitorean los cultivos desde arriba, encontrando plagas y evitando el uso excesivo de pesticidas.",
+        irriTitulo: "Riego por goteo",
+        irriTexto: " Lleva la cantidad exacta de agua que la planta necesita directamente a la raíz, ahorrando ríos de agua.",
+        solarTitulo: "Energía Solar",
+        solarTexto: " Uso de paneles fotovoltaicos para generar energía limpia en las fincas y reducir el impacto ambiental.",
+        secaoIntH3: "Participe de Nuestra Idea",
+        secaoIntP: "¡Apoye nuestro proyecto escolar o envíe una sugerencia de práctica sostenible para el campo!",
+        btnLike: "👍 Apoyar Proyecto",
+        contadorTextoPre: "¡Este proyecto ya ha recibido ",
+        contadorTextoPos: " apoyos!",
+        formH4: "Envíe su Sugerencia",
+        labelNome: "Su Nombre:",
+        labelMensagem: "Su Sugerencia Ambiental:",
+        btnEnviar: "Enviar Mensaje",
+        alertaCampos: "¡Por favor, complete todos los campos antes de enviar!",
+        alertaSucesso: "¡Gracias por su sugerencia, {nome}! Juntos por el agro sostenible."
     }
 };
 
-// 2. Variável para rastrear o idioma do site (começa em português)
+// Variáveis globais de controle que conectam todos os blocos do script
 let idiomaAtual = "pt";
+let numeroDeLikes = 0;
+// =================================================================
+// BLOCO 2: MECANISMO DE TROCA DE IDIOMAS DO SITE
+// =================================================================
 
-// 3. Função que varre a tela atualizando as tags pelos IDs correspondentes
+// Função que reescreve os textos internos do HTML consultando o dicionário do Bloco 1
 function alternarIdioma(idioma) {
     idiomaAtual = idioma;
     const txt = traducoes[idioma];
@@ -104,7 +144,7 @@ function alternarIdioma(idioma) {
     document.getElementById("secao-tec-h3").textContent = txt.secaoTecH3;
     document.getElementById("secao-tec-p").textContent = txt.secaoTecP;
     
-    // Atualiza a lista de tecnologias aplicando negrito nos termos corretos
+    // Atualiza os elementos da lista injetando as tags de negrito corretas
     document.getElementById("drone-text").innerHTML = `<strong>${txt.droneTitulo}:</strong>${txt.droneTexto}`;
     document.getElementById("irri-text").innerHTML = `<strong>${txt.irriTitulo}:</strong>${txt.irriTexto}`;
     document.getElementById("solar-text").innerHTML = `<strong>${txt.solarTitulo}:</strong>${txt.solarTexto}`;
@@ -117,42 +157,32 @@ function alternarIdioma(idioma) {
     document.getElementById("label-mensagem").textContent = txt.labelMensagem;
     document.getElementById("botao-enviar").textContent = txt.btnEnviar;
 
-    // Atualiza o bloco de curtidas mantendo a numeração ativa
+    // Atualiza a frase do contador de curtidas preservando o número ativo
     document.getElementById("texto-apoios").innerHTML = `${txt.contadorTextoPre}<span id="contador-likes">${numeroDeLikes}</span>${txt.contadorTextoPos}`;
 }
 
-// 4. Conecta os botões da barra de acessibilidade para rodar a função acima
+// Vincula os cliques dos botões superiores às ações de troca de idioma
 document.getElementById("btn-pt").addEventListener("click", function() { alternarIdioma("pt"); });
 document.getElementById("btn-en").addEventListener("click", function() { alternarIdioma("en"); });
-// ==========================================
-// PARTE 2: ACESSIBILIDADE VISUAL, LEITOR E INTERAÇÕES
-// ==========================================
+document.getElementById("btn-es").addEventListener("click", function() { alternarIdioma("es"); });
+// =================================================================
+// BLOCO 3: ACESSIBILIDADE VISUAL, LEITOR DE VOZ E INTERAÇÕES
+// =================================================================
 
 // --- A. CONTRASTE DE CORES ---
 const body = document.body;
-
 document.getElementById("btn-colorido").addEventListener("click", function() { body.className = ""; });
 document.getElementById("btn-branco").addEventListener("click", function() { body.className = "tema-branco"; });
 document.getElementById("btn-preto").addEventListener("click", function() { body.className = "tema-preto"; });
 
-
 // --- B. DIMENSIONADOR DE TEXTO (A+ / A-) ---
 let tamanhoBase = 16;
-
 document.getElementById("btn-Amais").addEventListener("click", function() {
-    if (tamanhoBase < 24) {
-        tamanhoBase = tamanhoBase + 2;
-        document.documentElement.style.fontSize = tamanhoBase + "px";
-    }
+    if (tamanhoBase < 24) { tamanhoBase = tamanhoBase + 2; document.documentElement.style.fontSize = tamanhoBase + "px"; }
 });
-
 document.getElementById("btn-Amenos").addEventListener("click", function() {
-    if (tamanhoBase > 12) {
-        tamanhoBase = tamanhoBase - 2;
-        document.documentElement.style.fontSize = tamanhoBase + "px";
-    }
+    if (tamanhoBase > 12) { tamanhoBase = tamanhoBase - 2; document.documentElement.style.fontSize = tamanhoBase + "px"; }
 });
-
 
 // --- C. LEITOR DE TELA POR VOZ (NARRADOR) ---
 let narrando = false;
@@ -162,60 +192,50 @@ let escopoLeitura;
 document.getElementById("btn-narrar").addEventListener("click", function() {
     if (narrando) {
         sinteseVoz.cancel();
-        document.getElementById("btn-narrar").textContent = idiomaAtual === "pt" ? "🔊 Narrar Site" : "🔊 Narrate Site";
+        document.getElementById("btn-narrar").textContent = idiomaAtual === "pt" ? "🔊 Narrar Site" : (idiomaAtual === "en" ? "🔊 Narrate Site" : "🔊 Narrar Sitio");
         narrando = false;
     } else {
-        // Captura todo o texto puro contido na tag principal <main>
         const textoParaLer = document.getElementById("conteudo-principal").innerText;
         escopoLeitura = new SpeechSynthesisUtterance(textoParaLer);
         
-        // Aplica o idioma correto para o leitor de voz do computador não falar com sotaque
-        escopoLeitura.lang = idiomaAtual === "pt" ? "pt-BR" : "en-US";
+        // Define o sotaque correto do motor de voz do sistema baseado no idioma do site
+        escopoLeitura.lang = idiomaAtual === "pt" ? "pt-BR" : (idiomaAtual === "en" ? "en-US" : "es-ES");
         
         escopoLeitura.onend = function() {
-            document.getElementById("btn-narrar").textContent = idiomaAtual === "pt" ? "🔊 Narrar Site" : "🔊 Narrate Site";
+            document.getElementById("btn-narrar").textContent = idiomaAtual === "pt" ? "🔊 Narrar Site" : (idiomaAtual === "en" ? "🔊 Narrate Site" : "🔊 Narrar Sitio");
             narrando = false;
         };
 
         sinteseVoz.speak(escopoLeitura);
-        document.getElementById("btn-narrar").textContent = idiomaAtual === "pt" ? "🛑 Parar Narração" : "🛑 Stop Narration";
+        document.getElementById("btn-narrar").textContent = idiomaAtual === "pt" ? "🛑 Parar Narração" : (idiomaAtual === "en" ? "🛑 Stop Narration" : "🛑 Parar Narración");
         narrando = true;
     }
 });
 
-
-// --- D. SISTEMA DE CONTADOR DE CURTIDAS (LIKES) ---
-let numeroDeLikes = 0;
-
+// --- D. CONTADOR DE CURTIDAS (LIKES) ---
 document.getElementById("botao-like").addEventListener("click", function() {
     numeroDeLikes = numeroDeLikes + 1;
     document.getElementById("contador-likes").textContent = numeroDeLikes;
 });
 
-
-// --- E. VALIDAÇÃO DO FORMULÁRIO DE CONTATO ---
+// --- E. VALIDAÇÃO E ENVIO DO FORMULÁRIO ---
 const formulario = document.getElementById("formulario-contato");
 const campoNome = document.getElementById("nome");
 const campoMensagem = document.getElementById("mensagem");
 const textoAlerta = document.getElementById("mensagem-alerta");
 
 formulario.addEventListener("submit", function(event) {
-    event.preventDefault(); // Impede o site de dar refresh na página
-
+    event.preventDefault();
     const nomeDigitado = campoNome.value.trim();
     const mensagemDigitada = campoMensagem.value.trim();
     const txt = traducoes[idiomaAtual];
 
-    // Valida se as caixas estão em branco
     if (nomeDigitado === "" || mensagemDigitada === "") {
         textoAlerta.textContent = txt.alertaCampos;
         textoAlerta.style.color = "red";
     } else {
-        // Substitui {nome} pela variável digitada pelo usuário na caixa
         textoAlerta.textContent = txt.alertaSucesso.replace("{nome}", nomeDigitado);
         textoAlerta.style.color = "green";
-
-        // Limpa os campos após o envio com sucesso
         campoNome.value = "";
         campoMensagem.value = "";
     }
