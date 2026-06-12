@@ -1,0 +1,317 @@
+/* --- CONFIGURAÇÕES GERAIS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garante que as margens não quebrem o tamanho das caixas */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333333;
+    background-color: #f0fdf4;
+    overflow-x: hidden; /* Evita que o site crie barra de rolagem para os lados no celular */
+}
+
+/* Container adaptável com largura máxima segura */
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px; /* Padding menor nas laterais para telas pequenas */
+}
+
+/* --- CABEÇALHO ADAPTÁVEL --- */
+.cabecalho {
+    background-color: #1b5e20;
+    color: #ffffff;
+    display: flex;
+    flex-wrap: wrap; /* Permite que os elementos pulem de linha se faltar espaço */
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 4px solid #ffcc00;
+}
+
+.logo h1 {
+    font-size: 1.4rem;
+    text-shadow: 1px 1px 2px #000000;
+}
+
+.menu ul {
+    display: flex;
+    flex-wrap: wrap; /* Se os links não couberem, eles se organizam sozinhos */
+    gap: 10px;
+    list-style: none;
+}
+
+.menu ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+
+.menu ul li a:hover {
+    background-color: #ffcc00;
+    color: #1b5e20;
+}
+
+/* --- CENÁRIO 1: BANNER PRINCIPAL --- */
+.banner {
+    background-color: #0288d1;
+    color: #ffffff;
+    text-align: center;
+    padding: 60px 20px; /* Reduzido o espaçamento para caber bem em telas menores */
+    border-bottom: 5px solid #2e7d32;
+}
+
+.banner-conteudo h2 {
+    font-size: 2.2rem; /* Tamanho base fluido */
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.banner-conteudo p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 25px auto;
+}
+
+.botao-saber-mais {
+    display: inline-block;
+    background-color: #ff6f00;
+    color: #ffffff;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.2s;
+}
+
+.botao-saber-mais:hover {
+    background-color: #e65100;
+}
+
+/* --- CENÁRIO 2: O EQUILÍBRIO --- */
+.secao-conteudo {
+    background-color: #c8e6c9;
+    text-align: center;
+}
+
+.secao-conteudo h3 {
+    font-size: 1.8rem;
+    color: #1b5e20;
+    margin-bottom: 15px;
+}
+
+.secao-conteudo p {
+    font-size: 1.05rem;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+}
+
+/* GRADE DE CARDS AUTO-ADAPTÁVEL */
+.cards-grade {
+    display: flex;
+    flex-direction: row; /* Fica lado a lado no computador */
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Faz os cards irem para baixo automaticamente no celular */
+}
+
+/* Base dos Cards adaptável */
+.card {
+    flex: 1;
+    min-width: 280px; /* Impede o card de esmagar e ficar muito fino */
+    max-width: 100%;  /* Garante que ele não passe da largura da tela */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.card:nth-child(1) { background-color: #fff9c4; border-top: 6px solid #fbc02d; }
+.card:nth-child(2) { background-color: #e8f5e9; border-top: 6px solid #4caf50; }
+
+.card h4 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+}
+
+/* --- CENÁRIO 3: TECNOLOGIA --- */
+.secao-tecnologia {
+    background-color: #ffe082;
+    border-top: 4px solid #ffb300;
+    border-bottom: 4px solid #ffb300;
+}
+
+.secao-tecnologia h3 {
+    font-size: 1.8rem;
+    color: #e65100;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.secao-tecnologia p {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.lista-tecnologias {
+    max-width: 700px;
+    margin: 0 auto;
+    list-style-type: none;
+}
+
+.lista-tecnologias li {
+    font-size: 1.05rem;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 6px solid #e65100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* --- CENÁRIO 4: PARTICIPE E FORMULÁRIO --- */
+.secao-interacao {
+    background-color: #b3e5fc;
+    text-align: center;
+}
+
+.secao-interacao h3 {
+    font-size: 1.8rem;
+    color: #01579b;
+    margin-bottom: 15px;
+}
+
+.caixa-likes {
+    margin-bottom: 35px;
+    background-color: #ffffff;
+    padding: 20px;
+    display: inline-block;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 100%; /* Evita estourar a tela no celular */
+}
+
+#botao-like {
+    background-color: #0288d1;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: background-color 0.2s;
+}
+
+#botao-like:hover { background-color: #01579b; }
+#contador-likes { font-weight: bold; color: #d32f2f; font-size: 1.3rem; }
+
+/* FORMULÁRIO RESPONSIVO */
+.form-sustentavel {
+    width: 100%;
+    max-width: 500px; /* Não passa disso no computador */
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.form-sustentavel h4 {
+    margin-bottom: 15px;
+    color: #01579b;
+    font-size: 1.25rem;
+}
+
+.campo {
+    margin-bottom: 15px;
+}
+
+.campo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.campo input, .campo textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #b3e5fc;
+    border-radius: 6px;
+    font-family: sans-serif;
+    background-color: #fafafa;
+}
+
+.botao-enviar {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+.botao-enviar:hover { background-color: #388e3c; }
+.alerta { margin-top: 15px; font-weight: bold; text-align: center; }
+
+/* --- RODAPÉ --- */
+.rodape {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    text-align: center;
+    padding: 25px 15px;
+    font-size: 0.85rem;
+    border-top: 4px solid #4caf50;
+}
+
+/* --- REGRAS ESPECÍFICAS PARA TELAS DE CELULAR (MÁXIMO 768px DE LARGURA) --- */
+@media (max-width: 768px) {
+    .cabecalho {
+        flex-direction: column; /* No celular, a logo fica em cima e o menu embaixo */
+        justify-content: center;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .menu ul {
+        justify-content: center; /* Centraliza os links do menu no celular */
+    }
+
+    .banner {
+        padding: 45px 15px;
+    }
+
+    .banner-conteudo h2 {
+        font-size: 1.8rem; /* Diminui o texto grande para não quebrar feio no celular */
+    }
+
+    .cards-grade {
+        flex-direction: column; /* Faz os cards ficarem um embaixo do outro no celular */
+        align-items: center;
+    }
+
+    .card {
+        width: 100%; /* O card ocupa a largura inteira disponível na tela do celular */
+    }
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=device-width, initial-scale=1.0">
+    <title>Agrinho 2026 - Agro Forte e Sustentável</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Cabeçalho principal do site -->
+    <header class="cabecalho">
+        <div class="logo">
+            <h1>Projeto Agrinho 2026</h1>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#equilibrio">O Equilíbrio</a></li>
+                <li><a href="#tecnologia">Tecnologia no Campo</a></li>
+                <li><a href="#interacao">Participe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Banner de Destaque -->
+    <section id="inicio" class="banner">
+        <div class="banner-conteudo">
+            <h2>Agro Forte, Futuro Sustentável</h2>
+            <p>Descubra como a produção de alimentos e a preservação do meio ambiente andam juntas para garantir o amanhã.</p>
+            <a href="#equilibrio" class="botao-saber-mais">Entender o Projeto</a>
+        </div>
+    </section>
+
+    <!-- Seção sobre o Equilíbrio -->
+    <section id="equilibrio" class="secao-conteudo">
+        <div class="container">
+            <h3>O Equilíbrio Necessário</h3>
+            <p>Para o nosso futuro ser seguro, o campo precisa produzir alimentos de forma eficiente sem esgotar os recursos naturais da nossa terra.</p>
+            
+            <div class="cards-grade">
+                <div class="card">
+                    <h4>Produção Forte</h4>
+                    <p>O agro abastece as cidades, gera empregos e garante que a comida chegue na mesa de milhões de pessoas todos os dias.</p>
+                </div>
+                <div class="card">
+                    <h4>Preservação Ativa</h4>
+                    <p>Cuidar das florestas, proteger as nascentes de água e evitar poluição é o que mantém a terra fértil para as próximas gerações.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Tecnologia -->
+    <section id="tecnologia" class="secao-tecnologia">
+        <div class="container">
+            <h3>Inovação e Tecnologia Sustentável</h3>
+            <p>Hoje, o produtor rural usa ferramentas modernas para evitar desperdícios. Veja alguns exemplos de práticas reais:</p>
+            
+            <ul class="lista-tecnologias">
+                <li><strong>Drones agrícolas:</strong> Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos.</li>
+                <li><strong>Irrigação gota a gota:</strong> Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando água.</li>
+                <li><strong>Energia Solar:</strong> Uso de placas fotovoltaicas para gerar energia limpa nas fazendas.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- NOVA SEÇÃO: Interação com JavaScript (Curtidas e Formulário) -->
+    <section id="interacao" class="secao-interacao">
+        <div class="container">
+            <h3>Participe da Nossa Ideia</h3>
+            <p>Apoie o nosso projeto escolar ou envie uma sugestão de prática sustentável para o campo!</p>
+
+            <!-- Sistema de Curtidas -->
+            <div class="caixa-likes">
+                <button id="botao-like">👍 Apoiar Projeto</button>
+                <p>Este projeto já recebeu <span id="contador-likes">0</span> apoios!</p>
+            </div>
+
+            <!-- Formulário de Sugestões -->
+            <form id="formulario-contato" class="form-sustentavel">
+                <h4>Envie sua Sugestão</h4>
+                <div class="campo">
+                    <label for="nome">Seu Nome:</label>
+                    <input type="text" id="nome" placeholder="Digite seu nome completo">
+                </div>
+                <div class="campo">
+                    <label for="mensagem">Sua Sugestão Ambiental:</label>
+                    <textarea id="mensagem" rows="4" placeholder="Escreva aqui uma ideia para ajudar o meio ambiente..."></textarea>
+                </div>
+                <button type="submit" class="botao-enviar">Enviar Mensagem</button>
+                <p id="mensagem-alerta" class="alerta"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Rodapé com créditos -->
+    <footer class="rodape">
+        <p>&copy; 2026 - Desenvolvido para o Concurso Agrinho | Categoria Front-End</p>
+        <p>Ensino Médio - Colégio Estadual do Paraná</p>
+    </footer>
+
+    <!-- CONECTANDO O JAVASCRIPT (Sempre no final do body) -->
+    <script src="script.js"></script>
+</body>
+</html>
