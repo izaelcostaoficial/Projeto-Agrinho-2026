@@ -4,145 +4,161 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto Agrinho 2026</title>
-    <!-- Link para CSS externo -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- ============================= -->
+<body class="tema-colorido">
+    <!-- ========================= -->
     <!-- BARRA DE ACESSIBILIDADE -->
-    <!-- ============================= -->
+    <!-- ========================= -->
     <div class="barra-acessibilidade">
+        <!-- Seleção de idioma -->
         <div class="grupo-botoes">
-            <strong>Idioma:</strong>
-            <button class="btn-ace" id="btn-pt">PT</button>
-            <button class="btn-ace" id="btn-en">EN</button>
-            <button class="btn-ace" id="btn-es">ES</button>
+            <button class="btn-ace" data-lang="pt">PT</button>
+            <button class="btn-ace" data-lang="en">EN</button>
+            <button class="btn-ace" data-lang="es">ES</button>
         </div>
+
+        <!-- Alterar visual -->
         <div class="grupo-botoes">
-            <strong>Visual:</strong>
-            <button class="btn-ace" id="btn-colorido">Colorido</button>
-            <button class="btn-ace" id="btn-branco">Branco</button>
-            <button class="btn-ace" id="btn-preto">Preto</button>
+            <button class="btn-ace" data-theme="colorido">Colorido</button>
+            <button class="btn-ace" data-theme="branco">Branco</button>
+            <button class="btn-ace" data-theme="preto">Preto</button>
         </div>
+
+        <!-- Aumentar/diminuir fonte -->
         <div class="grupo-botoes">
-            <strong>Texto:</strong>
-            <button class="btn-ace" id="btn-Amais">A+</button>
-            <button class="btn-ace" id="btn-Amenos">A-</button>
+            <button class="btn-ace" id="aumentarFonte">A+</button>
+            <button class="btn-ace" id="diminuirFonte">A-</button>
         </div>
+
+        <!-- Narrar site -->
         <div class="grupo-botoes">
-            <button class="btn-ace" id="btn-narrar">🔊 Narrar Site</button>
+            <button class="btn-ace" id="narrar">🔊 Narrar Site</button>
         </div>
     </div>
 
-    <!-- ============================= -->
+    <!-- ========================= -->
     <!-- CABEÇALHO -->
-    <!-- ============================= -->
+    <!-- ========================= -->
     <header class="cabecalho">
         <div class="logo">
             <h1 id="titulo-site">Projeto Agrinho 2026</h1>
         </div>
         <nav class="menu">
             <ul>
-                <li><a href="#" id="menu-inicio">Início</a></li>
-                <li><a href="#" id="menu-equilibrio">O Equilíbrio</a></li>
-                <li><a href="#" id="menu-tecnologia">Tecnologia no Campo</a></li>
-                <li><a href="#" id="menu-participe">Participe</a></li>
+                <li><a href="#inicio" id="menu-inicio">Início</a></li>
+                <li><a href="#equilibrio" id="menu-equilibrio">O Equilíbrio</a></li>
+                <li><a href="#tecnologia" id="menu-tecnologia">Tecnologia no Campo</a></li>
+                <li><a href="#participe" id="menu-participe">Participe</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- ============================= -->
+    <!-- ========================= -->
     <!-- BANNER -->
-    <!-- ============================= -->
-    <section class="banner">
-        <div class="banner-conteudo container">
+    <!-- ========================= -->
+    <section class="banner" id="inicio">
+        <div class="banner-conteudo">
             <h2 id="banner-h2">Agro Forte, Futuro Sustentável</h2>
-            <p id="banner-p">Descubra como a produção de alimentos e a preservação do meio ambiente andam juntas para garantir o amanhã.</p>
-            <a href="#secao-int" class="botao-saber-mais" id="banner-btn">Entender o Projeto</a>
+            <p id="banner-p">
+                O campo é muito mais do que só plantar e colher. É nele que podemos aprender a produzir alimentos de forma responsável, cuidando da natureza ao mesmo tempo...
+            </p>
+            <a href="#equilibrio" class="botao-saber-mais" id="banner-btn">Entender o Projeto</a>
         </div>
     </section>
 
-    <!-- ============================= -->
-    <!-- SEÇÃO EQUILÍBRIO -->
-    <!-- ============================= -->
-    <section class="secao-conteudo container">
-        <h3 id="secao-equi-h3">O Equilíbrio Necessário</h3>
-        <p id="secao-equi-p">Para o nosso futuro ser seguro, o campo precisa produzir alimentos de forma eficiente sem esgotar os recursos naturais da nossa terra.</p>
+    <!-- ========================= -->
+    <!-- SEÇÃO O EQUILÍBRIO -->
+    <!-- ========================= -->
+    <section class="secao-conteudo" id="equilibrio">
+        <h3 id="secaoEquiH3">O Equilíbrio Necessário</h3>
+        <p id="secaoEquiP">
+            O equilíbrio entre produzir comida e cuidar da natureza é essencial...
+        </p>
+
         <div class="cards-grade">
             <div class="card">
-                <h4 id="card1-h4">Produção Forte</h4>
-                <p id="card1-p">O agro abastece as cidades, gera empregos e garante que a comida chegue na mesa de milhões de pessoas todos os dias.</p>
+                <h4 id="card1H4">Produção Forte</h4>
+                <p id="card1P">O agricultor aprende a produzir alimentos de maneira eficiente...</p>
             </div>
             <div class="card">
-                <h4 id="card2-h4">Preservação Ativa</h4>
-                <p id="card2-p">Cuidar das florestas, proteger as nascentes de água e evitar poluição é o que mantém a terra fértil para as próximas gerações.</p>
+                <h4 id="card2H4">Preservação Ativa</h4>
+                <p id="card2P">É importante não só produzir, mas também cuidar do solo, das árvores e da água...</p>
             </div>
-        </div>
-
-        <!-- VÍDEO -->
-        <div class="container-video">
-            <h4 id="video-h4">Assista: O Futuro do Agro Sustentável</h4>
-            <iframe class="video-midia" src="https://www.youtube.com/embed/seu_video_aqui" frameborder="0" allowfullscreen></iframe>
         </div>
     </section>
 
-    <!-- ============================= -->
+    <!-- ========================= -->
+    <!-- VÍDEO DO PROJETO -->
+    <!-- ========================= -->
+    <section class="container-video">
+        <h4 id="videoH4">Assista: Projeto</h4>
+        <video controls class="video-midia">
+            <source src="projeto.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+        </video>
+    </section>
+
+    <!-- ========================= -->
     <!-- SEÇÃO TECNOLOGIA -->
-    <!-- ============================= -->
-    <section class="secao-tecnologia">
-        <h3 id="secao-tec-h3">Inovação e Tecnologia Sustentável</h3>
-        <p id="secao-tec-p">Hoje, o produtor rural usa ferramentas modernas para evitar desperdícios. Veja alguns exemplos de práticas reais:</p>
+    <!-- ========================= -->
+    <section class="secao-tecnologia" id="tecnologia">
+        <h3 id="secaoTecH3">Inovação e Tecnologia Sustentável</h3>
+        <p id="secaoTecP">A tecnologia chegou com força no campo...</p>
+
         <ul class="lista-tecnologias">
             <li>
-                <img src="drone.jpg" alt="Drone agrícola" class="foto-tecnologia">
-                <span id="drone-text"><strong>Drones agrícolas:</strong> Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.</span>
+                <img src="drone.jpg" alt="Drone" class="foto-tecnologia">
+                <strong id="droneTitulo">Drones agrícolas:</strong> <span id="droneTexto">Voam sobre as plantações e mostram onde tem plantas doentes...</span>
             </li>
             <li>
-                <img src="irrigacao.jpg" alt="Irrigação gota a gota" class="foto-tecnologia">
-                <span id="irri-text"><strong>Irrigação gota a gota:</strong> Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.</span>
+                <img src="irrigacao.jpg" alt="Irrigação" class="foto-tecnologia">
+                <strong id="irriTitulo">Irrigação gota a gota:</strong> <span id="irriTexto">Cada planta recebe exatamente a água que precisa...</span>
             </li>
             <li>
                 <img src="solar.jpg" alt="Energia Solar" class="foto-tecnologia">
-                <span id="solar-text"><strong>Energia Solar:</strong> Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.</span>
+                <strong id="solarTitulo">Energia Solar:</strong> <span id="solarTexto">Placas solares no campo ajudam a gerar energia limpa...</span>
             </li>
         </ul>
     </section>
 
-    <!-- ============================= -->
+    <!-- ========================= -->
     <!-- SEÇÃO PARTICIPE -->
-    <!-- ============================= -->
-    <section class="secao-interacao container" id="secao-int">
-        <h3 id="secao-int-h3">Participe da Nossa Ideia</h3>
-        <p id="secao-int-p">Apoie o nosso projeto escolar ou envie uma sugestão de prática sustentável para o campo!</p>
+    <!-- ========================= -->
+    <section class="secao-interacao" id="participe">
+        <h3 id="secaoIntH3">Participe da Nossa Ideia</h3>
+        <p id="secaoIntP">Você pode fazer a diferença também...</p>
 
         <div class="caixa-likes">
             <button id="botao-like">👍 Apoiar Projeto</button>
-            <p id="texto-apoios">Este projeto já recebeu <span id="contador-likes">0</span> apoios!</p>
+            <p id="contador-likes">Este projeto já recebeu 0 apoios!</p>
         </div>
 
-        <form id="formulario-contato" class="form-sustentavel">
-            <h4 id="form-h4">Envie sua Sugestão</h4>
+        <form class="form-sustentavel" id="formSustentavel">
+            <h4 id="formH4">Envie sua Sugestão</h4>
             <div class="campo">
-                <label for="nome" id="label-nome">Seu Nome:</label>
-                <input type="text" id="nome" name="nome">
+                <label for="nome" id="labelNome">Seu Nome:</label>
+                <input type="text" id="nome" required>
             </div>
             <div class="campo">
-                <label for="mensagem" id="label-mensagem">Sua Sugestão Ambiental:</label>
-                <textarea id="mensagem" name="mensagem" rows="5"></textarea>
+                <label for="mensagem" id="labelMensagem">Sua Sugestão Ambiental:</label>
+                <textarea id="mensagem" rows="4" required></textarea>
             </div>
-            <button type="submit" class="botao-enviar" id="botao-enviar">Enviar Mensagem</button>
-            <p class="alerta" id="mensagem-alerta"></p>
+            <button type="submit" class="botao-enviar" id="btnEnviar">Enviar Mensagem</button>
+            <p class="alerta" id="alerta"></p>
         </form>
     </section>
 
-    <!-- ============================= -->
+    <!-- ========================= -->
     <!-- RODAPÉ -->
-    <!-- ============================= -->
+    <!-- ========================= -->
     <footer class="rodape">
-        <p>&copy; 2026 Projeto Agrinho. Todos os direitos reservados.</p>
+        &copy; 2026 Projeto Agrinho. Todos os direitos reservados.
     </footer>
 
-    <!-- Link para JS externo -->
+    <!-- ========================= -->
+    <!-- SCRIPTS -->
+    <!-- ========================= -->
     <script src="script.js"></script>
 </body>
 </html>
