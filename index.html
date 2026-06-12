@@ -14,7 +14,7 @@
             <span>Idioma:</span>
             <button id="btn-pt" class="btn-ace">PT</button>
             <button id="btn-en" class="btn-ace">EN</button>
-            <button id="btn-es" class="btn-ace">ES</button> <!-- Botão do 3º Idioma -->
+            <button id="btn-es" class="btn-ace">ES</button>
         </div>
         <div class="grupo-botoes">
             <span>Visual:</span>
@@ -89,35 +89,39 @@
             </div>
         </section>
 
-        <!-- Seção de Tecnologia com as 3 fotos locais -->
+        <!-- Seção de Tecnologia Protegida contra Duplicação -->
         <section id="tecnologia" class="secao-tecnologia">
             <div class="container">
                 <h3 id="secao-tec-h3">Inovação e Tecnologia Sustentável</h3>
                 <p id="secao-tec-p">Hoje, o produtor rural usa ferramentas modernas para evitar desperdícios. Veja alguns exemplos de práticas reais:</p>
                 
                 <ul class="lista-tecnologias">
+                    <!-- Tecnologia 1 -->
                     <li>
                         <div class="bloco-midia-lista">
                             <img src="imagens/drone.jpg" alt="Drone" class="foto-tecnologia">
                             <span style="font-size: 0.75rem; color: #777; display: block; margin-top: -5px; margin-bottom: 10px;">Foto: DRONE EFT / Unsplash</span>
                         </div>
-                        <p id="drone-text"><strong>Drones agrícolas:</strong> Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.</p>
+                        <!-- O JS agora altera APENAS o conteúdo desta tag span abaixo -->
+                        <span id="drone-text"><strong>Drones agrícolas:</strong> Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.</span>
                     </li>
                     
+                    <!-- Tecnologia 2 -->
                     <li>
                         <div class="bloco-midia-lista">
                             <img src="imagens/irrigacao.jpg" alt="Irrigação" class="foto-tecnologia">
                             <span style="font-size: 0.75rem; color: #777; display: block; margin-top: -5px; margin-bottom: 10px;">Foto: Being Organic in EU / Unsplash</span>
                         </div>
-                        <p id="irri-text"><strong>Irrigação gota a gota:</strong> Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.</p>
+                        <span id="irri-text"><strong>Irrigação gota a gota:</strong> Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.</span>
                     </li>
                     
+                    <!-- Tecnologia 3 -->
                     <li>
                         <div class="bloco-midia-lista">
                             <img src="imagens/solar.jpg" alt="Painel Solar" class="foto-tecnologia">
                             <span style="font-size: 0.75rem; color: #777; display: block; margin-top: -5px; margin-bottom: 10px;">Foto: American Public Power Assoc. / Unsplash</span>
                         </div>
-                        <p id="solar-text"><strong>Energia Solar:</strong> Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.</p>
+                        <span id="solar-text"><strong>Energia Solar:</strong> Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.</span>
                     </li>
                 </ul>
             </div>
@@ -161,3 +165,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
