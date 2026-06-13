@@ -3,82 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Concurso Agrinho 2026 — Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente" />
-  <title data-i18n="page_title">Agrinho 2026 — Agro Forte, Futuro Sustentável</title>
+  <meta name="description" content="Concurso Agrinho 2026 — Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente. Projeto do Colégio Estadual do Paraná." />
+  <title>Agrinho 2026 — Agro Forte, Futuro Sustentável</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ===== BARRA DE ACESSIBILIDADE SUPERIOR FIXA ===== -->
   <div id="barra-acessibilidade" role="toolbar" aria-label="Barra de Acessibilidade">
 
     <div class="acesso-grupo">
-      <span class="acesso-label" data-i18n="acesso_idioma">Idioma / Language:</span>
-      <button class="btn-acesso btn-ativo" id="btn-pt" onclick="mudarIdioma('pt')" aria-pressed="true">PT</button>
-      <button class="btn-acesso" id="btn-en" onclick="mudarIdioma('en')" aria-pressed="false">EN</button>
-      <button class="btn-acesso" id="btn-es" onclick="mudarIdioma('es')" aria-pressed="false">ES</button>
+      <span class="acesso-label" id="label-idioma">Idioma:</span>
+      <button class="btn-acesso btn-ativo" id="btn-pt" aria-pressed="true">PT</button>
+      <button class="btn-acesso" id="btn-en" aria-pressed="false">EN</button>
+      <button class="btn-acesso" id="btn-es" aria-pressed="false">ES</button>
     </div>
 
     <div class="acesso-grupo">
-      <span class="acesso-label" data-i18n="acesso_visual">Visual:</span>
-      <button class="btn-acesso" onclick="mudarTema('padrao')" data-i18n="tema_padrao">Padrão</button>
-      <button class="btn-acesso" onclick="mudarTema('branco')" data-i18n="tema_branco">Acessível L/W</button>
-      <button class="btn-acesso" onclick="mudarTema('preto')" data-i18n="tema_preto">Acessível D/B</button>
+      <span class="acesso-label" id="label-visual">Visual:</span>
+      <button class="btn-acesso" id="btn-colorido">Padrão</button>
+      <button class="btn-acesso" id="btn-branco">L/W</button>
+      <button class="btn-acesso" id="btn-preto">D/B</button>
     </div>
 
     <div class="acesso-grupo">
-      <span class="acesso-label" data-i18n="acesso_texto">Texto:</span>
-      <button class="btn-acesso" onclick="aumentarFonte()" aria-label="Aumentar tamanho do texto">A+</button>
-      <button class="btn-acesso" onclick="diminuirFonte()" aria-label="Diminuir tamanho do texto">A−</button>
+      <span class="acesso-label" id="label-texto">Texto:</span>
+      <button class="btn-acesso" id="btn-Amais" aria-label="Aumentar fonte">A+</button>
+      <button class="btn-acesso" id="btn-Amenos" aria-label="Diminuir fonte">A−</button>
     </div>
 
     <div class="acesso-grupo">
-      <span class="acesso-label" data-i18n="acesso_audio">Áudio:</span>
-      <button class="btn-acesso" id="btn-narrar" onclick="alternarNarracao()" data-i18n="btn_narrar">🔊 Narrar Site</button>
+      <span class="acesso-label" id="label-audio">Áudio:</span>
+      <button class="btn-acesso" id="btn-narrar">🔊 Narrar Site</button>
     </div>
 
   </div>
-  <!-- FIM da Barra de Acessibilidade -->
 
-
-  <!-- ===== CABEÇALHO PRINCIPAL ===== -->
   <header id="cabecalho">
     <div class="header-inner">
       <div class="logo-area">
         <span class="logo-icone" aria-hidden="true">🌱</span>
         <div class="logo-texto">
-          <span class="logo-titulo" data-i18n="logo_titulo">Agrinho 2026</span>
-          <span class="logo-subtitulo" data-i18n="logo_subtitulo">SENAR · Paraná</span>
+          <span class="logo-titulo" id="logo-titulo-txt">Agrinho 2026</span>
+          <span class="logo-subtitulo" id="logo-subtitulo-txt">SENAR · Paraná</span>
         </div>
       </div>
       <nav id="menu-nav" aria-label="Menu principal">
-        <a href="#sobre" data-i18n="menu_sobre">Sobre</a>
-        <a href="#tema" data-i18n="menu_tema">Tema</a>
-        <a href="#tecnologias" data-i18n="menu_tecnologias">Tecnologias</a>
-        <a href="#video" data-i18n="menu_video">Vídeo</a>
-        <a href="#apoio" data-i18n="menu_apoio">Apoiar</a>
-        <a href="#contato" data-i18n="menu_contato">Contato</a>
+        <a href="#sobre" id="nav-sobre">Sobre</a>
+        <a href="#tema" id="nav-tema">Tema</a>
+        <a href="#tecnologias" id="nav-tecnologias">Tecnologias</a>
+        <a href="#video" id="nav-video">Vídeo</a>
+        <a href="#apoio" id="nav-apoio">Apoiar</a>
+        <a href="#contato" id="nav-contato">Contato</a>
       </nav>
-      <button class="btn-menu-mobile" id="btn-hamburger" onclick="toggleMenuMobile()" aria-label="Abrir menu" aria-expanded="false">☰</button>
+      <button class="btn-menu-mobile" id="btn-hamburger" aria-label="Abrir menu" aria-expanded="false">☰</button>
     </div>
   </header>
-  <!-- FIM do Cabeçalho -->
 
-
-  <!-- ===== CONTEÚDO PRINCIPAL ===== -->
   <main id="conteudo-principal">
 
-
-    <!-- ── SEÇÃO HERO ── -->
     <section id="hero" aria-labelledby="hero-titulo">
       <div class="hero-overlay">
         <div class="hero-conteudo">
-          <p class="hero-eyebrow" data-i18n="hero_eyebrow">Concurso Agrinho 2026</p>
-          <h1 id="hero-titulo" data-i18n="hero_titulo">Agro forte,<br>futuro sustentável</h1>
-          <p class="hero-subtitulo" data-i18n="hero_subtitulo">Equilíbrio entre produção e meio ambiente</p>
+          <p class="hero-eyebrow" id="hero-eyebrow-txt">Concurso Agrinho 2026</p>
+          <h1 id="hero-titulo">Agro forte,<br>futuro sustentável</h1>
+          <p class="hero-subtitulo" id="hero-subtitulo-txt">Equilíbrio entre produção e meio ambiente</p>
           <div class="hero-botoes">
-            <a href="#sobre" class="btn-hero btn-primario" data-i18n="hero_btn_conhecer">Conhecer o Projeto</a>
-            <a href="#apoio" class="btn-hero btn-secundario" data-i18n="hero_btn_apoiar">👍 Apoiar Agora</a>
+            <a href="#sobre" class="btn-hero btn-primario" id="hero-btn-conhecer">Conhecer o Projeto</a>
+            <a href="#apoio" class="btn-hero btn-secundario" id="hero-btn-apoiar">👍 Apoiar Agora</a>
           </div>
         </div>
       </div>
@@ -88,138 +79,123 @@
         </svg>
       </div>
     </section>
-    <!-- FIM Hero -->
 
-
-    <!-- ── SEÇÃO SOBRE ── -->
     <section id="sobre" aria-labelledby="sobre-titulo">
       <div class="secao-inner">
-        <p class="secao-eyebrow" data-i18n="sobre_eyebrow">O Programa</p>
-        <h2 id="sobre-titulo" data-i18n="sobre_titulo">O que é o Agrinho?</h2>
+        <p class="secao-eyebrow" id="sobre-eyebrow-txt">O Programa</p>
+        <h2 id="sobre-titulo">O que é o Agrinho?</h2>
         <div class="sobre-grade">
           <div class="sobre-texto">
-            <p data-i18n="sobre_p1">O Programa Agrinho é uma iniciativa do SENAR Paraná que existe há mais de 25 anos, conectando a educação do campo e da cidade por meio de temas como saúde, cidadania e, nesta edição, sustentabilidade agrícola.</p>
-            <p data-i18n="sobre_p2">Em 2026, o tema convida estudantes a refletirem sobre como o agronegócio brasileiro pode ser economicamente forte sem comprometer os recursos naturais para as próximas gerações. Tecnologia, consciência e responsabilidade caminham juntas.</p>
-            <p data-i18n="sobre_p3">Este site foi criado como projeto de participação, explorando conceitos de produção sustentável, inovação tecnológica no campo e o papel de cada cidadão na construção de um futuro mais verde.</p>
+            <p id="sobre-p1">O Programa Agrinho é uma iniciativa do SENAR Paraná que existe há mais de 25 anos, conectando a educação do campo e da cidade por meio de temas como saúde, cidadania e, nesta edição, sustentabilidade agrícola.</p>
+            <p id="sobre-p2">Em 2026, o tema convida estudantes a refletirem sobre como o agronegócio brasileiro pode ser economicamente forte sem comprometer os recursos naturais para as próximas gerações. Tecnologia, consciência e responsabilidade caminham juntas.</p>
+            <p id="sobre-p3">Este site foi criado como projeto de participação do Colégio Estadual do Paraná, explorando conceitos de produção sustentável, inovação tecnológica no campo e o papel de cada cidadão na construção de um futuro mais verde.</p>
           </div>
           <div class="sobre-estatisticas">
             <div class="estatistica-card">
               <span class="estat-numero">25+</span>
-              <span class="estat-descricao" data-i18n="estat_anos">Anos de Programa</span>
+              <span class="estat-descricao" id="estat-anos">Anos de Programa</span>
             </div>
             <div class="estatistica-card">
               <span class="estat-numero">400+</span>
-              <span class="estat-descricao" data-i18n="estat_municipios">Municípios Participantes</span>
+              <span class="estat-descricao" id="estat-municipios">Municípios Participantes</span>
             </div>
             <div class="estatistica-card">
               <span class="estat-numero">1M+</span>
-              <span class="estat-descricao" data-i18n="estat_alunos">Alunos Impactados</span>
+              <span class="estat-descricao" id="estat-alunos">Alunos Impactados</span>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- FIM Sobre -->
 
-
-    <!-- ── SEÇÃO TEMA ── -->
     <section id="tema" class="secao-destaque" aria-labelledby="tema-titulo">
       <div class="secao-inner">
-        <p class="secao-eyebrow" data-i18n="tema_eyebrow">O Desafio</p>
-        <h2 id="tema-titulo" data-i18n="tema_titulo">Produção e Natureza em Equilíbrio</h2>
-        <p class="secao-intro" data-i18n="tema_intro">O Brasil é um dos maiores produtores de alimentos do mundo. Mas como garantir que essa produção respeite o planeta? Três pilares sustentam essa resposta:</p>
+        <p class="secao-eyebrow" id="tema-eyebrow-txt">O Desafio</p>
+        <h2 id="tema-titulo">Produção e Natureza em Equilíbrio</h2>
+        <p class="secao-intro" id="tema-intro-txt">O Brasil é um dos maiores produtores de alimentos do mundo. Mas como garantir que essa produção respeite o planeta? Três pilares sustentam essa resposta:</p>
         <div class="pilares-grade">
 
           <article class="pilar-card">
             <div class="pilar-icone" aria-hidden="true">🌾</div>
-            <h3 data-i18n="pilar1_titulo">Agropecuária Responsável</h3>
-            <p data-i18n="pilar1_desc">Práticas como o plantio direto, rotação de culturas e integração lavoura-pecuária-floresta reduzem erosão do solo, poupam água e aumentam a produtividade ao mesmo tempo.</p>
+            <h3 id="pilar1-titulo">Agropecuária Responsável</h3>
+            <p id="pilar1-desc">Práticas como o plantio direto, rotação de culturas e integração lavoura-pecuária-floresta reduzem erosão do solo, poupam água e aumentam a produtividade ao mesmo tempo.</p>
           </article>
 
           <article class="pilar-card pilar-destaque">
             <div class="pilar-icone" aria-hidden="true">♻️</div>
-            <h3 data-i18n="pilar2_titulo">Economia Circular</h3>
-            <p data-i18n="pilar2_desc">Resíduos agrícolas como palha e esterco viram energia, compostagem e biofertilizantes. Nada se perde: tudo se transforma em mais produção com menos impacto ambiental.</p>
+            <h3 id="pilar2-titulo">Economia Circular</h3>
+            <p id="pilar2-desc">Resíduos agrícolas como palha e esterco viram energia, compostagem e biofertilizantes. Nada se perde: tudo se transforma em mais produção com menos impacto ambiental.</p>
           </article>
 
           <article class="pilar-card">
             <div class="pilar-icone" aria-hidden="true">🤝</div>
-            <h3 data-i18n="pilar3_titulo">Cidadania Ambiental</h3>
-            <p data-i18n="pilar3_desc">O campo precisa de guardiões. Desde a escola, cada aluno aprende que escolhas de consumo, descarte correto do lixo e preservação de nascentes são atos de cidadania concreta.</p>
+            <h3 id="pilar3-titulo">Cidadania Ambiental</h3>
+            <p id="pilar3-desc">O campo precisa de guardiões. Desde a escola, cada aluno aprende que escolhas de consumo, descarte correto do lixo e preservação de nascentes são atos de cidadania concreta.</p>
           </article>
 
         </div>
       </div>
     </section>
-    <!-- FIM Tema -->
 
-
-    <!-- ── SEÇÃO TECNOLOGIAS ── -->
     <section id="tecnologias" aria-labelledby="tec-titulo">
       <div class="secao-inner">
-        <p class="secao-eyebrow" data-i18n="tec_eyebrow">Inovação no Campo</p>
-        <h2 id="tec-titulo" data-i18n="tec_titulo">Tecnologias Sustentáveis</h2>
-        <p class="secao-intro" data-i18n="tec_intro">O agricultor moderno conta com ferramentas que antes pareciam ficção científica. Veja três exemplos que já transformam o agro brasileiro:</p>
+        <p class="secao-eyebrow" id="tec-eyebrow-txt">Inovação no Campo</p>
+        <h2 id="tec-titulo">Tecnologias Sustentáveis</h2>
+        <p class="secao-intro" id="tec-intro-txt">O agricultor moderno conta com ferramentas que antes pareciam ficção científica. Veja três exemplos que já transformam o agro brasileiro:</p>
 
         <div class="tec-lista">
 
-          <!-- Tecnologia 1: Drone -->
           <article class="tec-item">
             <figure class="tec-figura">
               <img src="imagens/drone.jpg"
-                   alt="Drone sobrevoando lavoura verde realizando monitoramento agrícola de precisão"
+                   alt="Drone sobrevoando lavoura verde realizando monitoramento agricola de precisao"
                    loading="lazy"
-                   onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22280%22><rect fill=%22%23e8f5e9%22 width=%22400%22 height=%22280%22/><text x=%2250%%22 y=%2245%%22 font-size=%2248%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>🚁</text><text x=%2250%%22 y=%2262%%22 font-size=%2216%22 text-anchor=%22middle%22 fill=%22%23388e3c%22>drone.jpg</text></svg>'" />
-              <figcaption class="tec-credito" data-i18n="drone_credito">📷 Foto: Pexels / Foto de Drone Agrícola</figcaption>
+                   onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22280%22%3E%3Crect fill=%22%23e8f5e9%22 width=%22400%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2245%25%22 font-size=%2248%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E%F0%9F%9A%81%3C/text%3E%3Ctext x=%2250%25%22 y=%2265%25%22 font-size=%2215%22 text-anchor=%22middle%22 fill=%22%23388e3c%22%3Edrone.jpg%3C/text%3E%3C/svg%3E'" />
+              <figcaption class="tec-credito" id="drone-credito-txt">📷 Foto: Pexels / Foto de Drone Agricola</figcaption>
             </figure>
             <div class="tec-conteudo">
-              <h3><strong data-i18n="drone_titulo">Agricultura de Precisão com Drones</strong></h3>
-              <p data-i18n="drone_desc">Drones equipados com câmeras multiespectrais sobrevoam as lavouras e identificam áreas com deficiência nutricional, pragas ou estresse hídrico com precisão de centímetros. Isso permite que o produtor aplique insumos somente onde é necessário, reduzindo o uso de defensivos em até 40% e economizando água e combustível. O resultado é uma lavoura mais saudável e um ambiente mais preservado.</p>
+              <h3 id="drone-titulo">Agricultura de Precisão com Drones</h3>
+              <p id="drone-text-span">Drones equipados com câmeras multiespectrais sobrevoam as lavouras e identificam áreas com deficiência nutricional, pragas ou estresse hídrico com precisão de centímetros. Isso permite que o produtor aplique insumos somente onde é necessário, reduzindo o uso de defensivos em até 40% e economizando água e combustível. O resultado é uma lavoura mais saudável e um ambiente mais preservado.</p>
             </div>
           </article>
 
-          <!-- Tecnologia 2: Irrigação -->
           <article class="tec-item tec-item-invertido">
             <figure class="tec-figura">
               <img src="imagens/irrigacao.jpg"
-                   alt="Sistema de irrigação por gotejamento em plantação com solo seco ao redor"
+                   alt="Sistema de irrigacao por gotejamento em plantacao com solo seco ao redor"
                    loading="lazy"
-                   onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22280%22><rect fill=%22%22 width=%22400%22 height=%22280%22/><rect fill=%22%23e3f2fd%22 width=%22400%22 height=%22280%22/><text x=%2250%%22 y=%2245%%22 font-size=%2248%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>💧</text><text x=%2250%%22 y=%2262%%22 font-size=%2216%22 text-anchor=%22middle%22 fill=%22%231565c0%22>irrigacao.jpg</text></svg>'" />
-              <figcaption class="tec-credito" data-i18n="irrigacao_credito">📷 Foto: Pexels / Foto de Irrigação por Gotejamento</figcaption>
+                   onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22280%22%3E%3Crect fill=%22%23e3f2fd%22 width=%22400%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2245%25%22 font-size=%2248%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E%F0%9F%92%A7%3C/text%3E%3Ctext x=%2250%25%22 y=%2265%25%22 font-size=%2215%22 text-anchor=%22middle%22 fill=%22%231565c0%22%3Eirrigacao.jpg%3C/text%3E%3C/svg%3E'" />
+              <figcaption class="tec-credito" id="irri-credito-txt">📷 Foto: Pexels / Foto de Irrigacao por Gotejamento</figcaption>
             </figure>
             <div class="tec-conteudo">
-              <h3><strong data-i18n="irrigacao_titulo">Irrigação Inteligente por Gotejamento</strong></h3>
-              <p data-i18n="irrigacao_desc">O sistema de irrigação por gotejamento entrega água diretamente na raiz da planta, gota a gota, controlado por sensores de umidade do solo conectados à internet. Sensores monitoram em tempo real a necessidade hídrica de cada espécie e irrigam apenas quando necessário. Comparado à irrigação convencional por aspersão, o gotejamento inteligente economiza até 60% de água — um recurso vital cada vez mais escasso no planeta.</p>
+              <h3 id="irrigacao-titulo">Irrigação Inteligente por Gotejamento</h3>
+              <p id="irri-text-span">O sistema de irrigação por gotejamento entrega água diretamente na raiz da planta, gota a gota, controlado por sensores de umidade do solo conectados à internet. Sensores monitoram em tempo real a necessidade hídrica de cada espécie e irrigam apenas quando necessário. Comparado à irrigação convencional por aspersão, o gotejamento inteligente economiza até 60% de água, um recurso vital cada vez mais escasso no planeta.</p>
             </div>
           </article>
 
-          <!-- Tecnologia 3: Energia Solar -->
           <article class="tec-item">
             <figure class="tec-figura">
               <img src="imagens/solar.jpg"
-                   alt="Painéis solares instalados em propriedade rural com plantação ao fundo"
+                   alt="Paineis solares instalados em propriedade rural com plantacao ao fundo"
                    loading="lazy"
-                   onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22280%22><rect fill=%22%22 width=%22400%22 height=%22280%22/><rect fill=%22%23fffde7%22 width=%22400%22 height=%22280%22/><text x=%2250%%22 y=%2245%%22 font-size=%2248%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>☀️</text><text x=%2250%%22 y=%2262%%22 font-size=%2216%22 text-anchor=%22middle%22 fill=%22%22 style=%22fill:%23f57f17%22>solar.jpg</text></svg>'" />
-              <figcaption class="tec-credito" data-i18n="solar_credito">📷 Foto: Pexels / Foto de Energia Solar Rural</figcaption>
+                   onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22280%22%3E%3Crect fill=%22%23fffde7%22 width=%22400%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2245%25%22 font-size=%2248%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E%E2%98%80%EF%B8%8F%3C/text%3E%3Ctext x=%2250%25%22 y=%2265%25%22 font-size=%2215%22 text-anchor=%22middle%22 fill=%22%23f57f17%22%3Esolar.jpg%3C/text%3E%3C/svg%3E'" />
+              <figcaption class="tec-credito" id="solar-credito-txt">📷 Foto: Pexels / Foto de Energia Solar Rural</figcaption>
             </figure>
             <div class="tec-conteudo">
-              <h3><strong data-i18n="solar_titulo">Energia Solar Fotovoltaica Rural</strong></h3>
-              <p data-i18n="solar_desc">Painéis solares instalados em propriedades rurais geram eletricidade limpa diretamente do sol, eliminando ou reduzindo drasticamente a conta de energia de fazendas e sítios. A energia excedente pode ser injetada na rede elétrica, gerando créditos ao produtor. Com o custo dos painéis caindo mais de 80% na última década, a energia solar se tornou um dos investimentos mais inteligentes e sustentáveis para o agricultor brasileiro do século XXI.</p>
+              <h3 id="solar-titulo">Energia Solar Fotovoltaica Rural</h3>
+              <p id="solar-text-span">Painéis solares instalados em propriedades rurais geram eletricidade limpa diretamente do sol, eliminando ou reduzindo drasticamente a conta de energia de fazendas e sítios. A energia excedente pode ser injetada na rede elétrica, gerando créditos ao produtor. Com o custo dos painéis caindo mais de 80% na última década, a energia solar se tornou um dos investimentos mais inteligentes e sustentáveis para o agricultor brasileiro do século XXI.</p>
             </div>
           </article>
 
         </div>
       </div>
     </section>
-    <!-- FIM Tecnologias -->
 
-
-    <!-- ── SEÇÃO VÍDEO ── -->
     <section id="video" class="secao-destaque" aria-labelledby="video-titulo">
       <div class="secao-inner">
-        <p class="secao-eyebrow" data-i18n="video_eyebrow">Assista</p>
-        <h2 id="video-titulo" data-i18n="video_titulo">O Campo em Movimento</h2>
-        <p class="secao-intro" data-i18n="video_intro">Veja a beleza e a força do agronegócio sustentável através das imagens abaixo.</p>
+        <p class="secao-eyebrow" id="video-eyebrow-txt">Assista</p>
+        <h2 id="video-titulo">O Campo em Movimento</h2>
+        <p class="secao-intro" id="video-intro-txt">Veja a beleza e a força do agronegócio sustentável através das imagens abaixo.</p>
         <div class="video-wrapper">
           <video
             id="player-video"
@@ -228,85 +204,74 @@
             autoplay
             loop
             playsinline
-            aria-label="Vídeo sobre agronegócio sustentável"
+            aria-label="Video sobre agronegocio sustentavel"
             poster="imagens/drone.jpg">
             <source src="videos/projeto.mp4" type="video/mp4" />
-            <p data-i18n="video_fallback">Seu navegador não suporta reprodução de vídeo HTML5.</p>
+            <p id="video-fallback-txt">Seu navegador não suporta reprodução de vídeo HTML5.</p>
           </video>
-          <p class="video-credito" data-i18n="video_credito">🎬 Vídeo por: Fernando Sánchez Aranguren (Pexels)</p>
+          <p class="video-credito" id="video-credito-txt">🎬 Vídeo por: Fernando Sanchez Aranguren (Pexels)</p>
         </div>
       </div>
     </section>
-    <!-- FIM Vídeo -->
 
-
-    <!-- ── SEÇÃO APOIO ── -->
     <section id="apoio" aria-labelledby="apoio-titulo">
       <div class="secao-inner apoio-inner">
-        <p class="secao-eyebrow" data-i18n="apoio_eyebrow">Participe</p>
-        <h2 id="apoio-titulo" data-i18n="apoio_titulo">Apoie Este Projeto</h2>
-        <p class="secao-intro" data-i18n="apoio_intro">Acredita num agro mais sustentável? Demonstre seu apoio clicando abaixo!</p>
-
+        <p class="secao-eyebrow" id="apoio-eyebrow-txt">Participe</p>
+        <h2 id="apoio-titulo">Apoie Este Projeto</h2>
+        <p class="secao-intro" id="apoio-intro-txt">Acredita num agro mais sustentável? Demonstre seu apoio clicando abaixo!</p>
         <div class="apoio-card">
-          <p id="texto-apoios" class="texto-apoios" aria-live="polite" data-i18n="apoio_contador" data-count="0">Este projeto já recebeu 0 apoios!</p>
-          <button id="btn-apoiar" class="btn-apoiar" onclick="incrementarApoio()" aria-describedby="texto-apoios">
+          <p id="texto-apoios" class="texto-apoios" aria-live="polite">Este projeto já recebeu 0 apoios!</p>
+          <button id="btn-apoiar" class="btn-apoiar" aria-describedby="texto-apoios">
             <span class="btn-apoiar-icone">👍</span>
-            <span data-i18n="apoio_btn">Apoiar Projeto</span>
+            <span id="apoio-btn-txt">Apoiar Projeto</span>
           </button>
         </div>
-
       </div>
     </section>
-    <!-- FIM Apoio -->
 
-
-    <!-- ── SEÇÃO CONTATO / FORMULÁRIO ── -->
     <section id="contato" class="secao-destaque" aria-labelledby="contato-titulo">
       <div class="secao-inner">
-        <p class="secao-eyebrow" data-i18n="contato_eyebrow">Fale Conosco</p>
-        <h2 id="contato-titulo" data-i18n="contato_titulo">Deixe sua Sugestão</h2>
-        <p class="secao-intro" data-i18n="contato_intro">Tem uma ideia para tornar o projeto ainda melhor? Compartilhe com a gente!</p>
+        <p class="secao-eyebrow" id="contato-eyebrow-txt">Fale Conosco</p>
+        <h2 id="contato-titulo">Deixe sua Sugestão</h2>
+        <p class="secao-intro" id="contato-intro-txt">Tem uma ideia para tornar o projeto ainda melhor? Compartilhe com a gente!</p>
 
         <div id="form-wrapper">
           <div class="form-grid">
 
             <div class="form-grupo">
-              <label for="campo-nome" data-i18n="form_label_nome">Nome completo</label>
+              <label for="campo-nome" id="label-nome">Nome completo</label>
               <input
                 type="text"
                 id="campo-nome"
                 name="nome"
                 autocomplete="name"
-                data-i18n-placeholder="form_placeholder_nome"
                 placeholder="Digite seu nome completo" />
               <span class="form-erro" id="erro-nome" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="form-grupo">
-              <label for="campo-email" data-i18n="form_label_email">E-mail (opcional)</label>
+              <label for="campo-email" id="label-email">E-mail (opcional)</label>
               <input
                 type="email"
                 id="campo-email"
                 name="email"
                 autocomplete="email"
-                data-i18n-placeholder="form_placeholder_email"
                 placeholder="seuemail@exemplo.com" />
             </div>
 
             <div class="form-grupo form-grupo-largo">
-              <label for="campo-mensagem" data-i18n="form_label_msg">Sua sugestão ou mensagem</label>
+              <label for="campo-mensagem" id="label-mensagem">Sua sugestão ou mensagem</label>
               <textarea
                 id="campo-mensagem"
                 name="mensagem"
                 rows="5"
-                data-i18n-placeholder="form_placeholder_msg"
                 placeholder="Escreva sua sugestão aqui..."></textarea>
               <span class="form-erro" id="erro-msg" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="form-grupo form-grupo-largo">
-              <button class="btn-enviar" onclick="enviarFormulario()" data-i18n="form_btn_enviar">
-                ✉️ Enviar Sugestão
+              <button class="btn-enviar" id="btn-enviar">
+                ✉️ <span id="btn-enviar-txt">Enviar Sugestão</span>
               </button>
             </div>
 
@@ -317,35 +282,28 @@
 
       </div>
     </section>
-    <!-- FIM Contato -->
-
 
   </main>
-  <!-- FIM do conteúdo principal -->
 
-
-  <!-- ===== RODAPÉ ===== -->
   <footer id="rodape">
     <div class="rodape-inner">
       <div class="rodape-marca">
         <span class="logo-icone" aria-hidden="true">🌱</span>
         <div>
-          <strong data-i18n="rodape_titulo">Agrinho 2026</strong>
-          <span data-i18n="rodape_subtitulo">SENAR · Paraná</span>
+          <strong id="rodape-titulo-txt">Agrinho 2026</strong>
+          <span id="rodape-subtitulo-txt">SENAR · Paraná</span>
         </div>
       </div>
-      <nav class="rodape-links" aria-label="Links do rodapé">
-        <a href="#sobre" data-i18n="menu_sobre">Sobre</a>
-        <a href="#tema" data-i18n="menu_tema">Tema</a>
-        <a href="#tecnologias" data-i18n="menu_tecnologias">Tecnologias</a>
-        <a href="#video" data-i18n="menu_video">Vídeo</a>
-        <a href="#contato" data-i18n="menu_contato">Contato</a>
+      <nav class="rodape-links" aria-label="Links do rodape">
+        <a href="#sobre" id="rodape-nav-sobre">Sobre</a>
+        <a href="#tema" id="rodape-nav-tema">Tema</a>
+        <a href="#tecnologias" id="rodape-nav-tecnologias">Tecnologias</a>
+        <a href="#video" id="rodape-nav-video">Vídeo</a>
+        <a href="#contato" id="rodape-nav-contato">Contato</a>
       </nav>
-      <p class="rodape-copy" data-i18n="rodape_copy">© 2026 Concurso Agrinho — SENAR Paraná. Projeto educativo sem fins lucrativos.</p>
+      <p class="rodape-copy" id="rodape-copy-txt">© 2026 Concurso Agrinho — SENAR Paraná — Colégio Estadual do Paraná. Projeto educativo sem fins lucrativos.</p>
     </div>
   </footer>
-  <!-- FIM Rodapé -->
-
 
   <script src="script.js"></script>
 </body>
