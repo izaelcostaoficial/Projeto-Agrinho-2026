@@ -8,17 +8,17 @@
 </head>
 <body>
 
-    <!-- BARRA DE ACESSIBILIDADE SUPERIOR INTERNACIONALIZADA -->
+    <!-- BARRA DE ACESSIBILIDADE SUPERIOR COMPLETA -->
     <div class="barra-acessibilidade">
         <div class="grupo-botoes">
-            <span id="txt-lbl-idioma">Idioma:</span>
+            <span id="txt-lbl-idioma">Idioma / Language:</span>
             <button id="btn-pt" class="btn-ace">PT</button>
             <button id="btn-en" class="btn-ace">EN</button>
             <button id="btn-es" class="btn-ace">ES</button>
         </div>
         <div class="grupo-botoes">
             <span id="txt-lbl-visual">Visual:</span>
-            <button id="btn-colorido" class="btn-ace">Padrão</button>
+            <button id="btn-colorid" class="btn-ace">Padrão</button>
             <button id="btn-branco" class="btn-ace">Acessível L/W</button>
             <button id="btn-preto" class="btn-ace">Acessível D/B</button>
         </div>
@@ -51,7 +51,7 @@
     <!-- Conteúdo principal embrulhado para a narração de voz off-line -->
     <main id="conteudo-principal">
 
-        <!-- Banner de Destaque / Introdução -->
+        <!-- Banner de Destaque / Introdução (Cenário 1) -->
         <section id="inicio" class="banner">
             <div class="banner-conteudo">
                 <h2 id="banner-h2">Agro Forte, Futuro Sustentável</h2>
@@ -59,6 +59,7 @@
                 <a href="#equilibrio" id="banner-btn" class="botao-saber-mais">Entender o Projeto</a>
             </div>
         </section>
+
         <!-- Seção sobre o Equilíbrio (Cenário 2) -->
         <section id="equilibrio" class="secao-conteudo">
             <div class="container">
@@ -76,19 +77,19 @@
                     </div>
                 </div>
 
-                <!-- Contêiner de Vídeo Local com Legendas Sincronizadas -->
+                <!-- Contêiner do Vídeo Local -->
                 <div class="container-video">
                     <h4 id="video-h4">Assista: O Futuro do Agro Sustentável</h4>
                     <video class="video-midia" controls muted autoplay loop>
                         <source src="vídeos/projeto.mp4" type="video/mp4">
                         Seu navegador não suporta a reprodução deste vídeo.
                     </video>
-                    <p id="txt-vid-credito" style="font-size: 0.8rem; color: #666; margin-top: 5px;">Vídeo por: Fernando Sánchez Aranguren (Pexels)</p>
+                    <p id="txt-vid-credito" style="font-size: 0.85rem; color: #555; margin-top: 8px; font-weight: bold;">Vídeo por: Fernando Sánchez Aranguren (Pexels)</p>
                 </div>
             </div>
         </section>
 
-        <!-- Seção de Tecnologia (Cenário 3) com mídias locais isoladas -->
+        <!-- Seção de Tecnologia (Cenário 3) -->
         <section id="tecnologia" class="secao-tecnologia">
             <div class="container">
                 <h3 id="secao-tec-h3">Inovação e Tecnologia Sustentável</h3>
@@ -99,27 +100,27 @@
                     <li>
                         <div class="bloco-midia-lista">
                             <img src="imagens/drone.jpg" alt="Drone" class="foto-tecnologia">
-                            <span id="drone-lbl-credito" style="font-size: 0.75rem; color: #777; display: block; margin-top: -5px; margin-bottom: 10px;">Foto: DRONE EFT / Unsplash</span>
+                            <span id="drone-lbl-credito" style="font-size: 0.8rem; color: #555; display: block; margin-top: -5px; margin-bottom: 10px; font-weight: bold;">Foto: DRONE EFT / Unsplash</span>
                         </div>
-                        <span id="drone-text-span"><strong>Drones agrícolas:</strong> Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.</span>
+                        <p id="drone-text"><strong>Drones agrícolas:</strong> Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.</p>
                     </li>
                     
                     <!-- Tecnologia 2 -->
                     <li>
                         <div class="bloco-midia-lista">
                             <img src="imagens/irrigacao.jpg" alt="Irrigação" class="foto-tecnologia">
-                            <span id="irri-lbl-credito" style="font-size: 0.75rem; color: #777; display: block; margin-top: -5px; margin-bottom: 10px;">Foto: Being Organic in EU / Unsplash</span>
+                            <span id="irri-lbl-credito" style="font-size: 0.8rem; color: #555; display: block; margin-top: -5px; margin-bottom: 10px; font-weight: bold;">Foto: Being Organic in EU / Unsplash</span>
                         </div>
-                        <span id="irri-text-span"><strong>Irrigação gota a gota:</strong> Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.</span>
+                        <p id="irri-text"><strong>Irrigação gota a gota:</strong> Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.</p>
                     </li>
                     
                     <!-- Tecnologia 3 -->
                     <li>
                         <div class="bloco-midia-lista">
                             <img src="imagens/solar.jpg" alt="Painel Solar" class="foto-tecnologia">
-                            <span id="solar-lbl-credito" style="font-size: 0.75rem; color: #777; display: block; margin-top: -5px; margin-bottom: 10px;">Foto: American Public Power Assoc. / Unsplash</span>
+                            <span id="solar-lbl-credito" style="font-size: 0.8rem; color: #555; display: block; margin-top: -5px; margin-bottom: 10px; font-weight: bold;">Foto: American Public Power Assoc. / Unsplash</span>
                         </div>
-                        <span id="solar-text-span"><strong>Energia Solar:</strong> Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.</span>
+                        <p id="solar-text"><strong>Energia Solar:</strong> Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.</p>
                     </li>
                 </ul>
             </div>
@@ -155,7 +156,7 @@
         </div>
     </section>
 
-    <!-- Rodapé Institucional Traduzível -->
+    <!-- Rodapé Institucional -->
     <footer class="rodape">
         <p id="credito-dev">&copy; 2026 - Desenvolvido para o Concurso Agrinho | Categoria Front-End</p>
         <p id="credito-col">Ensino Médio - Colégio Estadual do Paraná</p>
