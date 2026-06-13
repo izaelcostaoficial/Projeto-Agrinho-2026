@@ -4,11 +4,11 @@
 
 /**
  * Mapeamento estruturado de traduções para suportar a internacionalização do site.
- * Permite comutação linguística instantânea e off-line para três idiomas.
+ * Permite comutação linguística instantânea e off-line para três idiomas independentes.
  */
 const traducoes = {
     pt: {
-        txtIdioma: "Idioma:",
+        txtIdioma: "Idioma / Language:",
         txtVisual: "Visual:",
         txtTemaPadrao: "Padrão",
         txtTemaBranco: "Acessível L/W",
@@ -31,7 +31,7 @@ const traducoes = {
         card2P: "Cuidar das florestas, proteger as nascentes de água e evitar poluição é o que mantém a terra fértil para as próximas gerações."
     },
     en: {
-        txtIdioma: "Language:",
+        txtIdioma: "Idioma / Language:",
         txtVisual: "Visual:",
         txtTemaPadrao: "Default",
         txtTemaBranco: "Accessible L/W",
@@ -54,7 +54,7 @@ const traducoes = {
         card2P: "Caring for forests, protecting water sources, and avoiding pollution is what keeps the soil fertile for future generations."
     },
     es: {
-        txtIdioma: "Idioma:",
+        txtIdioma: "Idioma / Language:",
         txtVisual: "Visual:",
         txtTemaPadrao: "Predet.",
         txtTemaBranco: "Accesible L/W",
@@ -67,9 +67,9 @@ const traducoes = {
         menuTecnologia: "Tecnología de Campo",
         menuParticipe: "Participe",
         bannerH2: "Agro Fuerte, Futuro Sostenible",
-        bannerP: "Descubra cómo la producción de alimentos e la preservación del medio ambiente trabajan juntas para garantizar el mañana.",
+        bannerP: "Descubra cómo la producción de alimentos y la preservación del medio ambiente trabajan juntas para garantizar el mañana.",
         bannerBtn: "Entender el Proyecto",
-        secaoEquiH3: "El Equilibrio Necesario",
+        secaoEquiH3: "El Equilibrio Necessario",
         secaoEquiP: "Para que nuestro futuro sea seguro, el campo debe producir alimentos de manera eficiente sin agotar los recursos naturales de nuestra tierra.",
         card1H4: "Producción Fuerte",
         card1P: "El agronegocio abastece a las ciudades, genera empleos y garantiza que la comida llegue a la mesa de millones todos los días.",
@@ -78,14 +78,14 @@ const traducoes = {
     }
 };
 
-// Instanciação das variáveis globais de rastreamento de estado da aplicação
+// Inicialização das variáveis globais para sincronizar o estado da aplicação
 let idiomaAtual = "pt";
 let numeroDeLikes = 0;
 // =======================================================================================
-// BANCO DE DADOS DE IDIOMAS (PARTE B)
+// BLOCO 2 DE 4: BANCO DE DADOS DE IDIOMAS (PARTE B)
 // =======================================================================================
 
-// Extensão manual do dicionário de traduções (reaproveitando o escopo do Bloco 1)
+// Extensão do dicionário para o idioma Português (PT)
 traducoes.pt.videoH4 = "Assista: O Futuro do Agro Sustentável";
 traducoes.pt.txtVideoCredito = "Vídeo por: Fernando Sánchez Aranguren (Pexels)";
 traducoes.pt.secaoTecH3 = "Inovação e Tecnologia Sustentável";
@@ -113,9 +113,10 @@ traducoes.pt.btnEnviar = "Enviar Mensagem";
 traducoes.pt.btnNarrarTxt = "🔊 Narrar Site";
 traducoes.pt.alertaCampos = "Por favor, preencha todos os campos antes de enviar!";
 traducoes.pt.alertaSucesso = "Obrigado por sua sugestão, {nome}! Juntos pelo agro sustentável.";
-traducoes.pt.creditoDesenvolvedor = "2026 - Desenvolvido para o Concurso Agrinho | Categoria Front-End";
+traducoes.pt.creditoDesenvolvedor = "© 2026 - Desenvolvido para o Concurso Agrinho | Categoria Front-End";
 traducoes.pt.creditoColegio = "Ensino Médio - Colégio Estadual do Paraná";
 
+// Extensão do dicionário para o idioma Inglês (EN)
 traducoes.en.videoH4 = "Watch: The Future of Sustainable Agro";
 traducoes.en.txtVideoCredito = "Video by: Fernando Sánchez Aranguren (Pexels)";
 traducoes.en.secaoTecH3 = "Innovation and Sustainable Technology";
@@ -135,7 +136,7 @@ traducoes.en.btnLike = "👍 Support Project";
 traducoes.en.contadorTextoPre = "This project has already received ";
 traducoes.en.contadorTextoPos = " supports!";
 traducoes.en.formH4 = "Send your Suggestion";
-traducoes.en.labelNome: "Your Name:";
+traducoes.en.labelNome = "Your Name:";
 traducoes.en.placeholderNome = "Enter your full name";
 traducoes.en.labelMensagem = "Your Environmental Suggestion:";
 traducoes.en.placeholderMensagem = "Write an idea to help the environment here...";
@@ -146,6 +147,7 @@ traducoes.en.alertaSucesso = "Thank you for your suggestion, {nome}! Together fo
 traducoes.en.creditoDesenvolvedor = "2026 - Developed for the Agrinho Contest | Front-End Category";
 traducoes.en.creditoColegio = "High School - Paraná State College";
 
+// Extensão do dicionário para o idioma Espanhol (ES)
 traducoes.es.videoH4 = "Vea: El Futuro del Agro Sostenible";
 traducoes.es.txtVideoCredito = "Video por: Fernando Sánchez Aranguren (Pexels)";
 traducoes.es.secaoTecH3 = "Innovación y Tecnología Sostenible";
@@ -160,7 +162,7 @@ traducoes.es.solarTitulo = "Energía Solar";
 traducoes.es.solarTexto = " Uso de paneles fotovoltaicos para generar energía limpia en las fincas y reducir el impacto ambiental.";
 traducoes.es.txtFotoSolar = "Foto: American Public Power Assoc. / Unsplash";
 traducoes.es.secaoIntH3 = "Participe de Nuestra Idea";
-traducoes.es.secaoIntP: "¡Apoye nuestro proyecto escolar o envíe una sugerencia de práctica sostenible para el campo!";
+traducoes.es.secaoIntP = "¡Apoye nuestro proyecto escolar o envíe una sugerencia de práctica sostenible para el campo!";
 traducoes.es.btnLike = "👍 Apoyar Proyecto";
 traducoes.es.contadorTextoPre = "¡Este proyecto ya ha recibido ";
 traducoes.es.contadorTextoPos = " apoyos!";
@@ -173,41 +175,43 @@ traducoes.es.btnEnviar = "Enviar Mensaje";
 traducoes.es.btnNarrarTxt = "🔊 Narrar Sitio";
 traducoes.es.alertaCampos = "¡Por favor, complete todos los campos antes de enviar!";
 traducoes.es.alertaSucesso = "¡Gracias por su sugerencia, {nome}! Juntos por el agro sostenible.";
-traducoes.es.creditoDesenvolvedor = "2026 - Desarrollado para el Concurso Agrinho | Categoría Front-End";
+traducoes.es.creditoDesenvolvedor = "© 2026 - Desarrollado para el Concurso Agrinho | Categoría Front-End";
 traducoes.es.creditoColegio = "Escuela Secundaria - Colegio Estatal de Paraná";
 // =======================================================================================
-// COMUTAÇÃO E TRADUÇÃO DE NÓS DO DOM
+// TRADUÇÃO E MANIPULAÇÃO DINÂMICA DO DOM
 // =======================================================================================
 
 /**
- * Executa a varredura completa da página e altera as strings internas dos elementos.
- * Altera placeholders, legendas de mídias e rótulos de acessibilidade do site inteiro.
+ * Varre o documento e reescreve os elementos textuais e placeholders com base no idioma ativo.
+ * Protege mídias contra recarregamento alterando apenas strings específicas.
  * @param {string} idioma - Código identificador ('pt', 'en', 'es').
  */
 function alternarIdioma(idioma) {
     idiomaAtual = idioma;
     const txt = traducoes[idioma];
 
-    // Atualização dos rótulos de cabeçalhos e painel superior de acessibilidade
+    // Atualização dos rótulos fixos da Barra de Acessibilidade Superior
     document.getElementById("txt-lbl-idioma").textContent = txt.txtIdioma;
     document.getElementById("txt-lbl-visual").textContent = txt.txtVisual;
-    document.getElementById("btn-colorido").textContent = txt.txtTemaPadrao;
+    document.getElementById("btn-colorido").textContent = txt.txtThemePadrão || txt.txtTemaPadrao;
     document.getElementById("btn-branco").textContent = txt.txtTemaBranco;
     document.getElementById("btn-preto").textContent = txt.txtTemaPreto;
     document.getElementById("txt-lbl-texto").textContent = txt.txtTexto;
     document.getElementById("txt-lbl-audio").textContent = txt.txtAudio;
     
-    // Atualização dos menus e cabeçalho dinâmico
+    // Atualização estrutural do Cabeçalho e Menu
     document.getElementById("titulo-site").textContent = txt.titulo;
     document.getElementById("menu-inicio").textContent = txt.menuInicio;
     document.getElementById("menu-equilibrio").textContent = txt.menuEquilibrio;
     document.getElementById("menu-tecnologia").textContent = txt.menuTecnologia;
     document.getElementById("menu-participe").textContent = txt.menuParticipe;
     
-    // Atualização das seções de Banner e Cenário 2 (Cards e Vídeos)
+    // Atualização textual do Hero Banner Principal (Cenário 1)
     document.getElementById("banner-h2").textContent = txt.bannerH2;
     document.getElementById("banner-p").textContent = txt.bannerP;
     document.getElementById("banner-btn").textContent = txt.bannerBtn;
+    
+    // Atualização textual do Cenário 2 (Cards e Vídeos Locais)
     document.getElementById("secao-equi-h3").textContent = txt.secaoEquiH3;
     document.getElementById("secao-equi-p").textContent = txt.secaoEquiP;
     document.getElementById("card1-h4").textContent = txt.card1H4;
@@ -217,7 +221,7 @@ function alternarIdioma(idioma) {
     document.getElementById("video-h4").textContent = txt.videoH4;
     document.getElementById("txt-vid-credito").textContent = txt.txtVideoCredito;
     
-    // Atualização do Cenário 3 (Legendas das Mídias Locais e Spans Informativos)
+    // Atualização das Legendas e Parágrafos do Cenário 3 (Práticas Tecnológicas)
     document.getElementById("secao-tec-h3").textContent = txt.secaoTecH3;
     document.getElementById("secao-tec-p").textContent = txt.secaoTecP;
     document.getElementById("drone-lbl-credito").textContent = txt.txtFotoDrone;
@@ -225,30 +229,32 @@ function alternarIdioma(idioma) {
     document.getElementById("solar-lbl-credito").textContent = txt.txtFotoSolar;
     document.getElementById("drone-text-span").innerHTML = `<strong>${txt.droneTitulo}:</strong>${txt.droneTexto}`;
     document.getElementById("irri-text-span").innerHTML = `<strong>${txt.irriTitulo}:</strong>${txt.irriTexto}`;
+    document.getElementById("solar-text-span").innerHTML = ` = <strong>${txt.solarTitulo}:</strong>${txt.solarTexto}`;
     document.getElementById("solar-text-span").innerHTML = `<strong>${txt.solarTitulo}:</strong>${txt.solarTexto}`;
     
-    // Atualização do Cenário 4 (Formulários, Inputs e Textareas)
+    // Atualização dos Rótulos, Botões e Placeholders do Cenário 4 (Formulário e Likes)
     document.getElementById("secao-int-h3").textContent = txt.secaoIntH3;
     document.getElementById("secao-int-p").textContent = txt.secaoIntP;
     document.getElementById("botao-like").textContent = txt.btnLike;
     document.getElementById("form-h4").textContent = txt.formH4;
     document.getElementById("label-nome").textContent = txt.labelNome;
-    document.getElementById("nome").placeholder = txt.placeholderNome;
+    document.getElementById("nome").placeholder = txt.placeholderNome; // Corrigido sem erros
     document.getElementById("label-mensagem").textContent = txt.labelMensagem;
-    document.getElementById("mensagem").placeholder = txt.placeholderMensa;
-    document.getElementById("mensagem").placeholder = txt.placeholderMensagem;
+    document.getElementById("mensagem").placeholder = txt.placeholderMensagem; // Corrigido sem erros
     document.getElementById("botao-enviar").textContent = txt.btnEnviar;
     
-    // Atualização dos botões estáticos de áudio e rodapé institucional
+    // Sincronização condicional do botão do leitor de áudio estático
     if (!narrando) { document.getElementById("btn-narrar").textContent = txt.btnNarrarTxt; }
+    
+    // Atualização institucional do Rodapé
     document.getElementById("credito-dev").textContent = txt.creditoDesenvolvedor;
     document.getElementById("credito-col").textContent = txt.creditoColegio;
 
-    // Atualiza o bloco das curtidas concatenando as strings correspondentes
+    // Atualização da string dinâmica de apoios injetando as curtidas atuais
     document.getElementById("texto-apoios").innerHTML = `${txt.contadorTextoPre}<span id="contador-likes">${numeroDeLikes}</span>${txt.contadorTextoPos}`;
 }
 
-// Registro e escuta dos gatilhos para os disparos de idiomas do painel
+// Vinculação de escuta de eventos nativos para os disparadores superiores de idioma
 document.getElementById("btn-pt").addEventListener("click", function() { alternarIdioma("pt"); });
 document.getElementById("btn-en").addEventListener("click", function() { alternarIdioma("en"); });
 document.getElementById("btn-es").addEventListener("click", function() { alternarIdioma("es"); });
@@ -256,13 +262,13 @@ document.getElementById("btn-es").addEventListener("click", function() { alterna
 // CONTROLE DE ACESSIBILIDADE E EVENTOS
 // =======================================================================================
 
-// --- A. GESTÃO DE ALTO CONTRASTE ---
+// --- A. GERENCIAMENTO DE ALTO CONTRASTE (TEMAS DE CORES) ---
 const elementoBody = document.body;
 document.getElementById("btn-colorido").addEventListener("click", function() { elementoBody.className = ""; });
 document.getElementById("btn-branco").addEventListener("click", function() { elementoBody.className = "tema-branco"; });
 document.getElementById("btn-preto").addEventListener("click", function() { elementoBody.className = "tema-preto"; });
 
-// --- B. DIMENSIONADOR ELÁSTICO DE TEXTO (A+ / A-) ---
+// --- B. DIMENSIONADOR METRICO DE FONTES (A+ / A- EM SITE INTEIRO) ---
 let escalaMetricaFonte = 16;
 document.getElementById("btn-Amais").addEventListener("click", function() {
     if (escalaMetricaFonte < 24) { escalaMetricaFonte = escalaMetricaFonte + 2; document.documentElement.style.fontSize = escalaMetricaFonte + "px"; }
@@ -271,7 +277,7 @@ document.getElementById("btn-Amenos").addEventListener("click", function() {
     if (escalaMetricaFonte > 12) { escalaMetricaFonte = escalaMetricaFonte - 2; document.documentElement.style.fontSize = escalaMetricaFonte + "px"; }
 });
 
-// --- C. API SÍNTESE DE VOZ NATIVA (TEXTOS E VÍDEOS NARRADOS) ---
+// --- C. API SÍNTESE DE VOZ NATIVA (MOTOR DE NARRAÇÃO MULTI-IDIOMA) ---
 let narrando = false;
 let motorSinteseVoz = window.speechSynthesis;
 let instanciaFala;
@@ -283,11 +289,11 @@ document.getElementById("btn-narrar").addEventListener("click", function() {
         document.getElementById("btn-narrar").textContent = txt.btnNarrarTxt;
         narrando = false;
     } else {
-        // Captura o texto puro serializado apenas de dentro do contêiner elástico principal <main>
+        // Captura o texto puro contido exclusivamente dentro da tag estrutural elástica <main>
         const stringTextoPuro = document.getElementById("conteudo-principal").innerText;
         instanciaFala = new SpeechSynthesisUtterance(stringTextoPuro);
         
-        // Atribui a fonética e o sotaque nativo correto com base na linguagem do site
+        // Atribui o sotaque, velocidade e fonética adequada à linguagem em exibição
         instanciaFala.lang = idiomaAtual === "pt" ? "pt-BR" : (idiomaAtual === "en" ? "en-US" : "es-ES");
         
         instanciaFala.onend = function() {
@@ -301,21 +307,20 @@ document.getElementById("btn-narrar").addEventListener("click", function() {
     }
 });
 
-// --- D. GATILHO DAS CURTIDAS (LIKES) ---
+// --- D. GATILHO DAS CURTIDAS (VOTOS DE APOIO) ---
 document.getElementById("botao-like").addEventListener("click", function() {
     numeroDeLikes = numeroDeLikes + 1;
     document.getElementById("contador-likes").textContent = numeroDeLikes;
 });
 
-// --- E. VALIDAÇÃO DO FORMULÁRIO SUSTENTÁVEL COM CHAVES TRADUZIDAS ---
+// --- E. VALIDAÇÃO DO FORMULÁRIO SUSTENTÁVEL ---
 const domFormulario = document.getElementById("formulario-contato");
 const domCampoNome = document.getElementById("nome");
 const domCampoMensagem = document.getElementById("mensagem");
 const domTextoAlerta = document.getElementById("mensagem-alerta");
 
 domFormulario.addEventListener("submit", function(event) {
-    event.preventDefault(); // Elimina o reload forçado padrão do submit
-    
+    event.preventDefault(); // Inibe o reload forçado nativo da página
     const stringNome = domCampoNome.value.trim();
     const stringMensagem = domCampoMensagem.value.trim();
     const dicionarioAtivo = traducoes[idiomaAtual];
