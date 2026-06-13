@@ -1,5 +1,5 @@
 /* =======================================================================================
-   ESTILO CSS ULTRA PROFISSIONAL - BLOCO 1 DE 2: CONFIGURAÇÕES BASE, ACESSIBILIDADE E MENU
+   CONFIGURAÇÕES BASE, ACESSIBILIDADE E MENU
    ======================================================================================= */
 
 /* --- RESET GERAL E BOX MODEL PROPORCIONAL --- */
@@ -183,7 +183,7 @@ body.tema-preto .campo input, body.tema-preto .campo textarea {
     border-color: #FFFFFF !important;
 }
 /* =======================================================================================
-   ESTILO CSS ULTRA PROFISSIONAL - BLOCO 2 DE 2: CENÁRIOS, FORMULÁRIO E RESPONSIVIDADE
+   CENÁRIOS, FORMULÁRIO E RESPONSIVIDADE
    ======================================================================================= */
 
 /* --- CENÁRIO 1: HERO BANNER PRINCIPAL --- */
