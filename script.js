@@ -1,8 +1,11 @@
-// =================================================================
-// SCRIPT.JS - BLOCO 1: BASE DE DADOS DOS IDIOMAS (PT / EN / ES)
-// =================================================================
+// =======================================================================================
+// JAVASCRIPT ULTRA PROFISSIONAL - BLOCO 1 DE 3: DICIONÁRIO E MAPEAMENTO TRILINGUE
+// =======================================================================================
 
-// Objeto imutável contendo mapeamento integral dos textos para os três idiomas
+/**
+ * Mapeamento centralizado de traduções para suportar a internacionalização do site.
+ * Estrutura baseada em objetos chave-valor para garantir carregamento e comutação off-line.
+ */
 const traducoes = {
     pt: {
         titulo: "Projeto Agrinho 2026",
@@ -38,7 +41,9 @@ const traducoes = {
         labelMensagem: "Sua Sugestão Ambiental:",
         btnEnviar: "Enviar Mensagem",
         alertaCampos: "Por favor, preencha todos os campos antes de enviar!",
-        alertaSucesso: "Obrigado por sua sugestão, {nome}! Juntos pelo agro sustentável."
+        alertaSucesso: "Obrigado por sua sugestão, {nome}! Juntos pelo agro sustentável.",
+        creditoDesenvolvedor: "2026 - Desenvolvido para o Concurso Agrinho | Categoria Front-End",
+        creditoColegio: "Ensino Médio - Colégio Estadual do Paraná"
     },
     en: {
         titulo: "Agrinho Project 2026",
@@ -74,7 +79,9 @@ const traducoes = {
         labelMensagem: "Your Environmental Suggestion:",
         btnEnviar: "Send Message",
         alertaCampos: "Please fill in all fields before sending!",
-        alertaSucesso: "Thank you for your suggestion, {nome}! Together for sustainable agro."
+        alertaSucesso: "Thank you for your suggestion, {nome}! Together for sustainable agro.",
+        creditoDesenvolvedor: "2026 - Developed for the Agrinho Contest | Front-End Category",
+        creditoColegio: "High School - Paraná State College"
     },
     es: {
         titulo: "Proyecto Agrinho 2026",
@@ -110,22 +117,165 @@ const traducoes = {
         labelMensagem: "Su Sugerencia Ambiental:",
         btnEnviar: "Enviar Mensaje",
         alertaCampos: "¡Por favor, complete todos los campos antes de enviar!",
-        alertaSucesso: "¡Gracias por su sugerencia, {nome}! Juntos por el agro sostenible."
+        alertaSucesso: "¡Gracias por su sugerencia, {nome}! Juntos por el agro sostenible.",
+        creditoDesenvolvedor: "2026 - Desarrollado para el Concurso Agrinho | Categoría Front-End",
+        creditoColegio: "Escuela Secundaria - Colegio Estatal de Paraná"
     }
 };
 
-// Variáveis de controle de estado global que interligam os blocos do script
+// Instanciação das variáveis de controle global para sincronizar os dados dinâmicos do escopo
 let idiomaAtual = "pt";
 let numeroDeLikes = 0;
-// =================================================================
-// SCRIPT.JS - BLOCO 2: ENGINE DE TRADUÇÃO DOS TEXTOS DO DOM
-// =================================================================
+// =======================================================================================
+// JAVASCRIPT ULTRA PROFISSIONAL - BLOCO 2 DE 3: GERENCIADOR DINÂMICO DE IDIOMAS (DOM)
+// =======================================================================================
 
-// Função de varredura que atualiza as strings do DOM sem reconstruir ou duplicar os elementos de imagem
+/**
+ * Varre o documento HTML atualizando as propriedades textContent e innerHTML 
+ * com base na linguagem selecionada. Protege elementos de mídia contra reinicialização.
+ * @param {string} idioma - Código identificador da linguagem ('pt', 'en', 'es').
+ */
 function alternarIdioma(idioma) {
     idiomaAtual = idioma;
     const txt = traducoes[idioma];
 
-    // Atualização dos textos dos cabeçalhos, botões e menus nativos
+    // Atualização de cabeçalhos, menus e botões de navegação
     document.getElementById("titulo-site").textContent = txt.titulo;
-    document.getElementById("menu-inicio
+    document.getElementById("menu-inicio").textContent = txt.menuInicio;
+    document.getElementById("menu-equilibrio").textContent = txt.menuEquilibrio;
+    document.getElementById("menu-tecnologia").textContent = txt.menuTecnologia;
+    document.getElementById("menu-participe").textContent = txt.menuParticipe;
+    
+    // Atualização do Hero Banner (Introdução)
+    document.getElementById("banner-h2").textContent = txt.bannerH2;
+    document.getElementById("banner-p").textContent = txt.bannerP;
+    document.getElementById("banner-btn").textContent = txt.bannerBtn;
+    
+    // Atualização do Bloco do Cenário 2 (Equilíbrio e Cards)
+    document.getElementById("secao-equi-h3").textContent = txt.secaoEquiH3;
+    document.getElementById("secao-equi-p").textContent = txt.secaoEquiP;
+    document.getElementById("card1-h4").textContent = txt.card1H4;
+    document.getElementById("card1-p").textContent = txt.card1P;
+    document.getElementById("card2-h4").textContent = txt.card2H4;
+    document.getElementById("card2-p").textContent = txt.card2P;
+    document.getElementById("video-h4").textContent = txt.videoH4;
+    
+    // Atualização do Bloco do Cenário 3 (Tecnologias na Lista)
+    document.getElementById("secao-tec-h3").textContent = txt.secaoTecH3;
+    document.getElementById("secao-tec-p").textContent = txt.secaoTecP;
+    document.getElementById("drone-text").innerHTML = `<strong>${txt.droneTitulo}:</strong>${txt.droneTexto}`;
+    document.getElementById("irri-text").innerHTML = `<strong>${txt.irriTitulo}:</strong>${txt.irriTexto}`;
+    document.getElementById("solar-text").innerHTML = `<strong>${txt.solarTitulo}:</strong>${txt.solarTexto}`;
+    
+    // Atualização do Bloco do Cenário 4 (Interações, Formulário e Votos)
+    document.getElementById("secao-int-h3").textContent = txt.secaoIntH3;
+    document.getElementById("secao-int-p").textContent = txt.secaoIntP;
+    document.getElementById("botao-like").textContent = txt.btnLike;
+    document.getElementById("form-h4").textContent = txt.formH4;
+    document.getElementById("label-nome").textContent = txt.labelNome;
+    document.getElementById("label-mensagem").textContent = txt.labelMensagem;
+    document.getElementById("botao-enviar").textContent = txt.btnEnviar;
+    
+    // Atualização dos nós textuais estruturais do Rodapé institucional
+    document.getElementById("credito-dev").textContent = txt.creditoDesenvolvedor;
+    document.getElementById("credito-col").textContent = txt.creditoColegio;
+
+    // Atualiza a frase dinâmica de apoios injetando o span com a variável numérica ativa
+    document.getElementById("texto-apoios").innerHTML = `${txt.contadorTextoPre}<span id="contador-likes">${numeroDeLikes}</span>${txt.contadorTextoPos}`;
+}
+
+// Registro e escuta de gatilhos para os botões de idioma da interface superior
+document.getElementById("btn-pt").addEventListener("click", function() { alternarIdioma("pt"); });
+document.getElementById("btn-en").addEventListener("click", function() { alternarIdioma("en"); });
+document.getElementById("btn-es").addEventListener("click", function() { alternarIdioma("es"); });
+// =======================================================================================
+// JAVASCRIPT ULTRA PROFISSIONAL - BLOCO 3 DE 3: ACESSIBILIDADE, SÍNTESE DE VOZ E EVENTOS
+// =======================================================================================
+
+// --- A. SISTEMA DE COMUTAÇÃO DE ALTO CONTRASTE (TEMAS CSS) ---
+const elementoBody = document.body;
+
+document.getElementById("btn-colorido").addEventListener("click", function() { elementoBody.className = ""; });
+document.getElementById("btn-branco").addEventListener("click", function() { elementoBody.className = "tema-branco"; });
+document.getElementById("btn-preto").addEventListener("click", function() { elementoBody.className = "tema-preto"; });
+
+// --- B. GERENCIADOR DE MÉTRICA DE TEXTO (A+ / A- RESPONSIVO) ---
+let escalaMetricaFonte = 16; // Inicializa com a fonte padrão do documento em 16px
+
+document.getElementById("btn-Amais").addEventListener("click", function() {
+    if (escalaMetricaFonte < 24) { // Teto máximo para não romper contêineres elásticos
+        escalaMetricaFonte = escalaMetricaFonte + 2;
+        document.documentElement.style.fontSize = escalaMetricaFonte + "px";
+    }
+});
+
+document.getElementById("btn-Amenos").addEventListener("click", function() {
+    if (escalaMetricaFonte > 12) { // Piso mínimo para manter as regras de legibilidade
+        escalaMetricaFonte = escalaMetricaFonte - 2;
+        document.documentElement.style.fontSize = escalaMetricaFonte + "px";
+    }
+});
+
+// --- C. API DE SÍNTESE DE VOZ NATIVA (MOTOR DE NARAÇÃO MULTI-IDIOMA) ---
+let estadoNarrando = false;
+let motorSinteseVoz = window.speechSynthesis;
+let instanciaFala;
+
+document.getElementById("btn-narrar").addEventListener("click", function() {
+    if (estadoNarrando) {
+        motorSinteseVoz.cancel(); // Interrompe a execução do áudio imediatamente
+        document.getElementById("btn-narrar").textContent = idiomaAtual === "pt" ? "🔊 Narrar Site" : (idiomaAtual === "en" ? "🔊 Narrate Site" : "🔊 Narrar Sitio");
+        estadoNarrando = false;
+    } else {
+        // Captura o texto puro serializado apenas da área interna do nó principal <main>
+        const stringTextoPuro = document.getElementById("conteudo-principal").innerText;
+        instanciaFala = new SpeechSynthesisUtterance(stringTextoPuro);
+        
+        // Define o sotaque e fonética correta do motor nativo com base no idioma selecionado
+        instanciaFala.lang = idiomaAtual === "pt" ? "pt-BR" : (idiomaAtual === "en" ? "en-US" : "es-ES");
+        
+        // Callback acionado de forma nativa ao encerrar a leitura completa da string
+        instanciaFala.onend = function() {
+            document.getElementById("btn-narrar").textContent = idiomaAtual === "pt" ? "🔊 Narrar Site" : (idiomaAtual === "en" ? "🔊 Narrate Site" : "🔊 Narrar Sitio");
+            estadoNarrando = false;
+        };
+
+        motorSinteseVoz.speak(instanciaFala);
+        document.getElementById("btn-narrar").textContent = idiomaAtual === "pt" ? "🛑 Parar Narração" : (idiomaAtual === "en" ? "🛑 Stop Narration" : "🛑 Parar Narración");
+        estadoNarrando = true;
+    }
+});
+
+// --- D. GATILHO DO CONTADOR DE CURTIDAS (VOTOS) ---
+document.getElementById("botao-like").addEventListener("click", function() {
+    numeroDeLikes = numeroDeLikes + 1;
+    document.getElementById("contador-likes").textContent = numeroDeLikes;
+});
+
+// --- E. VALIDAÇÃO DO FORMULÁRIO SUSTENTÁVEL COM MENSAGENS TRADUZIDAS ---
+const domFormulario = document.getElementById("formulario-contato");
+const domCampoNome = document.getElementById("nome");
+const domCampoMensagem = document.getElementById("mensagem");
+const domTextoAlerta = document.getElementById("mensagem-alerta");
+
+domFormulario.addEventListener("submit", function(event) {
+    event.preventDefault(); // Inibe o reload forçado padrão da página
+    
+    const stringNome = domCampoNome.value.trim();
+    const stringMensagem = domCampoMensagem.value.trim();
+    const dicionarioAtivo = traducoes[idiomaAtual];
+
+    // Validação lógica contra campos vazios ou preenchidos com espaços
+    if (stringNome === "" || stringMensagem === "") {
+        domTextoAlerta.textContent = dicionarioAtivo.alertaCampos;
+        domTextoAlerta.style.color = "red";
+    } else {
+        // Injeta o nome do usuário capturado na caixa dentro do token da string correspondente
+        domTextoAlerta.textContent = dicionarioAtivo.alertaSucesso.replace("{nome}", stringNome);
+        domTextoAlerta.style.color = "green";
+        
+        // Limpa os elementos de input para novos envios do usuário
+        domCampoNome.value = "";
+        domCampoMensagem.value = "";
+    }
+});
