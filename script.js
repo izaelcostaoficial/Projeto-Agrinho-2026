@@ -1,228 +1,131 @@
-/* =====================================================
-PROJETO AGRINHO 2026 - JAVASCRIPT PROFISSIONAL
-Todas as funções estão integradas ao HTML e CSS enviados
-===================================================== */
+// =================================================================
+// SCRIPT.JS - BLOCO 1: BASE DE DADOS DOS IDIOMAS (PT / EN / ES)
+// =================================================================
 
-/* =====================================================
-1. DICIONÁRIO DE TRADUÇÃO (PT / EN / ES)
-===================================================== */
+// Objeto imutável contendo mapeamento integral dos textos para os três idiomas
 const traducoes = {
     pt: {
         titulo: "Projeto Agrinho 2026",
         menuInicio: "Início",
-        menuEquilibrio: "Equilíbrio",
-        menuTecnologia: "Tecnologia",
+        menuEquilibrio: "O Equilíbrio",
+        menuTecnologia: "Tecnologia no Campo",
         menuParticipe: "Participe",
-        bannerH2: "Agro forte, futuro sustentável",
-        bannerP: "O campo e a tecnologia caminham juntos para garantir um futuro melhor.",
-        secaoEquiH3: "O equilíbrio necessário",
-        secaoEquiP: "Produção e preservação precisam andar juntas.",
-        card1H4: "Produção forte",
-        card1P: "O agro alimenta o mundo e gera empregos.",
-        card2H4: "Preservação ativa",
-        card2P: "Cuidar da natureza garante o futuro.",
-        secaoTecH3: "Tecnologia no campo",
-        secaoTecP: "Tecnologia ajuda a produzir mais com menos impacto.",
-        drone: "Drones monitoram plantações.",
-        irrigacao: "Irrigação inteligente economiza água.",
-        solar: "Energia solar reduz impacto ambiental.",
-        secaoIntH3: "Participe",
-        secaoIntP: "Apoie o projeto e envie sugestões.",
-        btnLike: "👍 Apoiar",
-        alerta: "Preencha todos os campos!",
-        sucesso: "Mensagem enviada com sucesso!"
+        bannerH2: "Agro Forte, Futuro Sustentável",
+        bannerP: "Descubra como a produção de alimentos e a preservação do meio ambiente andam juntas para garantir o amanhã.",
+        bannerBtn: "Entender o Projeto",
+        secaoEquiH3: "O Equilíbrio Necessário",
+        secaoEquiP: "Para o nosso futuro ser seguro, o campo precisa produzir alimentos de forma eficiente sem esgotar os recursos naturais da nossa terra.",
+        card1H4: "Produção Forte",
+        card1P: "O agro abastece as cidades, gera empregos e garante que a comida chegue na mesa de milhões de pessoas todos os dias.",
+        card2H4: "Preservação Ativa",
+        card2P: "Cuidar das florestas, proteger as nascentes de água e evitar poluição é o que mantém a terra fértil para as próximas gerações.",
+        videoH4: "Assista: O Futuro do Agro Sustentável",
+        secaoTecH3: "Inovação e Tecnologia Sustentável",
+        secaoTecP: "Hoje, o produtor rural usa ferramentas modernas para evitar desperdícios. Veja alguns exemplos de práticas reais:",
+        droneTitulo: "Drones agrícolas",
+        droneTexto: " Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.",
+        irriTitulo: "Irrigação gota a gota",
+        irriTexto: " Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.",
+        solarTitulo: "Energia Solar",
+        solarTexto: " Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.",
+        secaoIntH3: "Participe da Nossa Ideia",
+        secaoIntP: "Apoie o nosso projeto escolar ou envie uma sugestão de prática sustentável para o campo!",
+        btnLike: "👍 Apoiar Projeto",
+        contadorTextoPre: "Este projeto já recebeu ",
+        contadorTextoPos: " apoios!",
+        formH4: "Envie sua Sugestão",
+        labelNome: "Seu Nome:",
+        labelMensagem: "Sua Sugestão Ambiental:",
+        btnEnviar: "Enviar Mensagem",
+        alertaCampos: "Por favor, preencha todos os campos antes de enviar!",
+        alertaSucesso: "Obrigado por sua sugestão, {nome}! Juntos pelo agro sustentável."
     },
-
     en: {
         titulo: "Agrinho Project 2026",
         menuInicio: "Home",
-        menuEquilibrio: "Balance",
-        menuTecnologia: "Technology",
-        menuParticipe: "Join",
-        bannerH2: "Strong agro, sustainable future",
-        bannerP: "Agriculture and technology working together for a better future.",
-        secaoEquiH3: "The necessary balance",
-        secaoEquiP: "Production and preservation must go together.",
-        card1H4: "Strong production",
-        card1P: "Agriculture feeds the world and creates jobs.",
-        card2H4: "Active preservation",
-        card2P: "Caring for nature ensures the future.",
-        secaoTecH3: "Farm technology",
-        secaoTecP: "Technology helps produce more with less impact.",
-        drone: "Drones monitor crops.",
-        irrigacao: "Smart irrigation saves water.",
-        solar: "Solar energy reduces impact.",
-        secaoIntH3: "Join",
-        secaoIntP: "Support the project and send ideas.",
-        btnLike: "👍 Support",
-        alerta: "Fill all fields!",
-        sucesso: "Message sent successfully!"
+        menuEquilibrio: "The Balance",
+        menuTecnologia: "Farm Tech",
+        menuParticipe: "Join In",
+        bannerH2: "Strong Agro, Sustainable Future",
+        bannerP: "Discover how food production and environmental preservation work together to guarantee tomorrow.",
+        bannerBtn: "Understand the Project",
+        secaoEquiH3: "The Necessary Balance",
+        secaoEquiP: "For our future to be safe, the countryside must produce food efficiently without depleting our land's natural resources.",
+        card1H4: "Strong Production",
+        card1P: "Agribusiness supplies cities, creates jobs, and ensures food reaches the tables of millions every day.",
+        card2H4: "Active Preservation",
+        card2P: "Caring for forests, protecting water sources, and avoiding pollution is what keeps the soil fertile for future generations.",
+        videoH4: "Watch: The Future of Sustainable Agro",
+        secaoTecH3: "Innovation and Sustainable Technology",
+        secaoTecP: "Today, rural producers use modern tools to avoid waste. See some examples of real practices:",
+        droneTitulo: "Agricultural drones",
+        droneTexto: " Monitor crops from above, finding pests and avoiding the excessive use of pesticides.",
+        irriTitulo: "Drip irrigation",
+        irriTexto: " Delivers the exact amount of water the plant needs directly to the root, saving tons of water.",
+        solarTitulo: "Solar Energy",
+        solarTexto: " Use of photovoltaic panels to generate clean energy on farms and reduce environmental impact.",
+        secaoIntH3: "Join Our Idea",
+        secaoIntP: "Support our school project or send a suggestion for a sustainable practice for the countryside!",
+        btnLike: "👍 Support Project",
+        contadorTextoPre: "This project has already received ",
+        contadorTextoPos: " supports!",
+        formH4: "Send your Suggestion",
+        labelNome: "Your Name:",
+        labelMensagem: "Your Environmental Suggestion:",
+        btnEnviar: "Send Message",
+        alertaCampos: "Please fill in all fields before sending!",
+        alertaSucesso: "Thank you for your suggestion, {nome}! Together for sustainable agro."
     },
-
     es: {
         titulo: "Proyecto Agrinho 2026",
         menuInicio: "Inicio",
-        menuEquilibrio: "Equilibrio",
-        menuTecnologia: "Tecnología",
-        menuParticipe: "Participar",
-        bannerH2: "Agro fuerte, futuro sostenible",
-        bannerP: "La agricultura y la tecnología trabajan juntas para el futuro.",
-        secaoEquiH3: "El equilibrio necesario",
-        secaoEquiP: "Producción y preservación deben ir juntas.",
-        card1H4: "Producción fuerte",
-        card1P: "La agricultura alimenta el mundo.",
-        card2H4: "Preservación activa",
-        card2P: "Cuidar la naturaleza asegura el futuro.",
-        secaoTecH3: "Tecnología agrícola",
-        secaoTecP: "La tecnología reduce impactos.",
-        drone: "Drones monitorean cultivos.",
-        irrigacao: "Riego inteligente ahorra agua.",
-        solar: "Energía solar reduce impacto.",
-        secaoIntH3: "Participar",
-        secaoIntP: "Apoya el proyecto y envía ideas.",
-        btnLike: "👍 Apoyar",
-        alerta: "Complete todos los campos!",
-        sucesso: "Mensaje enviado correctamente!"
+        menuEquilibrio: "El Equilibrio",
+        menuTecnologia: "Tecnología de Campo",
+        menuParticipe: "Participe",
+        bannerH2: "Agro Fuerte, Futuro Sostenible",
+        bannerP: "Descubra cómo la producción de alimentos y la preservación del medio ambiente trabajan juntas para garantizar el mañana.",
+        bannerBtn: "Entender el Proyecto",
+        secaoEquiH3: "El Equilibrio Necesario",
+        secaoEquiP: "Para que nuestro futuro sea seguro, el campo debe producir alimentos de manera eficiente sin agotar los recursos naturales de nuestra tierra.",
+        card1H4: "Producción Fuerte",
+        card1P: "El agronegocio abastece a las ciudades, genera empleos y garantiza que la comida llegue a la mesa de millones todos los días.",
+        card2H4: "Preservación Activa",
+        card2P: "Cuidar los bosques, proteger las fuentes de agua y evitar la contaminación mantiene el suelo fértil para las próximas generaciones.",
+        videoH4: "Vea: El Futuro del Agro Sostenible",
+        secaoTecH3: "Innovación y Tecnología Sostenible",
+        secaoTecP: "Hoy en día, los productores rurales utilizan herramientas modernas para evitar el desperdicio. Vea algunos ejemplos prácticos:",
+        droneTitulo: "Drones agrícolas",
+        droneTexto: " Monitorean los cultivos desde arriba, encontrando plagas y evitando el uso excesivo de pesticidas.",
+        irriTitulo: "Riego por goteo",
+        irriTexto: " Lleva la cantidad exacta de agua que la planta necesita directamente a la raíz, ahorrando ríos de agua.",
+        solarTitulo: "Energía Solar",
+        solarTexto: " Uso de paneles fotovoltaicos para generar energía limpia en las fincas y reducir el impacto ambiental.",
+        secaoIntH3: "Participe de Nuestra Idea",
+        secaoIntP: "¡Apoye nuestro proyecto escolar o envíe una sugerencia de práctica sostenible para el campo!",
+        btnLike: "👍 Apoyar Proyecto",
+        contadorTextoPre: "¡Este proyecto ya ha recibido ",
+        contadorTextoPos: " apoyos!",
+        formH4: "Envíe su Sugerencia",
+        labelNome: "Su Nombre:",
+        labelMensagem: "Su Sugerencia Ambiental:",
+        btnEnviar: "Enviar Mensaje",
+        alertaCampos: "¡Por favor, complete todos los campos antes de enviar!",
+        alertaSucesso: "¡Gracias por su sugerencia, {nome}! Juntos por el agro sostenible."
     }
 };
 
-/* =====================================================
-2. ESTADO GLOBAL
-===================================================== */
-let idioma = "pt";
-let likes = 0;
+// Variáveis de controle de estado global que interligam os blocos do script
+let idiomaAtual = "pt";
+let numeroDeLikes = 0;
+// =================================================================
+// SCRIPT.JS - BLOCO 2: ENGINE DE TRADUÇÃO DOS TEXTOS DO DOM
+// =================================================================
 
-/* =====================================================
-3. FUNÇÃO DE TROCA DE IDIOMA
-===================================================== */
-function mudarIdioma(lang) {
-    idioma = lang;
-    const t = traducoes[lang];
+// Função de varredura que atualiza as strings do DOM sem reconstruir ou duplicar os elementos de imagem
+function alternarIdioma(idioma) {
+    idiomaAtual = idioma;
+    const txt = traducoes[idioma];
 
-    document.getElementById("titulo-site").textContent = t.titulo;
-
-    document.getElementById("menu-inicio").textContent = t.menuInicio;
-    document.getElementById("menu-equilibrio").textContent = t.menuEquilibrio;
-    document.getElementById("menu-tecnologia").textContent = t.menuTecnologia;
-    document.getElementById("menu-participe").textContent = t.menuParticipe;
-
-    document.getElementById("banner-h2").textContent = t.bannerH2;
-    document.getElementById("banner-p").textContent = t.bannerP;
-
-    document.getElementById("secao-equi-h3").textContent = t.secaoEquiH3;
-    document.getElementById("secao-equi-p").textContent = t.secaoEquiP;
-
-    document.getElementById("card1-h4").textContent = t.card1H4;
-    document.getElementById("card1-p").textContent = t.card1P;
-    document.getElementById("card2-h4").textContent = t.card2H4;
-    document.getElementById("card2-p").textContent = t.card2P;
-
-    document.getElementById("secao-tec-h3").textContent = t.secaoTecH3;
-    document.getElementById("secao-tec-p").textContent = t.secaoTecP;
-
-    document.getElementById("drone-text").textContent = t.drone;
-    document.getElementById("irri-text").textContent = t.irrigacao;
-    document.getElementById("solar-text").textContent = t.solar;
-
-    document.getElementById("secao-int-h3").textContent = t.secaoIntH3;
-    document.getElementById("secao-int-p").textContent = t.secaoIntP;
-
-    document.getElementById("botao-like").textContent = t.btnLike;
-}
-
-/* eventos idioma */
-document.getElementById("btn-pt").onclick = () => mudarIdioma("pt");
-document.getElementById("btn-en").onclick = () => mudarIdioma("en");
-document.getElementById("btn-es").onclick = () => mudarIdioma("es");
-
-/* =====================================================
-4. TEMAS (COLORIDO / BRANCO / PRETO)
-===================================================== */
-document.getElementById("btn-colorido").onclick = () =>
-    document.body.className = "tema-colorido";
-
-document.getElementById("btn-branco").onclick = () =>
-    document.body.className = "tema-branco";
-
-document.getElementById("btn-preto").onclick = () =>
-    document.body.className = "tema-preto";
-
-/* =====================================================
-5. FONTE (+ / -)
-===================================================== */
-let fonte = 16;
-
-document.getElementById("btn-Amais").onclick = () => {
-    if (fonte < 24) {
-        fonte += 2;
-        document.documentElement.style.fontSize = fonte + "px";
-    }
-};
-
-document.getElementById("btn-Amenos").onclick = () => {
-    if (fonte > 12) {
-        fonte -= 2;
-        document.documentElement.style.fontSize = fonte + "px";
-    }
-};
-
-/* =====================================================
-6. LIKE
-===================================================== */
-document.getElementById("botao-like").onclick = () => {
-    likes++;
-    document.getElementById("contador-likes").textContent = likes;
-};
-
-/* =====================================================
-7. NARRAÇÃO (ÁUDIO MULTI-IDIOMA)
-===================================================== */
-let falando = false;
-let synth = window.speechSynthesis;
-
-document.getElementById("btn-narrar").onclick = () => {
-
-    if (falando) {
-        synth.cancel();
-        falando = false;
-        return;
-    }
-
-    const texto = document.body.innerText;
-
-    let utter = new SpeechSynthesisUtterance(texto);
-
-    if (idioma === "pt") utter.lang = "pt-BR";
-    if (idioma === "en") utter.lang = "en-US";
-    if (idioma === "es") utter.lang = "es-ES";
-
-    synth.speak(utter);
-    falando = true;
-
-    utter.onend = () => {
-        falando = false;
-    };
-};
-
-/* =====================================================
-8. FORMULÁRIO
-===================================================== */
-document.getElementById("formulario-contato").onsubmit = (e) => {
-    e.preventDefault();
-
-    const nome = document.getElementById("nome").value.trim();
-    const msg = document.getElementById("mensagem").value.trim();
-    const alerta = document.getElementById("mensagem-alerta");
-
-    if (!nome || !msg) {
-        alerta.textContent = traducoes[idioma].alerta;
-        alerta.style.color = "red";
-        return;
-    }
-
-    alerta.textContent = traducoes[idioma].sucesso;
-    alerta.style.color = "green";
-
-    document.getElementById("nome").value = "";
-    document.getElementById("mensagem").value = "";
-};
+    // Atualização dos textos dos cabeçalhos, botões e menus nativos
+    document.getElementById("titulo-site").textContent = txt.titulo;
+    document.getElementById("menu-inicio
