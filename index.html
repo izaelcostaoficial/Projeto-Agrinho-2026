@@ -3,38 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="aba-navegador">Agrinho 2026 - Agro Forte e Sustentável</title>
-    <!-- Vinculação do arquivo de estilos visuais -->
+    <title>Agrinho 2026 - Agro Forte e Sustentável</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- BARRA DE ACESSIBILIDADE GLOBAL (Funciona em todo o ecossistema do site) -->
+    <!-- BARRA DE ACESSIBILIDADE NO TOPO -->
     <div class="barra-acessibilidade">
         <div class="grupo-botoes">
-            <span id="label-idioma">Idioma / Language:</span>
+            <span id="lbl-idioma">Idioma:</span>
             <button id="btn-pt" class="btn-ace">PT</button>
             <button id="btn-en" class="btn-ace">EN</button>
             <button id="btn-es" class="btn-ace">ES</button>
         </div>
         <div class="grupo-botoes">
-            <span id="label-visual">Visual:</span>
+            <span id="lbl-visual">Visual:</span>
             <button id="btn-colorido" class="btn-ace">Padrão</button>
             <button id="btn-branco" class="btn-ace">Acessível L/W</button>
             <button id="btn-preto" class="btn-ace">Acessível D/B</button>
         </div>
         <div class="grupo-botoes">
-            <span id="label-texto">Texto:</span>
+            <span id="lbl-texto">Texto:</span>
             <button id="btn-Amais" class="btn-ace">A+</button>
             <button id="btn-Amenos" class="btn-ace">A-</button>
         </div>
         <div class="grupo-botoes">
-            <span id="label-audio">Áudio:</span>
+            <span id="lbl-audio">Áudio:</span>
             <button id="btn-narrar" class="btn-ace">🔊 Narrar Site</button>
         </div>
     </div>
 
-    <!-- CABEÇALHO PRINCIPAL -->
+    <!-- Cabeçalho principal do site -->
     <header class="cabecalho">
         <div class="logo">
             <h1 id="titulo-site">Projeto Agrinho 2026</h1>
@@ -49,10 +48,10 @@
         </nav>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL (Encapsulado para leitura completa da API de voz) -->
+    <!-- Conteúdo principal embrulhado para a narração por voz -->
     <main id="conteudo-principal">
 
-        <!-- CENÁRIO 1: BANNER PRINCIPAL -->
+        <!-- Banner de Destaque -->
         <section id="inicio" class="banner">
             <div class="banner-conteudo">
                 <h2 id="banner-h2">Agro Forte, Futuro Sustentável</h2>
@@ -61,7 +60,7 @@
             </div>
         </section>
 
-        <!-- CENÁRIO 2: O EQUILÍBRIO (CONTEÚDO TEÓRICO) -->
+        <!-- Seção sobre o Equilíbrio -->
         <section id="equilibrio" class="secao-conteudo">
             <div class="container">
                 <h3 id="secao-equi-h3">O Equilíbrio Necessário</h3>
@@ -78,49 +77,53 @@
                     </div>
                 </div>
 
-                <!-- CONTAINER DO VÍDEO LOCAL COMPACTADO -->
+                <!-- Vídeo Educativo Local -->
                 <div class="container-video">
                     <h4 id="video-h4">Assista: O Futuro do Agro Sustentável</h4>
                     <video class="video-midia" controls muted autoplay loop>
                         <source src="vídeos/projeto.mp4" type="video/mp4">
                         Seu navegador não suporta a reprodução deste vídeo.
                     </video>
-                    <!-- Nota de direitos autorais e acessibilidade descritiva -->
-                    <p id="video-credito" style="font-size: 0.8rem; margin-top: 8px;">Vídeo por: Fernando Sánchez Aranguren (Pexels) - Demonstração visual de maquinário agrícola.</p>
+                    <p style="font-size: 0.9rem; margin-top: 5px; font-weight: bold;">
+                        <span id="credito-video-lbl">Vídeo por:</span> Fernando Sánchez Aranguren (Pexels)
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- CENÁRIO 3: TECNOLOGIAS SUSTENTÁVEIS -->
+        <!-- Seção de Tecnologia Protegida contra Duplicação -->
         <section id="tecnologia" class="secao-tecnologia">
             <div class="container">
                 <h3 id="secao-tec-h3">Inovação e Tecnologia Sustentável</h3>
                 <p id="secao-tec-p">Hoje, o produtor rural usa ferramentas modernas para evitar desperdícios. Veja alguns exemplos de práticas reais:</p>
                 
                 <ul class="lista-tecnologias">
-                    <!-- Item 1: Drones -->
                     <li>
                         <div class="bloco-midia-lista">
-                            <img src="imagens/drone.jpg" alt="Drone Agrícola" class="foto-tecnologia">
-                            <span class="credito-foto" id="credito-drone">Foto: DRONE EFT / Unsplash</span>
+                            <img src="imagens/drone.jpg" alt="Drone" class="foto-tecnologia">
+                            <span style="font-size: 0.85rem; display: block; margin-top: -5px; margin-bottom: 10px; font-weight: bold;">
+                                <span class="credito-foto-lbl">Foto:</span> DRONE EFT / Unsplash
+                            </span>
                         </div>
                         <span id="drone-text"><strong>Drones agrícolas:</strong> Monitoram as plantações de cima, encontrando pragas e evitando o uso exagerado de defensivos agrícolas.</span>
                     </li>
                     
-                    <!-- Item 2: Irrigação -->
                     <li>
                         <div class="bloco-midia-lista">
-                            <img src="imagens/irrigacao.jpg" alt="Aspersores de Irrigação" class="foto-tecnologia">
-                            <span class="credito-foto" id="credito-irri">Foto: Being Organic in EU / Unsplash</span>
+                            <img src="imagens/irrigacao.jpg" alt="Irrigação" class="foto-tecnologia">
+                            <span style="font-size: 0.85rem; display: block; margin-top: -5px; margin-bottom: 10px; font-weight: bold;">
+                                <span class="credito-foto-lbl">Foto:</span> Being Organic in EU / Unsplash
+                            </span>
                         </div>
                         <span id="irri-text"><strong>Irrigação gota a gota:</strong> Leva a quantidade exata de água que a planta precisa diretamente na raiz, economizando rios de água.</span>
                     </li>
                     
-                    <!-- Item 3: Painéis Solares -->
                     <li>
                         <div class="bloco-midia-lista">
-                            <img src="imagens/solar.jpg" alt="Painéis Fotovoltaicos" class="foto-tecnologia">
-                            <span class="credito-foto" id="credito-solar">Foto: American Public Power Assoc. / Unsplash</span>
+                            <img src="imagens/solar.jpg" alt="Painel Solar" class="foto-tecnologia">
+                            <span style="font-size: 0.85rem; display: block; margin-top: -5px; margin-bottom: 10px; font-weight: bold;">
+                                <span class="credito-foto-lbl">Foto:</span> American Public Power Assoc. / Unsplash
+                            </span>
                         </div>
                         <span id="solar-text"><strong>Energia Solar:</strong> Uso de placas fotovoltaicas para gerar energia limpa nas fazendas e reduzir o impacto no ambiente.</span>
                     </li>
@@ -128,45 +131,41 @@
             </div>
         </section>
 
-        <!-- CENÁRIO 4: INTERAÇÃO, VOTAÇÃO E CONTATO -->
-        <section id="interacao" class="secao-interacao">
-            <div class="container">
-                <h3 id="secao-int-h3">Participe da Nossa Ideia</h3>
-                <p id="secao-int-p">Apoie o nosso projeto escolar ou envie uma sugestão de prática sustentável para o campo!</p>
-
-                <!-- Área Interativa de Apoios -->
-                <div class="caixa-likes">
-                    <button id="botao-like">👍 Apoiar Projeto</button>
-                    <p id="texto-apoios">Este projeto já recebeu <span id="contador-likes">0</span> apoios!</p>
-                </div>
-
-                <!-- Formulário com Validador Nativo -->
-                <form id="formulario-contato" class="form-sustentavel">
-                    <h4 id="form-h4">Envie sua Sugestão</h4>
-                    <div class="campo">
-                        <label for="nome" id="label-nome">Seu Nome:</label>
-                        <input type="text" id="nome" placeholder="Digite seu nome completo">
-                    </div>
-                    <div class="campo">
-                        <label for="mensagem" id="label-mensagem">Sua Sugestão Ambiental:</label>
-                        <textarea id="mensagem" rows="4" placeholder="Escreva aqui uma ideia para ajudar o meio ambiente..."></textarea>
-                    </div>
-                    <button type="submit" id="botao-enviar" class="botao-enviar">Enviar Mensagem</button>
-                    <!-- Localizador da resposta dinâmica via JS -->
-                    <p id="mensagem-alerta" class="alerta"></p>
-                </form>
-            </div>
-        </section>
-
     </main>
 
-    <!-- RODAPÉ INSTITUCIONAL -->
+    <!-- Seção de Interação -->
+    <section id="interacao" class="secao-interacao">
+        <div class="container">
+            <h3 id="secao-int-h3">Participe da Nossa Ideia</h3>
+            <p id="secao-int-p">Apoie o nosso projeto escolar ou envie uma sugestão de prática sustentável para o campo!</p>
+
+            <div class="caixa-likes">
+                <button id="botao-like">👍 Apoiar Projeto</button>
+                <p id="texto-apoios">Este projeto já recebeu <span id="contador-likes">0</span> apoios!</p>
+            </div>
+
+            <form id="formulario-contato" class="form-sustentavel">
+                <h4 id="form-h4">Envie sua Sugestão</h4>
+                <div class="campo">
+                    <label for="nome" id="label-nome">Seu Nome:</label>
+                    <input type="text" id="nome" placeholder="Digite seu nome completo">
+                </div>
+                <div class="campo">
+                    <label for="mensagem" id="label-mensagem">Sua Sugestão Ambiental:</label>
+                    <textarea id="mensagem" rows="4" placeholder="Escreva aqui uma ideia para ajudar o meio ambiente..."></textarea>
+                </div>
+                <button type="submit" id="botao-enviar" class="botao-enviar">Enviar Mensagem</button>
+                <p id="mensagem-alerta" class="alerta"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Rodapé Institucional -->
     <footer class="rodape">
-        <p id="rodape-linha1">&copy; 2026 - Desenvolvido para o Concurso Agrinho | Categoria Front-End</p>
-        <p id="rodape-linha2">Ensino Médio - Colégio Estadual do Paraná</p>
+        <p id="credito-dev">&copy; 2026 - Desenvolvido para o Concurso Agrinho | Categoria Front-End</p>
+        <p id="credito-col">Ensino Médio - Colégio Estadual do Paraná</p>
     </footer>
 
-    <!-- Vinculação do arquivo de inteligência comportamental (JS) -->
     <script src="script.js"></script>
 </body>
 </html>
