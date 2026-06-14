@@ -106,22 +106,23 @@ body.tema-branco #rodape {
 
 /* ── 4. TEMA ACESSIVEL DB (alto contraste escuro) ── */
 body.tema-preto {
-  --cor-primaria:     #ffee58;
-  --cor-primaria-esc: #fdd835;
-  --cor-secundaria:   #ffee58;
-  --cor-destaque:     #ffee58;
-  --cor-destaque2:    #ffc107;
-  --cor-fundo:        #000000;
-  --cor-fundo2:       #111111;
-  --cor-card:         #1a1a1a;
-  --cor-texto:        #ffee58;
-  --cor-texto-suave:  #ffe082;
-  --cor-link:         #ffee58;
-  --cor-borda:        #ffee58;
-  --cor-barra:        #000000;
-  --sombra:           0 4px 20px rgba(255,238,88,0.2);
-  --sombra-card:      0 2px 12px rgba(255,238,88,0.15);
+  --cor-primaria:     #000000; /* Alterado: Texto/elementos principais agora são pretos para contrastar com o fundo amarelo */
+  --cor-primaria-esc: #1a1a1a; /* Alterado: Versão escura passa a ser um cinza bem fechado */
+  --cor-secundaria:   #000000; /* Alterado: Segunda cor principal para preto */
+  --cor-destaque:     #000000; /* Alterado: Destaques em preto */
+  --cor-destaque2:    #1a1a1a; /* Alterado: Segundo destaque em cinza escuro */
+  --cor-fundo:        #ffee58; /* Alterado: O fundo agora assume o amarelo vivo principal */
+  --cor-fundo2:       #fdd835; /* Alterado: O segundo fundo assume o amarelo ouro */
+  --cor-card:         #ffe082; /* Alterado: O card passa a ser um amarelo pastel suave para destacar no fundo */
+  --cor-texto:        #000000; /* Alterado: Texto principal agora é preto e perfeitamente legível */
+  --cor-texto-suave:  #1a1a1a; /* Alterado: Texto secundário agora é cinza escuro */
+  --cor-link:         #000000; /* Alterado: Links agora são pretos */
+  --cor-borda:        #000000; /* Alterado: Bordas agora são pretas */
+  --cor-barra:        #ffee58; /* Alterado: Barra superior acompanha o fundo amarelo */
+  --sombra:           0 4px 20px rgba(0,0,0,0.15); /* Alterado: Sombra escura para dar profundidade no fundo claro */
+  --sombra-card:      0 2px 12px rgba(0,0,0,0.1);  /* Alterado: Sombra escura suave para o card */
 }
+
 
 body.tema-preto #barra-acessibilidade {
   border-bottom: 1px solid #ffee58;
