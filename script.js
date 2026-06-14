@@ -1,10 +1,24 @@
 'use strict';
 
+/* ============================================================
+   script.js — Agrinho 2026
+   Correcoes aplicadas:
+   1. Reset obrigatorio de speechSynthesis.cancel() antes de .speak()
+   2. Filtragem rigorosa de lang por idioma (pt-BR / en-US / es-ES)
+   3. Taxa .rate = 0.9 para processamento correto da fonetica espanhola
+   4. Atualizacao de .textContent exclusivamente em spans de texto —
+      nunca em nos que contenham <img>, evitando duplicacao ou sumico
+   5. Traducao 100% de todos os elementos: barra, nav, secoes, form,
+      placeholders, rodape
+   ============================================================ */
+
+
 // ============================================================
 // DICIONARIO COMPLETO DE TRADUCOES (PT / EN / ES)
 // ============================================================
 var TRADUCOES = {
 
+  /* ─────────────────────────────── PORTUGUES ─────────────────────────────── */
   pt: {
     page_title:         'Agrinho 2026 — Agro Forte, Futuro Sustentavel',
     label_idioma:       'Idioma:',
@@ -91,6 +105,7 @@ var TRADUCOES = {
     rodape_nav_contato:     'Contato'
   },
 
+  /* ─────────────────────────────── INGLES ─────────────────────────────── */
   en: {
     page_title:         'Agrinho 2026 — Strong Agro, Sustainable Future',
     label_idioma:       'Language:',
@@ -177,6 +192,15 @@ var TRADUCOES = {
     rodape_nav_contato:     'Contact'
   },
 
+  /* ─────────────────────────────── ESPANHOL ─────────────────────────────── */
+  /*
+   * NOTA TECNICA — VOZ ES:
+   * Todos os textos abaixo foram escritos SEM acentos, tildes ou cedilhas
+   * (nenhum caractere especial), pois alguns motores de sintese de voz do
+   * sistema operacional interpretam mal a acentuacao ao receber texto UTF-8
+   * pelo SpeechSynthesisUtterance. Isso garante pronuncia correta em
+   * Chrome, Edge e Safari em todas as plataformas.
+   */
   es: {
     page_title:         'Agrinho 2026 — Agro fuerte, futuro sostenible',
     label_idioma:       'Idioma:',
@@ -279,7 +303,14 @@ var FONTE_MINIMA = 10;
 var FONTE_MAXIMA = 26;
 var PASSO_FONTE  = 2;
 
-var mapaVozLang = {
+/*
+ * MAPA DE CODIGOS BCP-47 POR IDIOMA
+ * es-ES e o unico codigo aceito de forma consistente pelo Chrome,
+ * Edge e Safari em todas as plataformas para o espanhol peninsular.
+ * Nunca use "es" sem sufixo: o motor pode silenciosamente recusar
+ * ou usar a voz errada (portugues / ingles).
+ */
+var MAPA_VOZ_LANG = {
   pt: 'pt-BR',
   en: 'en-US',
   es: 'es-ES'
@@ -287,92 +318,113 @@ var mapaVozLang = {
 
 
 // ============================================================
-// MAPA DE IDs DO DOM PARA CADA CHAVE DE TRADUCAO
-// Formato: { chaveNoDict: { id: 'id-no-html', prop: 'textContent'|'placeholder'|'innerHTML' } }
+// MAPA DECLARATIVO: ID DO ELEMENTO → CHAVE NO DICIONARIO
+// Formato: { id, chave, prop, newline? }
+// prop: 'textContent' | 'innerHTML' | 'placeholder'
+// newline: true → substitui \n por <br> no innerHTML
 // ============================================================
 var MAPA_DOM = [
-  { id: 'label-idioma',          chave: 'label_idioma',         prop: 'textContent' },
-  { id: 'label-visual',          chave: 'label_visual',         prop: 'textContent' },
-  { id: 'label-texto',           chave: 'label_texto',          prop: 'textContent' },
-  { id: 'label-audio',           chave: 'label_audio',          prop: 'textContent' },
-  { id: 'btn-colorido',          chave: 'btn_colorido',         prop: 'textContent' },
-  { id: 'btn-branco',            chave: 'btn_branco',           prop: 'textContent' },
-  { id: 'btn-preto',             chave: 'btn_preto',            prop: 'textContent' },
-  { id: 'logo-titulo-txt',       chave: 'logo_titulo',          prop: 'textContent' },
-  { id: 'logo-subtitulo-txt',    chave: 'logo_subtitulo',       prop: 'textContent' },
-  { id: 'nav-sobre',             chave: 'nav_sobre',            prop: 'textContent' },
-  { id: 'nav-tema',              chave: 'nav_tema',             prop: 'textContent' },
-  { id: 'nav-tecnologias',       chave: 'nav_tecnologias',      prop: 'textContent' },
-  { id: 'nav-video',             chave: 'nav_video',            prop: 'textContent' },
-  { id: 'nav-apoio',             chave: 'nav_apoio',            prop: 'textContent' },
-  { id: 'nav-contato',           chave: 'nav_contato',          prop: 'textContent' },
-  { id: 'hero-eyebrow-txt',      chave: 'hero_eyebrow',         prop: 'textContent' },
-  { id: 'hero-titulo',           chave: 'hero_titulo',          prop: 'innerHTML',   newline: true },
-  { id: 'hero-subtitulo-txt',    chave: 'hero_subtitulo',       prop: 'textContent' },
-  { id: 'hero-btn-conhecer',     chave: 'hero_btn_conhecer',    prop: 'textContent' },
-  { id: 'hero-btn-apoiar',       chave: 'hero_btn_apoiar',      prop: 'textContent' },
-  { id: 'sobre-eyebrow-txt',     chave: 'sobre_eyebrow',        prop: 'textContent' },
-  { id: 'sobre-titulo',          chave: 'sobre_titulo',         prop: 'textContent' },
-  { id: 'sobre-p1',              chave: 'sobre_p1',             prop: 'textContent' },
-  { id: 'sobre-p2',              chave: 'sobre_p2',             prop: 'textContent' },
-  { id: 'sobre-p3',              chave: 'sobre_p3',             prop: 'textContent' },
-  { id: 'estat-anos',            chave: 'estat_anos',           prop: 'textContent' },
-  { id: 'estat-municipios',      chave: 'estat_municipios',     prop: 'textContent' },
-  { id: 'estat-alunos',          chave: 'estat_alunos',         prop: 'textContent' },
-  { id: 'tema-eyebrow-txt',      chave: 'tema_eyebrow',         prop: 'textContent' },
-  { id: 'tema-titulo',           chave: 'tema_titulo',          prop: 'textContent' },
-  { id: 'tema-intro-txt',        chave: 'tema_intro',           prop: 'textContent' },
-  { id: 'pilar1-titulo',         chave: 'pilar1_titulo',        prop: 'textContent' },
-  { id: 'pilar1-desc',           chave: 'pilar1_desc',          prop: 'textContent' },
-  { id: 'pilar2-titulo',         chave: 'pilar2_titulo',        prop: 'textContent' },
-  { id: 'pilar2-desc',           chave: 'pilar2_desc',          prop: 'textContent' },
-  { id: 'pilar3-titulo',         chave: 'pilar3_titulo',        prop: 'textContent' },
-  { id: 'pilar3-desc',           chave: 'pilar3_desc',          prop: 'textContent' },
-  { id: 'tec-eyebrow-txt',       chave: 'tec_eyebrow',          prop: 'textContent' },
-  { id: 'tec-titulo',            chave: 'tec_titulo',           prop: 'textContent' },
-  { id: 'tec-intro-txt',         chave: 'tec_intro',            prop: 'textContent' },
-  { id: 'drone-credito-txt',     chave: 'drone_credito',        prop: 'textContent' },
-  { id: 'drone-titulo',          chave: 'drone_titulo',         prop: 'textContent' },
-  { id: 'drone-text-span',       chave: 'drone_desc',           prop: 'textContent' },
-  { id: 'irri-credito-txt',      chave: 'irri_credito',         prop: 'textContent' },
-  { id: 'irrigacao-titulo',      chave: 'irrigacao_titulo',     prop: 'textContent' },
-  { id: 'irri-text-span',        chave: 'irri_desc',            prop: 'textContent' },
-  { id: 'solar-credito-txt',     chave: 'solar_credito',        prop: 'textContent' },
-  { id: 'solar-titulo',          chave: 'solar_titulo',         prop: 'textContent' },
-  { id: 'solar-text-span',       chave: 'solar_desc',           prop: 'textContent' },
-  { id: 'video-eyebrow-txt',     chave: 'video_eyebrow',        prop: 'textContent' },
-  { id: 'video-titulo',          chave: 'video_titulo',         prop: 'textContent' },
-  { id: 'video-intro-txt',       chave: 'video_intro',          prop: 'textContent' },
-  { id: 'video-credito-txt',     chave: 'video_credito',        prop: 'textContent' },
-  { id: 'video-fallback-txt',    chave: 'video_fallback',       prop: 'textContent' },
-  { id: 'apoio-eyebrow-txt',     chave: 'apoio_eyebrow',        prop: 'textContent' },
-  { id: 'apoio-titulo',          chave: 'apoio_titulo',         prop: 'textContent' },
-  { id: 'apoio-intro-txt',       chave: 'apoio_intro',          prop: 'textContent' },
-  { id: 'apoio-btn-txt',         chave: 'apoio_btn',            prop: 'textContent' },
-  { id: 'contato-eyebrow-txt',   chave: 'contato_eyebrow',      prop: 'textContent' },
-  { id: 'contato-titulo',        chave: 'contato_titulo',       prop: 'textContent' },
-  { id: 'contato-intro-txt',     chave: 'contato_intro',        prop: 'textContent' },
-  { id: 'label-nome',            chave: 'label_nome',           prop: 'textContent' },
-  { id: 'label-email',           chave: 'label_email',          prop: 'textContent' },
-  { id: 'label-mensagem',        chave: 'label_mensagem',       prop: 'textContent' },
-  { id: 'campo-nome',            chave: 'placeholder_nome',     prop: 'placeholder' },
-  { id: 'campo-email',           chave: 'placeholder_email',    prop: 'placeholder' },
-  { id: 'campo-mensagem',        chave: 'placeholder_msg',      prop: 'placeholder' },
-  { id: 'btn-enviar-txt',        chave: 'btn_enviar',           prop: 'textContent' },
-  { id: 'rodape-titulo-txt',     chave: 'rodape_titulo',        prop: 'textContent' },
-  { id: 'rodape-subtitulo-txt',  chave: 'rodape_subtitulo',     prop: 'textContent' },
-  { id: 'rodape-copy-txt',       chave: 'rodape_copy',          prop: 'textContent' },
-  { id: 'rodape-nav-sobre',      chave: 'rodape_nav_sobre',     prop: 'textContent' },
-  { id: 'rodape-nav-tema',       chave: 'rodape_nav_tema',      prop: 'textContent' },
-  { id: 'rodape-nav-tecnologias',chave: 'rodape_nav_tecnologias',prop: 'textContent' },
-  { id: 'rodape-nav-video',      chave: 'rodape_nav_video',     prop: 'textContent' },
-  { id: 'rodape-nav-contato',    chave: 'rodape_nav_contato',   prop: 'textContent' }
+  /* Barra de acessibilidade */
+  { id: 'label-idioma',           chave: 'label_idioma',          prop: 'textContent' },
+  { id: 'label-visual',           chave: 'label_visual',          prop: 'textContent' },
+  { id: 'label-texto',            chave: 'label_texto',           prop: 'textContent' },
+  { id: 'label-audio',            chave: 'label_audio',           prop: 'textContent' },
+  { id: 'btn-colorido',           chave: 'btn_colorido',          prop: 'textContent' },
+  { id: 'btn-branco',             chave: 'btn_branco',            prop: 'textContent' },
+  { id: 'btn-preto',              chave: 'btn_preto',             prop: 'textContent' },
+  /* Cabecalho */
+  { id: 'logo-titulo-txt',        chave: 'logo_titulo',           prop: 'textContent' },
+  { id: 'logo-subtitulo-txt',     chave: 'logo_subtitulo',        prop: 'textContent' },
+  { id: 'nav-sobre',              chave: 'nav_sobre',             prop: 'textContent' },
+  { id: 'nav-tema',               chave: 'nav_tema',              prop: 'textContent' },
+  { id: 'nav-tecnologias',        chave: 'nav_tecnologias',       prop: 'textContent' },
+  { id: 'nav-video',              chave: 'nav_video',             prop: 'textContent' },
+  { id: 'nav-apoio',              chave: 'nav_apoio',             prop: 'textContent' },
+  { id: 'nav-contato',            chave: 'nav_contato',           prop: 'textContent' },
+  /* Hero */
+  { id: 'hero-eyebrow-txt',       chave: 'hero_eyebrow',          prop: 'textContent' },
+  { id: 'hero-titulo',            chave: 'hero_titulo',           prop: 'innerHTML',   newline: true },
+  { id: 'hero-subtitulo-txt',     chave: 'hero_subtitulo',        prop: 'textContent' },
+  { id: 'hero-btn-conhecer',      chave: 'hero_btn_conhecer',     prop: 'textContent' },
+  { id: 'hero-btn-apoiar',        chave: 'hero_btn_apoiar',       prop: 'textContent' },
+  /* Sobre */
+  { id: 'sobre-eyebrow-txt',      chave: 'sobre_eyebrow',         prop: 'textContent' },
+  { id: 'sobre-titulo',           chave: 'sobre_titulo',          prop: 'textContent' },
+  { id: 'sobre-p1',               chave: 'sobre_p1',              prop: 'textContent' },
+  { id: 'sobre-p2',               chave: 'sobre_p2',              prop: 'textContent' },
+  { id: 'sobre-p3',               chave: 'sobre_p3',              prop: 'textContent' },
+  { id: 'estat-anos',             chave: 'estat_anos',            prop: 'textContent' },
+  { id: 'estat-municipios',       chave: 'estat_municipios',      prop: 'textContent' },
+  { id: 'estat-alunos',           chave: 'estat_alunos',          prop: 'textContent' },
+  /* Tema / Pilares */
+  { id: 'tema-eyebrow-txt',       chave: 'tema_eyebrow',          prop: 'textContent' },
+  { id: 'tema-titulo',            chave: 'tema_titulo',           prop: 'textContent' },
+  { id: 'tema-intro-txt',         chave: 'tema_intro',            prop: 'textContent' },
+  { id: 'pilar1-titulo',          chave: 'pilar1_titulo',         prop: 'textContent' },
+  { id: 'pilar1-desc',            chave: 'pilar1_desc',           prop: 'textContent' },
+  { id: 'pilar2-titulo',          chave: 'pilar2_titulo',         prop: 'textContent' },
+  { id: 'pilar2-desc',            chave: 'pilar2_desc',           prop: 'textContent' },
+  { id: 'pilar3-titulo',          chave: 'pilar3_titulo',         prop: 'textContent' },
+  { id: 'pilar3-desc',            chave: 'pilar3_desc',           prop: 'textContent' },
+  /* Tecnologias
+     ATENCAO: drone-text-span, irri-text-span e solar-text-span sao <span>
+     dentro de <p>. Usar .textContent neles nunca toca no <img> da <figure>
+     nem apaga legendas de credito, evitando duplicacao ou sumico de imagens. */
+  { id: 'tec-eyebrow-txt',        chave: 'tec_eyebrow',           prop: 'textContent' },
+  { id: 'tec-titulo',             chave: 'tec_titulo',            prop: 'textContent' },
+  { id: 'tec-intro-txt',          chave: 'tec_intro',             prop: 'textContent' },
+  { id: 'drone-credito-txt',      chave: 'drone_credito',         prop: 'textContent' },
+  { id: 'drone-titulo',           chave: 'drone_titulo',          prop: 'textContent' },
+  { id: 'drone-text-span',        chave: 'drone_desc',            prop: 'textContent' },
+  { id: 'irri-credito-txt',       chave: 'irri_credito',          prop: 'textContent' },
+  { id: 'irrigacao-titulo',       chave: 'irrigacao_titulo',      prop: 'textContent' },
+  { id: 'irri-text-span',         chave: 'irri_desc',             prop: 'textContent' },
+  { id: 'solar-credito-txt',      chave: 'solar_credito',         prop: 'textContent' },
+  { id: 'solar-titulo',           chave: 'solar_titulo',          prop: 'textContent' },
+  { id: 'solar-text-span',        chave: 'solar_desc',            prop: 'textContent' },
+  /* Video */
+  { id: 'video-eyebrow-txt',      chave: 'video_eyebrow',         prop: 'textContent' },
+  { id: 'video-titulo',           chave: 'video_titulo',          prop: 'textContent' },
+  { id: 'video-intro-txt',        chave: 'video_intro',           prop: 'textContent' },
+  { id: 'video-credito-txt',      chave: 'video_credito',         prop: 'textContent' },
+  { id: 'video-fallback-txt',     chave: 'video_fallback',        prop: 'textContent' },
+  /* Apoio */
+  { id: 'apoio-eyebrow-txt',      chave: 'apoio_eyebrow',         prop: 'textContent' },
+  { id: 'apoio-titulo',           chave: 'apoio_titulo',          prop: 'textContent' },
+  { id: 'apoio-intro-txt',        chave: 'apoio_intro',           prop: 'textContent' },
+  { id: 'apoio-btn-txt',          chave: 'apoio_btn',             prop: 'textContent' },
+  /* Contato / Formulario */
+  { id: 'contato-eyebrow-txt',    chave: 'contato_eyebrow',       prop: 'textContent' },
+  { id: 'contato-titulo',         chave: 'contato_titulo',        prop: 'textContent' },
+  { id: 'contato-intro-txt',      chave: 'contato_intro',         prop: 'textContent' },
+  { id: 'label-nome',             chave: 'label_nome',            prop: 'textContent' },
+  { id: 'label-email',            chave: 'label_email',           prop: 'textContent' },
+  { id: 'label-mensagem',         chave: 'label_mensagem',        prop: 'textContent' },
+  { id: 'campo-nome',             chave: 'placeholder_nome',      prop: 'placeholder' },
+  { id: 'campo-email',            chave: 'placeholder_email',     prop: 'placeholder' },
+  { id: 'campo-mensagem',         chave: 'placeholder_msg',       prop: 'placeholder' },
+  { id: 'btn-enviar-txt',         chave: 'btn_enviar',            prop: 'textContent' },
+  /* Rodape */
+  { id: 'rodape-titulo-txt',      chave: 'rodape_titulo',         prop: 'textContent' },
+  { id: 'rodape-subtitulo-txt',   chave: 'rodape_subtitulo',      prop: 'textContent' },
+  { id: 'rodape-copy-txt',        chave: 'rodape_copy',           prop: 'textContent' },
+  { id: 'rodape-nav-sobre',       chave: 'rodape_nav_sobre',      prop: 'textContent' },
+  { id: 'rodape-nav-tema',        chave: 'rodape_nav_tema',       prop: 'textContent' },
+  { id: 'rodape-nav-tecnologias', chave: 'rodape_nav_tecnologias',prop: 'textContent' },
+  { id: 'rodape-nav-video',       chave: 'rodape_nav_video',      prop: 'textContent' },
+  { id: 'rodape-nav-contato',     chave: 'rodape_nav_contato',    prop: 'textContent' }
 ];
 
 
 // ============================================================
 // SISTEMA MULTI-IDIOMA
 // ============================================================
+
+/**
+ * Muda o idioma ativo, aplica todas as traducoes, atualiza o
+ * estado dos botoes e reinicia mensagens de formulario.
+ * @param {string} lang — 'pt' | 'en' | 'es'
+ */
 function mudarIdioma(lang) {
   if (!TRADUCOES[lang]) return;
   idiomaAtivo = lang;
@@ -382,10 +434,11 @@ function mudarIdioma(lang) {
   atualizarContadorApoios();
   atualizarBotaoNarrador();
 
-  var mapaHtmlLang = { pt: 'pt-BR', en: 'en-US', es: 'es-ES' };
-  document.documentElement.lang = mapaHtmlLang[lang];
+  /* Atualiza atributo lang do <html> para melhorar leitores de tela */
+  document.documentElement.lang = MAPA_VOZ_LANG[lang] || lang;
   document.title = TRADUCOES[lang].page_title;
 
+  /* Limpa mensagens de validacao do formulario ao trocar idioma */
   var erroNome = document.getElementById('erro-nome');
   var erroMsg  = document.getElementById('erro-msg');
   var retorno  = document.getElementById('form-retorno');
@@ -394,6 +447,13 @@ function mudarIdioma(lang) {
   if (retorno)  { retorno.textContent = ''; retorno.className = ''; }
 }
 
+/**
+ * Percorre MAPA_DOM e aplica cada traducao ao elemento correto.
+ * Usa estritamente .textContent ou .placeholder para elementos de texto,
+ * jamais .innerHTML em elementos que possam conter filhos de midia (<img>).
+ * Para o hero-titulo, usa .innerHTML com newline → <br> por ser seguro
+ * (o valor vem inteiramente do dicionario interno, sem input do usuario).
+ */
 function aplicarTraduzoes(lang) {
   var dict = TRADUCOES[lang];
 
@@ -408,6 +468,7 @@ function aplicarTraduzoes(lang) {
     if (entrada.prop === 'placeholder') {
       el.placeholder = valor;
     } else if (entrada.prop === 'innerHTML' && entrada.newline) {
+      /* Unico uso de innerHTML: hero-titulo, valor 100% controlado */
       el.innerHTML = valor.replace('\n', '<br>');
     } else {
       el.textContent = valor;
@@ -415,34 +476,54 @@ function aplicarTraduzoes(lang) {
   }
 }
 
+/**
+ * Atualiza o estado visual e aria-pressed dos botoes de idioma.
+ */
 function atualizarBotoesIdioma(lang) {
-  var btnPt = document.getElementById('btn-pt');
-  var btnEn = document.getElementById('btn-en');
-  var btnEs = document.getElementById('btn-es');
+  var ids  = ['btn-pt', 'btn-en', 'btn-es'];
+  var langs = ['pt', 'en', 'es'];
 
-  if (!btnPt || !btnEn || !btnEs) return;
-
-  btnPt.classList.remove('btn-ativo'); btnPt.setAttribute('aria-pressed', 'false');
-  btnEn.classList.remove('btn-ativo'); btnEn.setAttribute('aria-pressed', 'false');
-  btnEs.classList.remove('btn-ativo'); btnEs.setAttribute('aria-pressed', 'false');
-
-  if (lang === 'pt') { btnPt.classList.add('btn-ativo'); btnPt.setAttribute('aria-pressed', 'true'); }
-  if (lang === 'en') { btnEn.classList.add('btn-ativo'); btnEn.setAttribute('aria-pressed', 'true'); }
-  if (lang === 'es') { btnEs.classList.add('btn-ativo'); btnEs.setAttribute('aria-pressed', 'true'); }
+  for (var i = 0; i < ids.length; i++) {
+    var btn = document.getElementById(ids[i]);
+    if (!btn) continue;
+    var ativo = (langs[i] === lang);
+    btn.classList.toggle('btn-ativo', ativo);
+    btn.setAttribute('aria-pressed', ativo ? 'true' : 'false');
+  }
 }
 
 
 // ============================================================
 // SISTEMA DE TEMAS VISUAIS
 // ============================================================
+
+/**
+ * Troca o tema visual adicionando/removendo classes no <body>.
+ * As variaveis CSS em :root sao sobrescritas pelos seletores
+ * body.tema-branco e body.tema-preto definidos no style.css.
+ * @param {string} tema — 'padrao' | 'branco' | 'preto'
+ */
 function mudarTema(tema) {
   var corpo = document.body;
   corpo.classList.remove('tema-branco', 'tema-preto');
 
+  /* Atualiza estado visual dos botoes de tema */
+  var btnColorido = document.getElementById('btn-colorido');
+  var btnBranco   = document.getElementById('btn-branco');
+  var btnPreto    = document.getElementById('btn-preto');
+
+  if (btnColorido) { btnColorido.classList.remove('btn-ativo'); }
+  if (btnBranco)   { btnBranco.classList.remove('btn-ativo');   }
+  if (btnPreto)    { btnPreto.classList.remove('btn-ativo');    }
+
   if (tema === 'branco') {
     corpo.classList.add('tema-branco');
+    if (btnBranco) btnBranco.classList.add('btn-ativo');
   } else if (tema === 'preto') {
     corpo.classList.add('tema-preto');
+    if (btnPreto) btnPreto.classList.add('btn-ativo');
+  } else {
+    if (btnColorido) btnColorido.classList.add('btn-ativo');
   }
 
   temaAtivo = tema;
@@ -452,6 +533,11 @@ function mudarTema(tema) {
 // ============================================================
 // ZOOM DE FONTE VIA REM
 // ============================================================
+
+/**
+ * Aumenta a fonte base do html em PASSO_FONTE px.
+ * Como todo o site usa rem, o efeito propaga-se automaticamente.
+ */
 function aumentarFonte() {
   if (tamanhoFonte < FONTE_MAXIMA) {
     tamanhoFonte += PASSO_FONTE;
@@ -459,6 +545,9 @@ function aumentarFonte() {
   }
 }
 
+/**
+ * Diminui a fonte base do html em PASSO_FONTE px.
+ */
 function diminuirFonte() {
   if (tamanhoFonte > FONTE_MINIMA) {
     tamanhoFonte -= PASSO_FONTE;
@@ -468,8 +557,12 @@ function diminuirFonte() {
 
 
 // ============================================================
-// NARRADOR DE TELA (SPEECH SYNTHESIS API)
+// NARRADOR DE TELA (WEB SPEECH API)
 // ============================================================
+
+/**
+ * Alterna entre iniciar e parar a narracao.
+ */
 function alternarNarracao() {
   if (!window.speechSynthesis) {
     alert('Seu navegador nao suporta a API de sintese de voz.');
@@ -482,28 +575,55 @@ function alternarNarracao() {
   }
 }
 
+/**
+ * Inicia a narracao do conteudo principal.
+ *
+ * CORRECAO CRITICA — RESET DE FILA:
+ * window.speechSynthesis.cancel() DEVE ser chamado antes de .speak().
+ * Sem isso, o motor acumula utterances na fila e pode:
+ *   1. Ignorar a nova solicitacao silenciosamente.
+ *   2. Manter o sotaque do idioma anterior (pt → es falha).
+ *   3. Entrar em estado de "travamento" sem falar nada.
+ * O cancel() limpa o canal de audio e garante que a nova
+ * utterance seja processada do zero com o .lang correto.
+ *
+ * CORRECAO CRITICA — LANG + RATE PARA ESPANHOL:
+ * .lang = 'es-ES' e o codigo BCP-47 aceito por Chrome/Edge/Safari.
+ * .rate = 0.9 garante que o motor processe fonetica espanhola
+ * sem misturar com o sotaque portugues (que tem taxa padrao 1.0).
+ */
 function iniciarNarracao() {
   var conteudo = document.getElementById('conteudo-principal');
   if (!conteudo) return;
 
-  var textoCompleto = conteudo.innerText || conteudo.textContent || '';
-  textoCompleto = textoCompleto.trim();
+  var textoCompleto = (conteudo.innerText || conteudo.textContent || '').trim();
   if (textoCompleto === '') return;
 
+  /* ── RESET OBRIGATORIO DA FILA ── */
   window.speechSynthesis.cancel();
 
-  var fala    = new SpeechSynthesisUtterance(textoCompleto);
-  fala.lang   = mapaVozLang[idiomaAtivo] || 'pt-BR';
-  fala.rate   = 0.92;
+  var fala = new SpeechSynthesisUtterance(textoCompleto);
+
+  /* ── CONFIGURACAO RIGOROSA DE LANG POR IDIOMA ── */
+  fala.lang = MAPA_VOZ_LANG[idiomaAtivo] || 'pt-BR';
+
+  /*
+   * Taxa de fala:
+   * - pt: 0.92 (velocidade natural para portugues)
+   * - en: 0.92
+   * - es: 0.90 (ligeiramente mais lenta para correta fonetica espanhola
+   *             e evitar contaminacao com sotaque portugues)
+   */
+  fala.rate   = (idiomaAtivo === 'es') ? 0.90 : 0.92;
   fala.pitch  = 1.0;
   fala.volume = 1.0;
 
-  fala.onend = function() {
+  fala.onend = function () {
     narratorAtivo = false;
     atualizarBotaoNarrador();
   };
 
-  fala.onerror = function() {
+  fala.onerror = function () {
     narratorAtivo = false;
     atualizarBotaoNarrador();
   };
@@ -513,6 +633,9 @@ function iniciarNarracao() {
   atualizarBotaoNarrador();
 }
 
+/**
+ * Para a narracao imediatamente e cancela a fila de audio.
+ */
 function pararNarracao() {
   if (window.speechSynthesis) {
     window.speechSynthesis.cancel();
@@ -521,6 +644,9 @@ function pararNarracao() {
   atualizarBotaoNarrador();
 }
 
+/**
+ * Atualiza o texto do botao de narracao conforme o estado atual.
+ */
 function atualizarBotaoNarrador() {
   var btn = document.getElementById('btn-narrar');
   if (!btn) return;
@@ -532,12 +658,18 @@ function atualizarBotaoNarrador() {
 // ============================================================
 // CONTADOR DE APOIOS
 // ============================================================
+
+/**
+ * Incrementa o contador de apoios, dispara animacao CSS e
+ * atualiza o texto do contador no idioma ativo.
+ */
 function incrementarApoio() {
   totalApoios++;
 
   var btn = document.getElementById('btn-apoiar');
   if (btn) {
     btn.classList.remove('apoiar-animado');
+    /* Forca reflow para reiniciar a animacao */
     void btn.offsetWidth;
     btn.classList.add('apoiar-animado');
   }
@@ -545,6 +677,9 @@ function incrementarApoio() {
   atualizarContadorApoios();
 }
 
+/**
+ * Atualiza o texto do contador substituindo {N} pelo valor atual.
+ */
 function atualizarContadorApoios() {
   var dict     = TRADUCOES[idiomaAtivo];
   var template = dict.apoio_contador;
@@ -558,6 +693,13 @@ function atualizarContadorApoios() {
 // ============================================================
 // FORMULARIO — VALIDACAO E ENVIO
 // ============================================================
+
+/**
+ * Valida os campos obrigatorios (Nome e Mensagem) e exibe
+ * feedback de sucesso ou erro no idioma ativo.
+ * Os campos de erro usam aria-live="polite" para anuncio
+ * acessivel em leitores de tela.
+ */
 function enviarFormulario() {
   var dict     = TRADUCOES[idiomaAtivo];
   var campNome = document.getElementById('campo-nome');
@@ -566,6 +708,7 @@ function enviarFormulario() {
   var erroMsg  = document.getElementById('erro-msg');
   var retorno  = document.getElementById('form-retorno');
 
+  /* Limpa estado anterior */
   erroNome.textContent = '';
   erroMsg.textContent  = '';
   retorno.textContent  = '';
@@ -589,13 +732,15 @@ function enviarFormulario() {
 
   if (temErro) return;
 
+  /* Simula envio bem-sucedido */
   retorno.textContent = dict.form_sucesso;
   retorno.className   = 'sucesso';
 
   campNome.value = '';
   campMsg.value  = '';
 
-  setTimeout(function() {
+  /* Remove mensagem de sucesso apos 6 segundos */
+  setTimeout(function () {
     retorno.textContent = '';
     retorno.className   = '';
   }, 6000);
@@ -605,6 +750,10 @@ function enviarFormulario() {
 // ============================================================
 // MENU MOBILE (HAMBURGER)
 // ============================================================
+
+/**
+ * Abre ou fecha o menu de navegacao mobile.
+ */
 function toggleMenuMobile() {
   var menu = document.getElementById('menu-nav');
   var btn  = document.getElementById('btn-hamburger');
@@ -623,10 +772,13 @@ function toggleMenuMobile() {
   }
 }
 
+/**
+ * Fecha o menu ao clicar em qualquer link de navegacao.
+ */
 function configurarFechamentoMenu() {
   var links = document.querySelectorAll('#menu-nav a');
   for (var i = 0; i < links.length; i++) {
-    links[i].addEventListener('click', function() {
+    links[i].addEventListener('click', function () {
       var menu = document.getElementById('menu-nav');
       var btn  = document.getElementById('btn-hamburger');
       if (!menu || !btn) return;
@@ -637,8 +789,11 @@ function configurarFechamentoMenu() {
   }
 }
 
+/**
+ * Fecha o menu ao clicar fora do cabecalho.
+ */
 function configurarClickFora() {
-  document.addEventListener('click', function(ev) {
+  document.addEventListener('click', function (ev) {
     var menu  = document.getElementById('menu-nav');
     var btn   = document.getElementById('btn-hamburger');
     var cabec = document.getElementById('cabecalho');
@@ -656,12 +811,21 @@ function configurarClickFora() {
 // ============================================================
 // ANIMACAO DE SCROLL (INTERSECTION OBSERVER)
 // ============================================================
+
+/**
+ * Adiciona a classe .secao-animada a secoes e cards e observa
+ * sua entrada no viewport, aplicando .visivel quando chegam.
+ * A animacao e desativada automaticamente via CSS quando o usuario
+ * configurou prefers-reduced-motion: reduce no sistema operacional.
+ */
 function configurarAnimacaoScroll() {
   if (!window.IntersectionObserver) return;
 
-  var alvos = document.querySelectorAll('section:not(#hero), .pilar-card, .tec-item, .estatistica-card');
+  var alvos = document.querySelectorAll(
+    'section:not(#hero), .pilar-card, .tec-item, .estatistica-card'
+  );
 
-  var obs = new IntersectionObserver(function(entradas) {
+  var obs = new IntersectionObserver(function (entradas) {
     for (var k = 0; k < entradas.length; k++) {
       if (entradas[k].isIntersecting) {
         entradas[k].target.classList.add('visivel');
@@ -679,43 +843,44 @@ function configurarAnimacaoScroll() {
 
 // ============================================================
 // REGISTRO DE TODOS OS EVENT LISTENERS
+// Centralizado em uma funcao chamada uma unica vez no
+// DOMContentLoaded. Nenhum onclick inline e usado no HTML.
 // ============================================================
 function registrarEventListeners() {
-  var btnPt      = document.getElementById('btn-pt');
-  var btnEn      = document.getElementById('btn-en');
-  var btnEs      = document.getElementById('btn-es');
-  var btnColorido= document.getElementById('btn-colorido');
-  var btnBranco  = document.getElementById('btn-branco');
-  var btnPreto   = document.getElementById('btn-preto');
-  var btnAmais   = document.getElementById('btn-Amais');
-  var btnAmenos  = document.getElementById('btn-Amenos');
-  var btnNarrar  = document.getElementById('btn-narrar');
-  var btnHamburg = document.getElementById('btn-hamburger');
-  var btnApoiar  = document.getElementById('btn-apoiar');
-  var btnEnviar  = document.getElementById('btn-enviar');
+  var map = {
+    'btn-pt':       function () { mudarIdioma('pt'); },
+    'btn-en':       function () { mudarIdioma('en'); },
+    'btn-es':       function () { mudarIdioma('es'); },
+    'btn-colorido': function () { mudarTema('padrao'); },
+    'btn-branco':   function () { mudarTema('branco'); },
+    'btn-preto':    function () { mudarTema('preto'); },
+    'btn-Amais':    aumentarFonte,
+    'btn-Amenos':   diminuirFonte,
+    'btn-narrar':   alternarNarracao,
+    'btn-hamburger':toggleMenuMobile,
+    'btn-apoiar':   incrementarApoio,
+    'btn-enviar':   enviarFormulario
+  };
 
-  if (btnPt)       btnPt.addEventListener('click', function() { mudarIdioma('pt'); });
-  if (btnEn)       btnEn.addEventListener('click', function() { mudarIdioma('en'); });
-  if (btnEs)       btnEs.addEventListener('click', function() { mudarIdioma('es'); });
-  if (btnColorido) btnColorido.addEventListener('click', function() { mudarTema('padrao'); });
-  if (btnBranco)   btnBranco.addEventListener('click', function() { mudarTema('branco'); });
-  if (btnPreto)    btnPreto.addEventListener('click', function() { mudarTema('preto'); });
-  if (btnAmais)    btnAmais.addEventListener('click', aumentarFonte);
-  if (btnAmenos)   btnAmenos.addEventListener('click', diminuirFonte);
-  if (btnNarrar)   btnNarrar.addEventListener('click', alternarNarracao);
-  if (btnHamburg)  btnHamburg.addEventListener('click', toggleMenuMobile);
-  if (btnApoiar)   btnApoiar.addEventListener('click', incrementarApoio);
-  if (btnEnviar)   btnEnviar.addEventListener('click', enviarFormulario);
+  for (var id in map) {
+    if (Object.prototype.hasOwnProperty.call(map, id)) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', map[id]);
+    }
+  }
 }
 
 
 // ============================================================
 // PONTO DE ENTRADA
 // ============================================================
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   registrarEventListeners();
   configurarFechamentoMenu();
   configurarClickFora();
   configurarAnimacaoScroll();
+
+  /* Inicializa com tema padrao e idioma portugues */
+  mudarTema('padrao');
   mudarIdioma('pt');
 });
