@@ -114,16 +114,14 @@ body.tema-preto {
   --cor-fundo:        #000000;
   --cor-fundo2:       #111111;
   --cor-card:         #1a1a1a;
-  --cor-texto:        #1a1a1a; /* Alterado: Letras principais agora são escuras para não sumirem */
-  --cor-texto-suave:  #333333; /* Alterado: Letras secundárias em cinza escuro legível */
-  --cor-link:         #000000; /* Alterado: Links em preto absoluto */
-  --cor-borda:        #1a1a1a; /* Alterado: Bordas escuras para dar contorno e destaque */
+  --cor-texto:        #ffee58;
+  --cor-texto-suave:  #ffe082;
+  --cor-link:         #ffee58;
+  --cor-borda:        #ffee58;
   --cor-barra:        #000000;
   --sombra:           0 4px 20px rgba(255,238,88,0.2);
   --sombra-card:      0 2px 12px rgba(255,238,88,0.15);
 }
-
-
 
 body.tema-preto #barra-acessibilidade {
   border-bottom: 1px solid #ffee58;
