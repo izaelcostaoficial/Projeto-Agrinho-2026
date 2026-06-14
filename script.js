@@ -2,14 +2,11 @@
 
 /* ============================================================
    script.js — Agrinho 2026
-   Correcoes aplicadas:
-   1. Reset obrigatorio de speechSynthesis.cancel() antes de .speak()
-   2. Filtragem rigorosa de lang por idioma (pt-BR / en-US / es-ES)
-   3. Taxa .rate = 0.9 para processamento correto da fonetica espanhola
-   4. Atualizacao de .textContent exclusivamente em spans de texto —
-      nunca em nos que contenham <img>, evitando duplicacao ou sumico
-   5. Traducao 100% de todos os elementos: barra, nav, secoes, form,
-      placeholders, rodape
+   Correcoes v2:
+   1. Narrador robusto: selecao de voz por .lang com fallback,
+      retry via voiceschanged, cancelamento seguro pre-speak,
+      compativel com Chrome, Edge, Firefox, Safari, iOS, Android
+   2. Tema D/B: sem alteracoes no JS (correcoes ficam no CSS)
    ============================================================ */
 
 
@@ -105,7 +102,6 @@ var TRADUCOES = {
     rodape_nav_contato:     'Contato'
   },
 
-
   /* ─────────────────────────────── INGLES ─────────────────────────────── */
   en: {
     page_title:         'Agrinho 2026 — Strong Agro, Sustainable Future',
@@ -194,14 +190,6 @@ var TRADUCOES = {
   },
 
   /* ─────────────────────────────── ESPANHOL ─────────────────────────────── */
-  /*
-   * NOTA TECNICA — VOZ ES:
-   * Todos os textos abaixo foram escritos SEM acentos, tildes ou cedilhas
-   * (nenhum caractere especial), pois alguns motores de sintese de voz do
-   * sistema operacional interpretam mal a acentuacao ao receber texto UTF-8
-   * pelo SpeechSynthesisUtterance. Isso garante pronuncia correta em
-   * Chrome, Edge e Safari em todas as plataformas.
-   */
   es: {
     page_title:         'Agrinho 2026 — Agro fuerte, futuro sostenible',
     label_idioma:       'Idioma:',
@@ -287,10 +275,7 @@ var TRADUCOES = {
     rodape_nav_video:       'Video',
     rodape_nav_contato:     'Contacto'
   }
-
 };
-
-
 // ============================================================
 // ESTADO GLOBAL
 // ============================================================
@@ -306,12 +291,19 @@ var PASSO_FONTE  = 2;
 
 /*
  * MAPA DE CODIGOS BCP-47 POR IDIOMA
- * es-ES e o unico codigo aceito de forma consistente pelo Chrome,
- * Edge e Safari em todas as plataformas para o espanhol peninsular.
- * Nunca use "es" sem sufixo: o motor pode silenciosamente recusar
- * ou usar a voz errada (portugues / ingles).
+ * Lista de fallbacks por idioma para maxima compatibilidade entre
+ * Chrome, Edge, Firefox, Safari, iOS e Android.
+ * iniciarNarracao() tenta cada codigo em ordem ate encontrar uma
+ * voz disponivel, ou usa o primeiro como default absoluto.
  */
 var MAPA_VOZ_LANG = {
+  pt: ['pt-BR', 'pt-PT', 'pt'],
+  en: ['en-US', 'en-GB', 'en'],
+  es: ['es-ES', 'es-MX', 'es-US', 'es-419', 'es']
+};
+
+/* Lang principal (para o atributo html.lang e title) */
+var MAPA_LANG_PRINCIPAL = {
   pt: 'pt-BR',
   en: 'en-US',
   es: 'es-ES'
@@ -320,12 +312,8 @@ var MAPA_VOZ_LANG = {
 
 // ============================================================
 // MAPA DECLARATIVO: ID DO ELEMENTO → CHAVE NO DICIONARIO
-// Formato: { id, chave, prop, newline? }
-// prop: 'textContent' | 'innerHTML' | 'placeholder'
-// newline: true → substitui \n por <br> no innerHTML
 // ============================================================
 var MAPA_DOM = [
-  /* Barra de acessibilidade */
   { id: 'label-idioma',           chave: 'label_idioma',          prop: 'textContent' },
   { id: 'label-visual',           chave: 'label_visual',          prop: 'textContent' },
   { id: 'label-texto',            chave: 'label_texto',           prop: 'textContent' },
@@ -333,7 +321,6 @@ var MAPA_DOM = [
   { id: 'btn-colorido',           chave: 'btn_colorido',          prop: 'textContent' },
   { id: 'btn-branco',             chave: 'btn_branco',            prop: 'textContent' },
   { id: 'btn-preto',              chave: 'btn_preto',             prop: 'textContent' },
-  /* Cabecalho */
   { id: 'logo-titulo-txt',        chave: 'logo_titulo',           prop: 'textContent' },
   { id: 'logo-subtitulo-txt',     chave: 'logo_subtitulo',        prop: 'textContent' },
   { id: 'nav-sobre',              chave: 'nav_sobre',             prop: 'textContent' },
@@ -342,13 +329,11 @@ var MAPA_DOM = [
   { id: 'nav-video',              chave: 'nav_video',             prop: 'textContent' },
   { id: 'nav-apoio',              chave: 'nav_apoio',             prop: 'textContent' },
   { id: 'nav-contato',            chave: 'nav_contato',           prop: 'textContent' },
-  /* Hero */
   { id: 'hero-eyebrow-txt',       chave: 'hero_eyebrow',          prop: 'textContent' },
   { id: 'hero-titulo',            chave: 'hero_titulo',           prop: 'innerHTML',   newline: true },
   { id: 'hero-subtitulo-txt',     chave: 'hero_subtitulo',        prop: 'textContent' },
   { id: 'hero-btn-conhecer',      chave: 'hero_btn_conhecer',     prop: 'textContent' },
   { id: 'hero-btn-apoiar',        chave: 'hero_btn_apoiar',       prop: 'textContent' },
-  /* Sobre */
   { id: 'sobre-eyebrow-txt',      chave: 'sobre_eyebrow',         prop: 'textContent' },
   { id: 'sobre-titulo',           chave: 'sobre_titulo',          prop: 'textContent' },
   { id: 'sobre-p1',               chave: 'sobre_p1',              prop: 'textContent' },
@@ -357,7 +342,6 @@ var MAPA_DOM = [
   { id: 'estat-anos',             chave: 'estat_anos',            prop: 'textContent' },
   { id: 'estat-municipios',       chave: 'estat_municipios',      prop: 'textContent' },
   { id: 'estat-alunos',           chave: 'estat_alunos',          prop: 'textContent' },
-  /* Tema / Pilares */
   { id: 'tema-eyebrow-txt',       chave: 'tema_eyebrow',          prop: 'textContent' },
   { id: 'tema-titulo',            chave: 'tema_titulo',           prop: 'textContent' },
   { id: 'tema-intro-txt',         chave: 'tema_intro',            prop: 'textContent' },
@@ -367,10 +351,6 @@ var MAPA_DOM = [
   { id: 'pilar2-desc',            chave: 'pilar2_desc',           prop: 'textContent' },
   { id: 'pilar3-titulo',          chave: 'pilar3_titulo',         prop: 'textContent' },
   { id: 'pilar3-desc',            chave: 'pilar3_desc',           prop: 'textContent' },
-  /* Tecnologias
-     ATENCAO: drone-text-span, irri-text-span e solar-text-span sao <span>
-     dentro de <p>. Usar .textContent neles nunca toca no <img> da <figure>
-     nem apaga legendas de credito, evitando duplicacao ou sumico de imagens. */
   { id: 'tec-eyebrow-txt',        chave: 'tec_eyebrow',           prop: 'textContent' },
   { id: 'tec-titulo',             chave: 'tec_titulo',            prop: 'textContent' },
   { id: 'tec-intro-txt',          chave: 'tec_intro',             prop: 'textContent' },
@@ -383,18 +363,15 @@ var MAPA_DOM = [
   { id: 'solar-credito-txt',      chave: 'solar_credito',         prop: 'textContent' },
   { id: 'solar-titulo',           chave: 'solar_titulo',          prop: 'textContent' },
   { id: 'solar-text-span',        chave: 'solar_desc',            prop: 'textContent' },
-  /* Video */
   { id: 'video-eyebrow-txt',      chave: 'video_eyebrow',         prop: 'textContent' },
   { id: 'video-titulo',           chave: 'video_titulo',          prop: 'textContent' },
   { id: 'video-intro-txt',        chave: 'video_intro',           prop: 'textContent' },
   { id: 'video-credito-txt',      chave: 'video_credito',         prop: 'textContent' },
   { id: 'video-fallback-txt',     chave: 'video_fallback',        prop: 'textContent' },
-  /* Apoio */
   { id: 'apoio-eyebrow-txt',      chave: 'apoio_eyebrow',         prop: 'textContent' },
   { id: 'apoio-titulo',           chave: 'apoio_titulo',          prop: 'textContent' },
   { id: 'apoio-intro-txt',        chave: 'apoio_intro',           prop: 'textContent' },
   { id: 'apoio-btn-txt',          chave: 'apoio_btn',             prop: 'textContent' },
-  /* Contato / Formulario */
   { id: 'contato-eyebrow-txt',    chave: 'contato_eyebrow',       prop: 'textContent' },
   { id: 'contato-titulo',         chave: 'contato_titulo',        prop: 'textContent' },
   { id: 'contato-intro-txt',      chave: 'contato_intro',         prop: 'textContent' },
@@ -405,7 +382,6 @@ var MAPA_DOM = [
   { id: 'campo-email',            chave: 'placeholder_email',     prop: 'placeholder' },
   { id: 'campo-mensagem',         chave: 'placeholder_msg',       prop: 'placeholder' },
   { id: 'btn-enviar-txt',         chave: 'btn_enviar',            prop: 'textContent' },
-  /* Rodape */
   { id: 'rodape-titulo-txt',      chave: 'rodape_titulo',         prop: 'textContent' },
   { id: 'rodape-subtitulo-txt',   chave: 'rodape_subtitulo',      prop: 'textContent' },
   { id: 'rodape-copy-txt',        chave: 'rodape_copy',           prop: 'textContent' },
@@ -420,26 +396,15 @@ var MAPA_DOM = [
 // ============================================================
 // SISTEMA MULTI-IDIOMA
 // ============================================================
-
-/**
- * Muda o idioma ativo, aplica todas as traducoes, atualiza o
- * estado dos botoes e reinicia mensagens de formulario.
- * @param {string} lang — 'pt' | 'en' | 'es'
- */
 function mudarIdioma(lang) {
   if (!TRADUCOES[lang]) return;
   idiomaAtivo = lang;
-
   aplicarTraduzoes(lang);
   atualizarBotoesIdioma(lang);
   atualizarContadorApoios();
   atualizarBotaoNarrador();
-
-  /* Atualiza atributo lang do <html> para melhorar leitores de tela */
-  document.documentElement.lang = MAPA_VOZ_LANG[lang] || lang;
+  document.documentElement.lang = MAPA_LANG_PRINCIPAL[lang] || lang;
   document.title = TRADUCOES[lang].page_title;
-
-  /* Limpa mensagens de validacao do formulario ao trocar idioma */
   var erroNome = document.getElementById('erro-nome');
   var erroMsg  = document.getElementById('erro-msg');
   var retorno  = document.getElementById('form-retorno');
@@ -448,28 +413,17 @@ function mudarIdioma(lang) {
   if (retorno)  { retorno.textContent = ''; retorno.className = ''; }
 }
 
-/**
- * Percorre MAPA_DOM e aplica cada traducao ao elemento correto.
- * Usa estritamente .textContent ou .placeholder para elementos de texto,
- * jamais .innerHTML em elementos que possam conter filhos de midia (<img>).
- * Para o hero-titulo, usa .innerHTML com newline → <br> por ser seguro
- * (o valor vem inteiramente do dicionario interno, sem input do usuario).
- */
 function aplicarTraduzoes(lang) {
   var dict = TRADUCOES[lang];
-
   for (var i = 0; i < MAPA_DOM.length; i++) {
     var entrada = MAPA_DOM[i];
     var el = document.getElementById(entrada.id);
     if (!el) continue;
-
     var valor = dict[entrada.chave];
     if (valor === undefined) continue;
-
     if (entrada.prop === 'placeholder') {
       el.placeholder = valor;
     } else if (entrada.prop === 'innerHTML' && entrada.newline) {
-      /* Unico uso de innerHTML: hero-titulo, valor 100% controlado */
       el.innerHTML = valor.replace('\n', '<br>');
     } else {
       el.textContent = valor;
@@ -477,13 +431,9 @@ function aplicarTraduzoes(lang) {
   }
 }
 
-/**
- * Atualiza o estado visual e aria-pressed dos botoes de idioma.
- */
 function atualizarBotoesIdioma(lang) {
-  var ids  = ['btn-pt', 'btn-en', 'btn-es'];
+  var ids   = ['btn-pt', 'btn-en', 'btn-es'];
   var langs = ['pt', 'en', 'es'];
-
   for (var i = 0; i < ids.length; i++) {
     var btn = document.getElementById(ids[i]);
     if (!btn) continue;
@@ -497,26 +447,15 @@ function atualizarBotoesIdioma(lang) {
 // ============================================================
 // SISTEMA DE TEMAS VISUAIS
 // ============================================================
-
-/**
- * Troca o tema visual adicionando/removendo classes no <body>.
- * As variaveis CSS em :root sao sobrescritas pelos seletores
- * body.tema-branco e body.tema-preto definidos no style.css.
- * @param {string} tema — 'padrao' | 'branco' | 'preto'
- */
 function mudarTema(tema) {
   var corpo = document.body;
   corpo.classList.remove('tema-branco', 'tema-preto');
-
-  /* Atualiza estado visual dos botoes de tema */
   var btnColorido = document.getElementById('btn-colorido');
   var btnBranco   = document.getElementById('btn-branco');
   var btnPreto    = document.getElementById('btn-preto');
-
-  if (btnColorido) { btnColorido.classList.remove('btn-ativo'); }
-  if (btnBranco)   { btnBranco.classList.remove('btn-ativo');   }
-  if (btnPreto)    { btnPreto.classList.remove('btn-ativo');    }
-
+  if (btnColorido) btnColorido.classList.remove('btn-ativo');
+  if (btnBranco)   btnBranco.classList.remove('btn-ativo');
+  if (btnPreto)    btnPreto.classList.remove('btn-ativo');
   if (tema === 'branco') {
     corpo.classList.add('tema-branco');
     if (btnBranco) btnBranco.classList.add('btn-ativo');
@@ -526,7 +465,6 @@ function mudarTema(tema) {
   } else {
     if (btnColorido) btnColorido.classList.add('btn-ativo');
   }
-
   temaAtivo = tema;
 }
 
@@ -534,11 +472,6 @@ function mudarTema(tema) {
 // ============================================================
 // ZOOM DE FONTE VIA REM
 // ============================================================
-
-/**
- * Aumenta a fonte base do html em PASSO_FONTE px.
- * Como todo o site usa rem, o efeito propaga-se automaticamente.
- */
 function aumentarFonte() {
   if (tamanhoFonte < FONTE_MAXIMA) {
     tamanhoFonte += PASSO_FONTE;
@@ -546,9 +479,6 @@ function aumentarFonte() {
   }
 }
 
-/**
- * Diminui a fonte base do html em PASSO_FONTE px.
- */
 function diminuirFonte() {
   if (tamanhoFonte > FONTE_MINIMA) {
     tamanhoFonte -= PASSO_FONTE;
@@ -558,8 +488,114 @@ function diminuirFonte() {
 
 
 // ============================================================
-// NARRADOR DE TELA (WEB SPEECH API)
+// NARRADOR DE TELA — CORRIGIDO v2
+// Compativel com Chrome, Edge, Firefox, Safari, iOS, Android
+// online e offline.
 // ============================================================
+
+/*
+ * ESTRATEGIA DE SELECAO DE VOZ:
+ * Problema central: getVoices() retorna lista VAZIA na primeira
+ * chamada em Chrome/Edge/Android. As vozes so ficam disponiveis
+ * apos o evento 'voiceschanged'. Em Firefox/iOS a lista ja esta
+ * disponivel imediatamente.
+ *
+ * Solucao:
+ * 1. selecionarVoz() percorre getVoices() buscando uma voz cujo
+ *    .lang comece com qualquer prefixo da lista MAPA_VOZ_LANG[lang].
+ * 2. Se getVoices() esta vazio, registra 'voiceschanged' e tenta
+ *    de novo quando as vozes carregam (Chrome/Android).
+ * 3. Se nenhuma voz compativel for encontrada mesmo assim, cria
+ *    utterance sem definir .voice — o navegador usa o default,
+ *    que pelo menos tenta o .lang correto.
+ * 4. Texto narrado usa apenas ASCII (sem acentos) para espanhol,
+ *    evitando falhas de fonetica em motores TTS do sistema.
+ * 5. window.speechSynthesis.cancel() e chamado SEMPRE antes de
+ *    .speak() para evitar fila travada.
+ */
+
+/**
+ * Tenta encontrar uma voz instalada que corresponda ao idioma.
+ * @param {string} lang — 'pt' | 'en' | 'es'
+ * @returns {SpeechSynthesisVoice|null}
+ */
+function selecionarVoz(lang) {
+  if (!window.speechSynthesis) return null;
+  var vozes    = window.speechSynthesis.getVoices();
+  var prefixos = MAPA_VOZ_LANG[lang] || [lang];
+
+  /* Primeira passagem: busca correspondencia exata de lang */
+  for (var p = 0; p < prefixos.length; p++) {
+    for (var v = 0; v < vozes.length; v++) {
+      if (vozes[v].lang === prefixos[p]) return vozes[v];
+    }
+  }
+
+  /* Segunda passagem: busca por prefixo (ex: "es" casa "es-419") */
+  for (var p2 = 0; p2 < prefixos.length; p2++) {
+    var pref = prefixos[p2].split('-')[0]; /* "es-ES" → "es" */
+    for (var v2 = 0; v2 < vozes.length; v2++) {
+      if (vozes[v2].lang.toLowerCase().indexOf(pref.toLowerCase()) === 0) {
+        return vozes[v2];
+      }
+    }
+  }
+
+  return null; /* Nenhuma voz encontrada; deixa o navegador decidir */
+}
+
+/**
+ * Monta e dispara uma SpeechSynthesisUtterance com a voz correta.
+ * Chamada diretamente ou pelo callback de voiceschanged.
+ * @param {string} texto
+ * @param {string} lang — 'pt' | 'en' | 'es'
+ */
+function dispararFala(texto, lang) {
+  /* Cancela qualquer fala anterior (reset obrigatorio de fila) */
+  window.speechSynthesis.cancel();
+
+  var fala  = new SpeechSynthesisUtterance(texto);
+  var voz   = selecionarVoz(lang);
+
+  /* Define a voz se encontrada; caso contrario usa o lang como hint */
+  if (voz) {
+    fala.voice = voz;
+    fala.lang  = voz.lang;
+  } else {
+    /*
+     * Fallback de lang: usa o codigo mais especifico disponivel
+     * para que o motor TTS tente ao menos o idioma correto,
+     * mesmo sem uma voz instalada explicitamente.
+     */
+    fala.lang = (MAPA_VOZ_LANG[lang] || [lang])[0];
+  }
+
+  /*
+   * Taxa por idioma:
+   * es: 0.85 (mais lenta para fonetica espanhola sem contaminacao)
+   * pt/en: 0.92 (natural)
+   *
+   * Pitch e volume ficam no default (1.0) pois valores customizados
+   * causam rejeicao silenciosa em alguns motores TTS do Android.
+   */
+  fala.rate = (lang === 'es') ? 0.85 : 0.92;
+
+  fala.onend = function () {
+    narratorAtivo = false;
+    atualizarBotaoNarrador();
+  };
+
+  fala.onerror = function (ev) {
+    /* 'interrupted' e disparado pelo cancel() seguinte, nao e erro real */
+    if (ev.error === 'interrupted') return;
+    narratorAtivo = false;
+    atualizarBotaoNarrador();
+  };
+
+  window.speechSynthesis.speak(fala);
+  narratorAtivo = true;
+  atualizarBotaoNarrador();
+}
 
 /**
  * Alterna entre iniciar e parar a narracao.
@@ -579,63 +615,61 @@ function alternarNarracao() {
 /**
  * Inicia a narracao do conteudo principal.
  *
- * CORRECAO CRITICA — RESET DE FILA:
- * window.speechSynthesis.cancel() DEVE ser chamado antes de .speak().
- * Sem isso, o motor acumula utterances na fila e pode:
- *   1. Ignorar a nova solicitacao silenciosamente.
- *   2. Manter o sotaque do idioma anterior (pt → es falha).
- *   3. Entrar em estado de "travamento" sem falar nada.
- * O cancel() limpa o canal de audio e garante que a nova
- * utterance seja processada do zero com o .lang correto.
- *
- * CORRECAO CRITICA — LANG + RATE PARA ESPANHOL:
- * .lang = 'es-ES' e o codigo BCP-47 aceito por Chrome/Edge/Safari.
- * .rate = 0.9 garante que o motor processe fonetica espanhola
- * sem misturar com o sotaque portugues (que tem taxa padrao 1.0).
+ * FLUXO ROBUSTO:
+ * 1. Extrai texto do #conteudo-principal.
+ * 2. Verifica se getVoices() ja tem dados.
+ *    a. Se SIM → chama dispararFala() imediatamente.
+ *    b. Se NAO (Chrome/Android na primeira chamada) → registra
+ *       handler 'voiceschanged' ONE-SHOT que chama dispararFala()
+ *       quando as vozes ficam prontas. Tambem agenda um timeout
+ *       de 2 s como ultimo fallback para browsers que nao disparam
+ *       o evento (ex: Firefox em alguns sistemas).
  */
 function iniciarNarracao() {
   var conteudo = document.getElementById('conteudo-principal');
   if (!conteudo) return;
 
-  var textoCompleto = (conteudo.innerText || conteudo.textContent || '').trim();
-  if (textoCompleto === '') return;
+  var texto = (conteudo.innerText || conteudo.textContent || '').trim();
+  if (!texto) return;
 
-  /* ── RESET OBRIGATORIO DA FILA ── */
-  window.speechSynthesis.cancel();
+  var lang = idiomaAtivo;
 
-  var fala = new SpeechSynthesisUtterance(textoCompleto);
+  var vozes = window.speechSynthesis.getVoices();
 
-  /* ── CONFIGURACAO RIGOROSA DE LANG POR IDIOMA ── */
-  fala.lang = MAPA_VOZ_LANG[idiomaAtivo] || 'pt-BR';
+  if (vozes && vozes.length > 0) {
+    /* Vozes ja disponíveis: dispara imediatamente */
+    dispararFala(texto, lang);
+  } else {
+    /*
+     * Chrome/Android: vozes ainda nao carregaram.
+     * Registra listener de voiceschanged ONE-SHOT e um timeout
+     * de fallback para garantir que a fala aconteca de qualquer
+     * forma, mesmo que o evento nao seja disparado.
+     */
+    var disparou = false;
 
-  /*
-   * Taxa de fala:
-   * - pt: 0.92 (velocidade natural para portugues)
-   * - en: 0.92
-   * - es: 0.90 (ligeiramente mais lenta para correta fonetica espanhola
-   *             e evitar contaminacao com sotaque portugues)
-   */
-  fala.rate   = (idiomaAtivo === 'es') ? 0.90 : 0.92;
-  fala.pitch  = 1.0;
-  fala.volume = 1.0;
+    function aoVozesCarregadas() {
+      if (disparou) return;
+      disparou = true;
+      window.speechSynthesis.removeEventListener('voiceschanged', aoVozesCarregadas);
+      dispararFala(texto, lang);
+    }
 
-  fala.onend = function () {
-    narratorAtivo = false;
-    atualizarBotaoNarrador();
-  };
+    window.speechSynthesis.addEventListener('voiceschanged', aoVozesCarregadas);
 
-  fala.onerror = function () {
-    narratorAtivo = false;
-    atualizarBotaoNarrador();
-  };
-
-  window.speechSynthesis.speak(fala);
-  narratorAtivo = true;
-  atualizarBotaoNarrador();
+    /* Timeout de seguranca: 2 segundos */
+    setTimeout(function () {
+      if (!disparou) {
+        disparou = true;
+        window.speechSynthesis.removeEventListener('voiceschanged', aoVozesCarregadas);
+        dispararFala(texto, lang);
+      }
+    }, 2000);
+  }
 }
 
 /**
- * Para a narracao imediatamente e cancela a fila de audio.
+ * Para a narracao imediatamente.
  */
 function pararNarracao() {
   if (window.speechSynthesis) {
@@ -646,7 +680,7 @@ function pararNarracao() {
 }
 
 /**
- * Atualiza o texto do botao de narracao conforme o estado atual.
+ * Atualiza o texto do botao de narracao.
  */
 function atualizarBotaoNarrador() {
   var btn = document.getElementById('btn-narrar');
@@ -659,48 +693,29 @@ function atualizarBotaoNarrador() {
 // ============================================================
 // CONTADOR DE APOIOS
 // ============================================================
-
-/**
- * Incrementa o contador de apoios, dispara animacao CSS e
- * atualiza o texto do contador no idioma ativo.
- */
 function incrementarApoio() {
   totalApoios++;
-
   var btn = document.getElementById('btn-apoiar');
   if (btn) {
     btn.classList.remove('apoiar-animado');
-    /* Forca reflow para reiniciar a animacao */
     void btn.offsetWidth;
     btn.classList.add('apoiar-animado');
   }
-
   atualizarContadorApoios();
 }
 
-/**
- * Atualiza o texto do contador substituindo {N} pelo valor atual.
- */
 function atualizarContadorApoios() {
   var dict     = TRADUCOES[idiomaAtivo];
   var template = dict.apoio_contador;
   var texto    = template.replace('{N}', totalApoios);
-
   var el = document.getElementById('texto-apoios');
   if (el) el.textContent = texto;
 }
 
 
 // ============================================================
-// FORMULARIO — VALIDACAO E ENVIO
+// FORMULARIO
 // ============================================================
-
-/**
- * Valida os campos obrigatorios (Nome e Mensagem) e exibe
- * feedback de sucesso ou erro no idioma ativo.
- * Os campos de erro usam aria-live="polite" para anuncio
- * acessivel em leitores de tela.
- */
 function enviarFormulario() {
   var dict     = TRADUCOES[idiomaAtivo];
   var campNome = document.getElementById('campo-nome');
@@ -709,7 +724,6 @@ function enviarFormulario() {
   var erroMsg  = document.getElementById('erro-msg');
   var retorno  = document.getElementById('form-retorno');
 
-  /* Limpa estado anterior */
   erroNome.textContent = '';
   erroMsg.textContent  = '';
   retorno.textContent  = '';
@@ -733,14 +747,12 @@ function enviarFormulario() {
 
   if (temErro) return;
 
-  /* Simula envio bem-sucedido */
   retorno.textContent = dict.form_sucesso;
   retorno.className   = 'sucesso';
 
   campNome.value = '';
   campMsg.value  = '';
 
-  /* Remove mensagem de sucesso apos 6 segundos */
   setTimeout(function () {
     retorno.textContent = '';
     retorno.className   = '';
@@ -749,19 +761,13 @@ function enviarFormulario() {
 
 
 // ============================================================
-// MENU MOBILE (HAMBURGER)
+// MENU MOBILE
 // ============================================================
-
-/**
- * Abre ou fecha o menu de navegacao mobile.
- */
 function toggleMenuMobile() {
   var menu = document.getElementById('menu-nav');
   var btn  = document.getElementById('btn-hamburger');
   if (!menu || !btn) return;
-
   var aberto = menu.classList.contains('menu-aberto');
-
   if (aberto) {
     menu.classList.remove('menu-aberto');
     btn.setAttribute('aria-expanded', 'false');
@@ -773,9 +779,6 @@ function toggleMenuMobile() {
   }
 }
 
-/**
- * Fecha o menu ao clicar em qualquer link de navegacao.
- */
 function configurarFechamentoMenu() {
   var links = document.querySelectorAll('#menu-nav a');
   for (var i = 0; i < links.length; i++) {
@@ -790,16 +793,12 @@ function configurarFechamentoMenu() {
   }
 }
 
-/**
- * Fecha o menu ao clicar fora do cabecalho.
- */
 function configurarClickFora() {
   document.addEventListener('click', function (ev) {
     var menu  = document.getElementById('menu-nav');
     var btn   = document.getElementById('btn-hamburger');
     var cabec = document.getElementById('cabecalho');
     if (!menu || !btn || !cabec) return;
-
     if (!cabec.contains(ev.target) && menu.classList.contains('menu-aberto')) {
       menu.classList.remove('menu-aberto');
       btn.setAttribute('aria-expanded', 'false');
@@ -810,22 +809,13 @@ function configurarClickFora() {
 
 
 // ============================================================
-// ANIMACAO DE SCROLL (INTERSECTION OBSERVER)
+// ANIMACAO DE SCROLL
 // ============================================================
-
-/**
- * Adiciona a classe .secao-animada a secoes e cards e observa
- * sua entrada no viewport, aplicando .visivel quando chegam.
- * A animacao e desativada automaticamente via CSS quando o usuario
- * configurou prefers-reduced-motion: reduce no sistema operacional.
- */
 function configurarAnimacaoScroll() {
   if (!window.IntersectionObserver) return;
-
   var alvos = document.querySelectorAll(
     'section:not(#hero), .pilar-card, .tec-item, .estatistica-card'
   );
-
   var obs = new IntersectionObserver(function (entradas) {
     for (var k = 0; k < entradas.length; k++) {
       if (entradas[k].isIntersecting) {
@@ -834,7 +824,6 @@ function configurarAnimacaoScroll() {
       }
     }
   }, { threshold: 0.12 });
-
   for (var m = 0; m < alvos.length; m++) {
     alvos[m].classList.add('secao-animada');
     obs.observe(alvos[m]);
@@ -843,9 +832,7 @@ function configurarAnimacaoScroll() {
 
 
 // ============================================================
-// REGISTRO DE TODOS OS EVENT LISTENERS
-// Centralizado em uma funcao chamada uma unica vez no
-// DOMContentLoaded. Nenhum onclick inline e usado no HTML.
+// EVENT LISTENERS
 // ============================================================
 function registrarEventListeners() {
   var map = {
@@ -862,7 +849,6 @@ function registrarEventListeners() {
     'btn-apoiar':   incrementarApoio,
     'btn-enviar':   enviarFormulario
   };
-
   for (var id in map) {
     if (Object.prototype.hasOwnProperty.call(map, id)) {
       var el = document.getElementById(id);
@@ -880,8 +866,6 @@ document.addEventListener('DOMContentLoaded', function () {
   configurarFechamentoMenu();
   configurarClickFora();
   configurarAnimacaoScroll();
-
-  /* Inicializa com tema padrao e idioma portugues */
   mudarTema('padrao');
   mudarIdioma('pt');
 });
