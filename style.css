@@ -122,7 +122,6 @@ body.tema-preto {
   --sombra-card:      0 2px 12px rgba(255,238,88,0.15);
 }
 
-
 body.tema-preto #barra-acessibilidade {
   border-bottom: 1px solid #ffee58;
 }
@@ -201,11 +200,11 @@ body.tema-preto .hero-eyebrow {
 }
 
 body.tema-preto #hero h1 {
-  color: #ffee58;
+  color: #ffffff; /* AJUSTADO: Mudou de amarelo para branco para destacar se o fundo falhar */
 }
 
 body.tema-preto .hero-subtitulo {
-  color: rgba(255,238,88,0.85);
+  color: #ffe082; /* AJUSTADO: Mudou para amarelo suave para garantir leitura */
 }
 
 body.tema-preto .btn-primario {
@@ -216,6 +215,17 @@ body.tema-preto .btn-primario {
 body.tema-preto .btn-secundario {
   border-color: #ffee58;
   color: #ffee58;
+  background: transparent; /* AJUSTADO: Garante que o botão direito fique vazado e legível */
+}
+
+/* ── REGRAS DE CORREÇÃO FORÇADA PARA O BANNER CENTRAL ── */
+body.tema-preto #hero {
+  background: #000000 !important; /* Força o fundo amarelo do banner a virar PRETO */
+  background-image: none !important; /* Remove gradientes amarelos que possam estar por cima */
+}
+
+body.tema-preto #hero * {
+  text-shadow: none !important; /* Remove sombras amarelas antigas que borravam a letra */
 }
 
 
