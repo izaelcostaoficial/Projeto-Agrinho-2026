@@ -103,25 +103,25 @@ body.tema-branco #rodape {
   color: #eeeeee;
 }
 
-
 /* ── 4. TEMA ACESSIVEL DB (alto contraste escuro) ── */
 body.tema-preto {
   --cor-primaria:     #ffee58;
   --cor-primaria-esc: #fdd835;
   --cor-secundaria:   #ffee58;
-  --cor-destaque:     #000000;
+  --cor-destaque:     #ffee58;
   --cor-destaque2:    #ffc107;
-  --cor-fundo:        #000000;
-  --cor-fundo2:       #111111;
-  --cor-card:         #1a1a1a;
-  --cor-texto:        #ffee58;
-  --cor-texto-suave:  #ffe082;
-  --cor-link:         #ffee58;
-  --cor-borda:        #ffee58;
+  --cor-fundo:        #000000; /* Fundo permanece preto absoluto */
+  --cor-fundo2:       #111111; /* Segundo fundo permanece cinza quase preto */
+  --cor-card:         #1a1a1a; /* Cards permanecem em cinza escuro */
+  --cor-texto:        #ffffff; /* CORRIGIDO: Letras principais em Branco para leitura perfeita no preto */
+  --cor-texto-suave:  #ffe082; /* CORRIGIDO: Letras secundárias em Amarelo Suave */
+  --cor-link:         #ffee58; /* CORRIGIDO: Links em Amarelo Vivo de alto destaque */
+  --cor-borda:        #ffee58; /* CORRIGIDO: Bordas em Amarelo para contornar elementos no escuro */
   --cor-barra:        #000000;
   --sombra:           0 4px 20px rgba(255,238,88,0.2);
   --sombra-card:      0 2px 12px rgba(255,238,88,0.15);
 }
+
 
 body.tema-preto #barra-acessibilidade {
   border-bottom: 1px solid #ffee58;
