@@ -98,6 +98,12 @@ body.tema-branco {
   --sombra-card:      0 2px 12px rgba(0,0,0,0.12);
 }
 
+body.tema-branco #rodape {
+  background: #1a1a1a;
+  color: #eeeeee;
+}
+
+
 /* ── 4. TEMA ACESSIVEL DB (alto contraste escuro) ── */
 body.tema-preto {
   --cor-primaria:     #ffee58;
@@ -185,6 +191,30 @@ body.tema-preto .rodape-links a {
 }
 
 body.tema-preto .rodape-marca strong {
+  color: #ffee58;
+}
+
+body.tema-preto .hero-eyebrow {
+  background: rgba(255,238,88,0.15);
+  color: #ffee58;
+  border-color: rgba(255,238,88,0.4);
+}
+
+body.tema-preto #hero h1 {
+  color: #ffee58;
+}
+
+body.tema-preto .hero-subtitulo {
+  color: rgba(255,238,88,0.85);
+}
+
+body.tema-preto .btn-primario {
+  background: #ffee58;
+  color: #000;
+}
+
+body.tema-preto .btn-secundario {
+  border-color: #ffee58;
   color: #ffee58;
 }
 
@@ -678,6 +708,7 @@ section h2 {
   border-radius: var(--raio);
   box-shadow: var(--sombra);
   background: #000;
+  /* pointer-events garantido via atributo inline no HTML */
 }
 
 .video-credito {
@@ -857,11 +888,6 @@ section h2 {
   padding: 3rem 1.5rem;
 }
 
-body.tema-branco #rodape {
-  background: #1a1a1a;
-  color: #eeeeee;
-}
-
 .rodape-inner {
   max-width: 1100px;
   margin: 0 auto;
@@ -921,7 +947,7 @@ body.tema-branco #rodape {
 /* ── 16. ANIMACOES ── */
 @keyframes pulsar {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  50%       { transform: scale(1.05); }
 }
 
 .apoiar-animado {
